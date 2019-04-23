@@ -5,7 +5,7 @@ using CardsForMemoryLibrary.Models;
 using SQLite;
 
 namespace CardsForMemoryLibrary.Services {
-    public class SqliteConnectionService : iSqliteConnectionService {
+    public class SqliteConnectionService : ISqliteConnectionService {
         /// <inheritdoc />
         public SQLiteAsyncConnection GetAsyncConnection() {
             return new SQLiteAsyncConnection("CardsForMemory");
@@ -13,7 +13,7 @@ namespace CardsForMemoryLibrary.Services {
 
         static SqliteConnectionService() {
             var connection = new SQLiteConnection("CardsForMemory");
-            connection.CreateTable<Cards>();
+            connection.CreateTable<Card>();
         }
     }
 }

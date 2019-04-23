@@ -4,7 +4,7 @@ using System.Text;
 using SQLite;
 
 namespace CardsForMemoryLibrary.Models {
-    public class Cards {
+    public class Card {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 

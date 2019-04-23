@@ -5,7 +5,7 @@ using System.Text;
 using SQLite;
 
 namespace CardsForMemoryLibrary.Services {
-    public interface iSqliteConnectionService {
+    public interface ISqliteConnectionService {
         /// <summary>
         ///     获得数据库连接
         /// </summary>
