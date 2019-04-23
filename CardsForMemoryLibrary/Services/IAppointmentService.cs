@@ -18,11 +18,11 @@ namespace CardsForMemoryLibrary.Services {
         /// <summary>
         ///     查找全部卡片
         /// </summary>
-        Task<List<Card>> SelectAsync();
+        Task<List<Card>> SelectAllAsync();
 
         /// <summary>
         ///     删除
         /// </summary>
-        Task DeleteAsync();
+        Task DeleteAllAsync();
     }
 }

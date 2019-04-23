@@ -19,13 +19,13 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<List<Card>> SelectAsync() {
+        public async Task<List<Card>> SelectAllAsync() {
             return await _sqliteConnectionService.GetAsyncConnection()
                 .Table<Card>().ToListAsync();
         }
 
         /// <inheritdoc />
-        public async Task DeleteAsync() {
+        public async Task DeleteAllAsync() {
             await _sqliteConnectionService.GetAsyncConnection()
                 .DeleteAllAsync<Card>();
         }
