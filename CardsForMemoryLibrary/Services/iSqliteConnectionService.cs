@@ -6,6 +6,10 @@ using SQLite;
 
 namespace CardsForMemoryLibrary.Services {
     public interface iSqliteConnectionService {
+        /// <summary>
+        ///     获得数据库连接
+        /// </summary>
+        /// <returns>SqliteConnection</returns>
         SQLiteAsyncConnection GetAsyncConnection();
     }
 }

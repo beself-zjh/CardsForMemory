@@ -13,6 +13,6 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ServicesTest\" />
+    <ProjectReference Include="..\CardsForMemoryLibrary\CardsForMemoryLibrary.csproj" />
   </ItemGroup>
 </Project>

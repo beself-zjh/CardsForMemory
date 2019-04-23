@@ -133,6 +133,12 @@
       <Version>5.4.1.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CardsForMemoryLibrary\CardsForMemoryLibrary.csproj">
+      <Project>{2e37a604-11c4-47eb-9c6a-35537ebc2127}</Project>
+      <Name>CardsForMemoryLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
