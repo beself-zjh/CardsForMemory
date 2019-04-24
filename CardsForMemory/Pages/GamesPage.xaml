@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="CardsForMemory.GamesPage"
+    x:Class="CardsForMemory.Pages.GamesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CardsForMemory"

@@ -1,0 +1,71 @@
+﻿<Page
+    x:Class="CardsForMemory.Pages.CardsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:CardsForMemory"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Orientation="Horizontal">
+        <!--左列表-->
+        <ListView
+                Grid.Column="0"
+                x:Name="cardsListView"
+                SelectionChanged="CardsPageListViewSelectionChangeHandler"
+                ItemsSource="{x:Bind CardHolders}"
+                IsMultiSelectCheckBoxEnabled="False">
+            <!--列表头部-->
+            <ListView.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="140" Margin="5">Name</TextBlock>
+                    <TextBlock Width="140" Margin="5">Author</TextBlock>
+                    <TextBlock Width="140" Margin="5">UpdateTime</TextBlock>
+                </StackPanel>
+            </ListView.Header>
+            <!--列表模板-->
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:CardHolder">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="140" Margin="5" Text="{x:Bind Name}"></TextBlock>
+                        <TextBlock Width="140" Margin="5" Text="{x:Bind Author}"></TextBlock>
+                        <TextBlock Width="140" Margin="5" Text="{x:Bind UpdateTime}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--右侧栏-->
+        <StackPanel Margin="5,0,0,0" Width="300">
+            <!--三个按钮-->
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" x:Name="CardsPageAddBtn" Click="CardsPageAddBtnClickHandler">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Add"></SymbolIcon>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Add</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Margin="5" x:Name="CardsPageEditBtn" Click="CardsPageEditBtnClickHandler">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Edit"></SymbolIcon>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Edit</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Margin="5" x:Name="CardsPagePlayBtn" Click="CardsPagePlayBtnClickHandler">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Play"></SymbolIcon>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Play</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <!--更多信息-->
+            <TextBlock Margin="5" FontSize="32">MoreInformation</TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="24" x:Name="selectedName"></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="24" x:Name="selectedAuthor"></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="24" x:Name="selectedCreateTime"></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="24" x:Name="selectedUpdateTime"></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="24" x:Name="selectedDescription"></TextBlock>
+        </StackPanel>
+    </StackPanel>
+    
+</Page>

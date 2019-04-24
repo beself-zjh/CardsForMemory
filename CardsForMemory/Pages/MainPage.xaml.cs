@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
-namespace CardsForMemory
+namespace CardsForMemory.Pages
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -25,7 +25,6 @@ namespace CardsForMemory
         public MainPage()
         {
             this.InitializeComponent();
-
         }
 
         private void NavView_Navigate(NavigationViewItem item)
@@ -36,8 +35,8 @@ namespace CardsForMemory
                     ContentFrame.Navigate(typeof(HomePage));
                     break;
 
-                case "apps":
-                    ContentFrame.Navigate(typeof(AppsPage));
+                case "cards":
+                    ContentFrame.Navigate(typeof(CardsPage));
                     break;
 
                 case "games":
@@ -52,7 +51,7 @@ namespace CardsForMemory
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            // args.IsSettingsInvoked
+            // args.IsSettingsInvoked :
             // 获取一个值，该值指示 **InvokedItem** 是否是“设置”的菜单项。
             if (args.IsSettingsInvoked)
             {
@@ -61,7 +60,8 @@ namespace CardsForMemory
             else
             {
                 // find NavigationViewItem with Content that equals InvokedItem
-                var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
+                var item = sender.MenuItems.OfType<NavigationViewItem>()
+                    .First(x => (string)x.Content == (string)args.InvokedItem);
                 NavView_Navigate(item as NavigationViewItem);
             }
         }
@@ -70,8 +70,6 @@ namespace CardsForMemory
         {
             // you can also add items in code behind
             NavView.MenuItems.Add(new NavigationViewItemSeparator());
-            NavView.MenuItems.Add(new NavigationViewItem()
-            { Content = "My content", Icon = new SymbolIcon(Symbol.Folder), Tag = "content" });
 
             // set the initial SelectedItem 
             foreach (NavigationViewItemBase item in NavView.MenuItems)

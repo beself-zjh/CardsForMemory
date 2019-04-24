@@ -1,8 +1,7 @@
 ﻿<Page
-    x:Class="CardsForMemory.MainPage"
+    x:Class="CardsForMemory.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CardsForMemory"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -20,7 +19,7 @@
             </NavigationViewItem>
             <NavigationViewItemSeparator/>
             <NavigationViewItemHeader Content="Main pages"/>
-            <NavigationViewItem x:Uid="AppsNavItem" Icon="AllApps" Content="Apps" Tag="apps"/>
+            <NavigationViewItem x:Uid="AppsNavItem" Icon="AllApps" Content="Cards" Tag="cards"/>
             <NavigationViewItem x:Uid="GamesNavItem" Icon="Video" Content="Games" Tag="games"/>
             <NavigationViewItem x:Uid="MusicNavItem" Icon="Audio" Content="Music" Tag="music"/>
         </NavigationView.MenuItems>
