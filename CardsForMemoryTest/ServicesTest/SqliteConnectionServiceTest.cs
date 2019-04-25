@@ -9,9 +9,11 @@ using SQLite;
 namespace CardsForMemoryTest.ServicesTest {
     public class SqliteConnectionServiceTest {
         [Test]
-        public async Task TestGetAsyncConnection() {
-            SqliteConnectionService sqliteConnectionService = new SqliteConnectionService();
-            SQLiteAsyncConnection connection = sqliteConnectionService.GetAsyncConnection();
+        public void TestGetAsyncConnection() {
+            SqliteConnectionService sqliteConnectionService = 
+                new SqliteConnectionService();
+            ServiceResult<SQLiteAsyncConnection> connection = 
+                sqliteConnectionService.GetAsyncConnection();
             Assert.IsNotNull(connection);
         }
     }

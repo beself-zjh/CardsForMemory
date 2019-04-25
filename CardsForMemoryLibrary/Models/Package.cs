@@ -8,10 +8,18 @@ namespace CardsForMemoryLibrary.Models {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string NeckName { get; set; }
+        public string Name { get; set; }
         public string Author { get; set; }
-        public int Style { get; set; }
+        public string Description { get; set; }
+        public Styles Style { get; set; }
         public DateTime CreatedTime { get; set; }
-        public DateTime AmendTime { get; set; }
+        public DateTime UpdateTime { get; set; }
+    }
+
+    /// <summary>
+    ///     风格类型
+    /// </summary>
+    public enum Styles {
+
     }
 }

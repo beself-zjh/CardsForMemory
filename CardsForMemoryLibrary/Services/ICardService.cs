@@ -13,35 +13,35 @@ namespace CardsForMemoryLibrary.Services {
         ///     单卡片获取
         /// </summary>
         /// <param name="cardId">卡片ID</param>
-        Task<Card> GetAsyncSingleCard(int cardId);
+        Task<ServiceResult<Card>> GetAsyncSingleCard(int cardId);
 
         /// <summary>
         ///     卡包卡片获取
         /// </summary>
         /// <param name="packageId">卡包ID</param>
-        Task<List<Card>> GetAsyncCardInPackage(int packageId);
+        Task<ServiceResult<List<Card>>> GetAsyncCardInPackage(int packageId);
 
         /// <summary>
         ///     全卡片获取
         /// </summary>
-        Task<List<Card>> GetAsyncAllCards();
+        Task<ServiceResult<List<Card>>> GetAsyncAllCards();
 
         /// <summary>
         ///     修改某个卡片
         /// </summary>
         /// <param name="card">修改后的卡片实例</param>
-        Task EditAsyncSingleCard(Card card);
+        Task<ServiceResult> EditAsyncSingleCard(Card card);
 
         /// <summary>
         ///     插入卡片
         /// </summary>
         /// <param name="card"></param>
-        Task InsertAsyncSingleCard(Card card);
+        Task<ServiceResult> InsertAsyncSingleCard(Card card);
 
         /// <summary>
         ///     插入一组卡片
         /// </summary>
         /// <param name="cards">卡片组</param>
-        Task InsertAsyncPluralCard(List<Card> cards);
+        Task<ServiceResult> InsertAsyncPluralCard(List<Card> cards);
     }
 }

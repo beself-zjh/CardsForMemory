@@ -6,28 +6,28 @@ using CardsForMemoryLibrary.Models;
 
 namespace CardsForMemoryLibrary.Services {
     public class AppointmentService : IAppointmentService {
-        private SqliteConnectionService _sqliteConnectionService;
+        private ISqliteConnectionService _sqliteConnectionService;
 
-        public AppointmentService(SqliteConnectionService sqliteConnectionService) {
+        public AppointmentService(ISqliteConnectionService sqliteConnectionService) {
             _sqliteConnectionService = sqliteConnectionService;
         }
 
         /// <inheritdoc />
         public async Task InsertAsync(Card card) {
             await _sqliteConnectionService.GetAsyncConnection()
-                .InsertAsync(card);
+                .Result.InsertAsync(card);
         }
 
         /// <inheritdoc />
         public async Task<List<Card>> SelectAllAsync() {
             return await _sqliteConnectionService.GetAsyncConnection()
-                .Table<Card>().ToListAsync();
+                .Result.Table<Card>().ToListAsync();
         }
 
         /// <inheritdoc />
         public async Task DeleteAllAsync() {
             await _sqliteConnectionService.GetAsyncConnection()
-                .DeleteAllAsync<Card>();
+                .Result.DeleteAllAsync<Card>();
         }
     }
 }

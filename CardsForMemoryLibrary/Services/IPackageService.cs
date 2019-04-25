@@ -10,29 +10,29 @@ namespace CardsForMemoryLibrary.Services {
         ///     创建一个卡包
         /// </summary>
         /// <param name="package"></param>
-        Task InsertAsyncPackage(Package package);
+        Task<ServiceResult> InsertAsyncPackage(Package package);
 
         /// <summary>
         ///     删除一个卡包及其卡片
         /// </summary>
         /// <param name="packageId">卡包ID</param>
-        Task DeleteAsyncPackage(int packageId);
+        Task<ServiceResult> DeleteAsyncPackage(int packageId);
 
         /// <summary>
         ///     编辑修改卡片信息
         /// </summary>
         /// <param name="package"></param>
-        Task EditAsyncPackage(Package package);
+        Task<ServiceResult> EditAsyncPackage(Package package);
 
         /// <summary>
         ///     获取全部卡包信息
         /// </summary>
-        Task<List<Package>> GetAsyncAllPackage();
+        Task<ServiceResult<List<Package>>> GetAsyncAllPackage();
 
         /// <summary>
         ///     获取某一卡片信息
         /// </summary>
         /// <param name="packageId">卡包ID</param>
-        Task<Package> GetAsyncSinglePackage(int packageId);
+        Task<ServiceResult<Package>> GetAsyncSinglePackage(int packageId);
     }
 }

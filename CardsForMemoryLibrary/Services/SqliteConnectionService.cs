@@ -7,8 +7,21 @@ using SQLite;
 namespace CardsForMemoryLibrary.Services {
     public class SqliteConnectionService : ISqliteConnectionService {
         /// <inheritdoc />
-        public SQLiteAsyncConnection GetAsyncConnection() {
-            return new SQLiteAsyncConnection("CardsForMemory");
+        public ServiceResult<SQLiteAsyncConnection> GetAsyncConnection() {
+            SQLiteAsyncConnection connection;
+            try {
+                connection = new SQLiteAsyncConnection("CardsForMemory");
+            } catch (SQLiteException e) {
+                return new ServiceResult<SQLiteAsyncConnection> {
+                    Status = ServiceResultStatusHelper.FromSQLiteResult(e.Result),
+                    Message = e.Message
+                };
+            }
+
+            return new ServiceResult<SQLiteAsyncConnection> {
+                Result = connection,
+                Status = ServiceResultStatus.OK
+            };
         }
 
         static SqliteConnectionService() {
