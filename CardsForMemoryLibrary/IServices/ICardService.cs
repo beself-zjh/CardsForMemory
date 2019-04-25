@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using CardsForMemoryLibrary.Models;
+using CardsForMemoryLibrary.Services;
 
-namespace CardsForMemoryLibrary.Services {
+namespace CardsForMemoryLibrary.IServices {
     /// <summary>
     ///     卡片服务
     /// </summary>

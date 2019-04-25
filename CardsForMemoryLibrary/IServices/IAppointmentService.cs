@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CardsForMemoryLibrary.Models;
 
-namespace CardsForMemoryLibrary.Services {
+namespace CardsForMemoryLibrary.IServices {
     /// <summary>
     ///     数据库操作服务接口
     /// </summary>

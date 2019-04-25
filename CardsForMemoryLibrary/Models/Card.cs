@@ -11,5 +11,6 @@ namespace CardsForMemoryLibrary.Models {
         public int PackageId { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
+        public string Options { get; set; }
     }
 }

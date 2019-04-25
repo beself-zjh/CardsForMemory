@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using CardsForMemoryLibrary.Services;
 using SQLite;
 
-namespace CardsForMemoryLibrary.Services {
+namespace CardsForMemoryLibrary.IServices {
     /// <summary>
     ///     数据库连接服务
     /// </summary>

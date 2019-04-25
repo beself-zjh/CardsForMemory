@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using CardsForMemoryLibrary.Models;
+using CardsForMemoryLibrary.Services;
 
-namespace CardsForMemoryLibrary.Services {
+namespace CardsForMemoryLibrary.IServices {
     /// <summary>
     ///     卡包服务
     /// </summary>
@@ -36,6 +37,6 @@ namespace CardsForMemoryLibrary.Services {
         ///     获取某一卡片信息
         /// </summary>
         /// <param name="packageId">卡包ID</param>
-        Task<ServiceResult<Package>> GetAsyncSinglePackage(int packageId);
+        Task<ServiceResult<Package>> GetAsyncPackage(int packageId);
     }
 }
