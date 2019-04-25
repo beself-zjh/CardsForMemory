@@ -1,0 +1,122 @@
+﻿<Page
+    x:Class="CardsForMemory.Pages.RememberPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CardsForMemory"
+    xmlns:Controls="using:CardsForMemory.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Name="rememberPage"
+    Width="750"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Loaded="RememberPageLoadedHandler">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <!--浮动屏蔽-->
+        <Grid
+            x:Name="RememberPageShieldingLayer"
+            Background="White"
+            Grid.RowSpan="3"
+            Canvas.ZIndex="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <TextBlock
+                FontSize="64"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">先选一个牌库吧!</TextBlock>
+        </Grid>
+        
+        <TextBlock
+            Grid.Row="0"
+            x:Name="Problem"
+            Padding="20"
+            FontSize="64"></TextBlock>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="240"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="240"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="2"
+                TextWrapping="Wrap"
+                x:Name="Items"
+                Padding="20"
+                FontSize="64"></TextBlock>
+            <!--计时器-->
+            <Grid
+                Grid.Column="1"
+                Grid.Row="1"
+                Width="200" Height="200"
+                Margin="10"
+                x:Name="RememberPageClock">
+                <!--灰环-->
+                <Ellipse 
+                    x:Name="RememberPageOuterClock"
+                    Stroke="Gray" 
+                    StrokeThickness="4"/>
+                <!--蓝环-->
+                <Ellipse
+                    x:Name="RememberPageInnerClock"
+                    Stroke="DeepSkyBlue"
+                    StrokeThickness="4"
+                    StrokeDashArray="0,1000"
+                    RenderTransformOrigin="0.5,0.5">
+                    <Ellipse.RenderTransform>
+                        <RotateTransform Angle="-90"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <!--中间的文字-->
+                <TextBlock
+                    x:Name="RememberPageClockText"
+                    Foreground="Black" 
+                    FontSize="50" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Text="00:00"/>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button Content="这不很简单嘛" Click="RememberPageBtn1"/>
+            </StackPanel>
+            <StackPanel
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button Content="哎呀,还不能立刻有思路啊"/>
+            </StackPanel>
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button Content="哇,我完全想不起来"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Page>
