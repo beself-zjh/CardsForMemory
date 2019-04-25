@@ -20,6 +20,6 @@ namespace CardsForMemoryLibrary.Models {
     ///     风格类型
     /// </summary>
     public enum Styles {
-
+        defaulted = 0
     }
 }

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using CardsForMemoryLibrary.Models;
 
 namespace CardsForMemoryLibrary.Services {
+    /// <summary>
+    ///     卡包服务
+    /// </summary>
     public interface IPackageService {
         /// <summary>
         ///     创建一个卡包
