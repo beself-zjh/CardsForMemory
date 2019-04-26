@@ -29,6 +29,7 @@ namespace CardsForMemoryLibrary.Services {
             var connection = new SQLiteConnection("CardsForMemory");
             connection.CreateTable<Card>();
             connection.CreateTable<Package>();
+            connection.CreateTable<Log>();
         }
     }
 }
