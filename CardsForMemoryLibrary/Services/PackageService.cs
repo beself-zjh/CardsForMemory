@@ -7,8 +7,15 @@ using CardsForMemoryLibrary.Models;
 
 namespace CardsForMemoryLibrary.Services {
     public class PackageService : IPackageService {
+        /// <summary>
+        ///     数据库连接服务
+        /// </summary>
         private ISqliteConnectionService _connectionService;
 
+        /// <summary>
+        ///     构造函数
+        /// </summary>
+        /// <param name="connectionServiece"></param>
         public PackageService(ISqliteConnectionService connectionServiece) {
             _connectionService = connectionServiece;
         }
