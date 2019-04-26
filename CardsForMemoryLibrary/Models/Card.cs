@@ -11,7 +11,7 @@ namespace CardsForMemoryLibrary.Models {
         public int PackageId { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
-        //public string Options { get; set; }
+        public string Options { get; set; }
         public DateTime UpdateTime { get; set; }//上次复习时间
         public int Proficiency { get; set; } //熟练度(下限)
     }
