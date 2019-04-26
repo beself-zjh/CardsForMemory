@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CardsForMemoryLibrary.Models;
+using CardsForMemoryLibrary.Services;
+using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,7 +20,7 @@ namespace CardsForMemory.Pages
         private List<Card> now = null;
         private int x = 0;
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter == null)
             {
@@ -30,10 +32,12 @@ namespace CardsForMemory.Pages
                 RememberPageShieldingLayer.Width = 0;
             }
             int val = (int)e.Parameter;
-            now = CardHolder.CardHolders[val].Cards;
+            var s = new CardService(new SqliteConnectionService());
+            now = (await s.GetAsyncCards(val)).Result;
             if (now.Count == 0) return;
-            Problem.Text = now[x++].a;
-            Items.Text = now[x++].b;
+            x = 0;
+            Problem.Text = now[x].Question;
+            Items.Text = now[x++].Options;
         }
 
         public RememberPage()
@@ -81,8 +85,8 @@ namespace CardsForMemory.Pages
 
         private void RememberPageBtn1(object sender, RoutedEventArgs e)
         {
-            Problem.Text = now[x++].a;
-            Items.Text = now[x++].b;
+            Problem.Text = now[x].Question;
+            Items.Text = now[x++].Options;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CardsForMemoryLibrary.IServices;
 using CardsForMemoryLibrary.Services;
+using CardsForMemoryLibrary.ViewModels;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace CardsForMemory.Locator {
@@ -15,8 +16,9 @@ namespace CardsForMemory.Locator {
         /// <summary>
         ///     ViewModel定位器单件
         /// </summary>
-        public static readonly ViewModelLocator Instance =
-            new ViewModelLocator();
+        public static readonly ViewModelLocator Instance = new ViewModelLocator();
+
+        public CardsPageViewModel CardsPageViewModel => SimpleIoc.Default.GetInstance<CardsPageViewModel>();
 
         /// <summary>
         ///     私有构造
@@ -25,8 +27,7 @@ namespace CardsForMemory.Locator {
             SimpleIoc.Default.Register<ICardService, CardService>();
             SimpleIoc.Default.Register<IPackageService, PackageService>();
             SimpleIoc.Default.Register<ISqliteConnectionService, SqliteConnectionService>();
+            SimpleIoc.Default.Register<CardsPageViewModel>();
         }
-
-        //public XxxViewModel XxxViewModel = SimpleIoc.Default.GetInstance<>();
     }
 }

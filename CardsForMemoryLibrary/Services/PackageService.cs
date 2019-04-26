@@ -19,7 +19,7 @@ namespace CardsForMemoryLibrary.Services {
                 Author = package.Author,
                 Description = package.Description,
                 Name = package.Name,
-                CreatedTime = DateTime.Now,
+                CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now
             };
             await connection.Result.InsertAsync(newPackage);
@@ -47,7 +47,7 @@ namespace CardsForMemoryLibrary.Services {
                 Author = package.Author,
                 Description = package.Description,
                 Name = package.Name,
-                CreatedTime = package.CreatedTime,
+                CreateTime = package.CreateTime,
                 UpdateTime = DateTime.Now
             };
             await connection.Result.UpdateAsync(newPackage);

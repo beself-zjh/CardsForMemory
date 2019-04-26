@@ -12,7 +12,7 @@ namespace CardsForMemoryLibrary.Models {
         public string Author { get; set; }
         public string Description { get; set; }
         public Styles Style { get; set; }
-        public DateTime CreatedTime { get; set; }
+        public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
     }
 
