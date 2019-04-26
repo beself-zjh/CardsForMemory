@@ -23,7 +23,7 @@ namespace CardsForMemoryLibrary.IServices {
         Task<ServiceResult> DeleteAsyncPackage(int packageId);
 
         /// <summary>
-        ///     编辑修改卡片信息
+        ///     编辑修改卡包信息
         /// </summary>
         /// <param name="package"></param>
         Task<ServiceResult> EditAsyncPackage(Package package);
@@ -34,7 +34,7 @@ namespace CardsForMemoryLibrary.IServices {
         Task<ServiceResult<List<Package>>> GetAsyncAllPackage();
 
         /// <summary>
-        ///     获取某一卡片信息
+        ///     获取某一卡包信息
         /// </summary>
         /// <param name="packageId">卡包ID</param>
         Task<ServiceResult<Package>> GetAsyncPackage(int packageId);

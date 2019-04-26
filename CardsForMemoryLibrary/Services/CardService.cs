@@ -33,9 +33,7 @@ namespace CardsForMemoryLibrary.Services {
                 case ServiceResultStatus.OK:
                     serviceResult.Result =
                         await connection.Result
-                            .Table<Card>()
-                            .Where(i => i.Id == cardId)
-                            .FirstAsync();
+                            .FindAsync<Card>(cardId);
                     serviceResult.Status = connection.Status;
                     serviceResult.Message = connection.Message;
                     break;

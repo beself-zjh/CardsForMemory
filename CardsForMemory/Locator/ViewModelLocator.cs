@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CardsForMemoryLibrary.IServices;
+using CardsForMemoryLibrary.Services;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace CardsForMemory.Locator {
@@ -20,7 +22,9 @@ namespace CardsForMemory.Locator {
         ///     私有构造
         /// </summary>
         private ViewModelLocator() {
-            //SimpleIoc.Default.Register<>();
+            SimpleIoc.Default.Register<ICardService, CardService>();
+            SimpleIoc.Default.Register<IPackageService, PackageService>();
+            SimpleIoc.Default.Register<ISqliteConnectionService, SqliteConnectionService>();
         }
 
         //public XxxViewModel XxxViewModel = SimpleIoc.Default.GetInstance<>();
