@@ -11,7 +11,7 @@ namespace CardsForMemoryLibrary.IServices {
         ///     卡片记忆率分析业务
         /// </summary>
         /// <param name="cardId"></param>
-        /// <returns>近30天记忆率的变化情况</returns>
+        /// <returns>近30天记忆率变化情况</returns>
         List<Item> CardAnalysis(int cardId);
     }
 

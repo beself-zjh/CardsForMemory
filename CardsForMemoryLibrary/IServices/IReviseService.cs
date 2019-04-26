@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using CardsForMemoryLibrary.Models;
 
 namespace CardsForMemoryLibrary.IServices {
@@ -14,6 +15,6 @@ namespace CardsForMemoryLibrary.IServices {
         /// <param name="packages">复习范围</param>
         /// <param name="num">题量</param>
         /// <returns>题目</returns>
-        List<Card> SmartRevise(List<int> packages, int num);
+        Task<List<Card>> SmartRevise(List<int> packages, int num);
     }
 }
