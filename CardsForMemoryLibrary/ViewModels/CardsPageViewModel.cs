@@ -33,7 +33,8 @@ namespace CardsForMemoryLibrary.ViewModels
         public RelayCommand RefreshCommand =>
             _refreshCommand ?? (_refreshCommand = new RelayCommand(async () =>
             {
-                //await _packageService.InsertAsyncPackage(new Package {
+                //await _packageService.InsertAsyncPackage(new Package
+                //{
                 //    Author = "asasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd",
                 //    CreateTime = System.DateTime.Now,
                 //    Description = "asasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd",

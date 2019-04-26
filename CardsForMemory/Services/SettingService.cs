@@ -28,32 +28,43 @@ namespace CardsForMemory.Services {
 
         /// <inheritdoc />
         public void Init() {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            string first = "yes";
+            if (_localSetting.Values.ContainsKey(first))
+            {
+
+            }
+            else
+                RestoreSettings();
         }
 
         /// <inheritdoc />
         public void Save(string key, string value) {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            _localSetting.Values[key] = value;
         }
 
         /// <inheritdoc />
         public void Save(string key, ApplicationDataCompositeValue compositeValue) {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            _localSetting.Values[key] = compositeValue;
         }
 
         /// <inheritdoc />
         public string Value(string key) {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+                return _localSetting.Values[key].ToString();
         }
 
         /// <inheritdoc />
         public ApplicationDataCompositeValue CompositeValue(string key) {
-            throw new NotImplementedException();
+                return (ApplicationDataCompositeValue)_localSetting.Values[key];
         }
 
         /// <inheritdoc />
         public void RestoreSettings() {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
         }
     }
 }
