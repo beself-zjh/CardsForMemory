@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using CardsForMemoryLibrary.Models;
 
 namespace CardsForMemoryLibrary.IServices {
@@ -9,22 +10,10 @@ namespace CardsForMemoryLibrary.IServices {
     /// </summary>
     public interface IFeedbackService {
         /// <summary>
-        ///     简单
+        ///     复习反馈
         /// </summary>
         /// <param name="card"></param>
-        void IsEasy(Card card);
-
-        /// <summary>
-        ///     困难
-        /// </summary>
-        /// <param name="card"></param>
-        void IsDifficult(Card card);
-
-        /// <summary>
-        ///     一般
-        /// </summary>
-        /// <param name="card"></param>
-        void IsNormal(Card card);
+        Task Utility(Card card, Level level);
 
         /// <summary>
         ///     提交答案(针对选择题)
@@ -33,5 +22,14 @@ namespace CardsForMemoryLibrary.IServices {
         /// <param name="answer"></param>
         /// <returns>True:答对，False:答错</returns>
         bool Submit(Card card, string answer);
+    }
+
+    /// <summary>
+    ///     反馈情况
+    /// </summary>
+    public enum Level {
+        Easy = 10,
+        Normal = 20,
+        Difficult = 30
     }
 }

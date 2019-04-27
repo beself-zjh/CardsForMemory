@@ -8,14 +8,19 @@ using CardsForMemoryLibrary.Models;
 
 namespace CardsForMemoryLibrary.Services {
     public class ReviseService : IReviseService {
+        private ICardService _cardService;
+
+        public ReviseService(ICardService cardService) {
+            _cardService = cardService;
+        }
+
         public async Task<List<Card>> SmartRevise(List<int> packageIds, int num) {
             throw new NotImplementedException();
             var currentDate = DateTime.Today;
-            var cardService = new CardService(new SqliteConnectionService());
             List<Card> cards = new List<Card>();
 
             foreach (var packageId in packageIds) {
-                cards.AddRange((await cardService.GetAsyncCards(packageId)).Result);
+                cards.AddRange((await _cardService.GetAsyncCards(packageId)).Result);
             }
 
             if (cards.Count <= num)
