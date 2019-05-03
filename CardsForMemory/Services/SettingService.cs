@@ -30,11 +30,9 @@ namespace CardsForMemory.Services {
         public void Init() {
             //throw new NotImplementedException();
             string first = "yes";
-            if (_localSetting.Values.ContainsKey(first))
-            {
+            if (_localSetting.Values.ContainsKey(first)) {
 
-            }
-            else
+            } else
                 RestoreSettings();
         }
 
@@ -53,12 +51,12 @@ namespace CardsForMemory.Services {
         /// <inheritdoc />
         public string Value(string key) {
             //throw new NotImplementedException();
-                return _localSetting.Values[key].ToString();
+            return _localSetting.Values[key].ToString();
         }
 
         /// <inheritdoc />
         public ApplicationDataCompositeValue CompositeValue(string key) {
-                return (ApplicationDataCompositeValue)_localSetting.Values[key];
+            return (ApplicationDataCompositeValue)_localSetting.Values[key];
         }
 
         /// <inheritdoc />

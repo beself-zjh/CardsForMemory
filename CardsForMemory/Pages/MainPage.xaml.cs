@@ -2,33 +2,25 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace CardsForMemory.Pages
-{
-    public sealed partial class MainPage : Page
-    {
-        public MainPage()
-        {
+namespace CardsForMemory.Pages {
+    public sealed partial class MainPage : Page {
+        public MainPage() {
             this.InitializeComponent();
         }
 
         /// <summary>
         /// 当MainPage的NavView的子项被点中时触发此函数
         /// </summary>
-        private void MainPageNavViewItemInvoke(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-        {
+        private void MainPageNavViewItemInvoke(NavigationView sender, NavigationViewItemInvokedEventArgs args) {
             // 先看是不是设置被点中了
-            if (args.IsSettingsInvoked)
-            {
+            if (args.IsSettingsInvoked) {
                 ContentFrame.Navigate(typeof(SettingsPage));
-            }
-            else
-            {
+            } else {
                 // 找到被点中的NavigationViewItem
                 // 特征是它的Content = args.InvokedItem
                 var item = sender.MenuItems.OfType<NavigationViewItem>()
                     .First(x => (string)x.Content == (string)args.InvokedItem);
-                switch (item.Tag)
-                {
+                switch (item.Tag) {
                     case "home":
                         ContentFrame.Navigate(typeof(HomePage));
                         break;
@@ -51,8 +43,7 @@ namespace CardsForMemory.Pages
         /// <summary>
         /// 当MainPage的NavView加载完毕后调用此函数
         /// </summary>
-        private void MainPageNavViewLoaded(object sender, RoutedEventArgs e)
-        {
+        private void MainPageNavViewLoaded(object sender, RoutedEventArgs e) {
             // 导航到主页
             ContentFrame.Navigate(typeof(HomePage));
         }

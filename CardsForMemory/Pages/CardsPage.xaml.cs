@@ -2,20 +2,16 @@
 using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml.Controls;
 
-namespace CardsForMemory.Pages
-{
-    public sealed partial class CardsPage : Page
-    {
-        public CardsPage()
-        {
+namespace CardsForMemory.Pages {
+    public sealed partial class CardsPage : Page {
+        public CardsPage() {
             this.InitializeComponent();
             CardsPageEditBtn.IsEnabled = false;
             CardsPagePlayBtn.IsEnabled = false;
             DataContext = Locator.ViewModelLocator.Instance.CardsPageViewModel;
         }
 
-        private void CardsPageListViewSelectionChangeHandler(object sender, SelectionChangedEventArgs e)
-        {
+        private void CardsPageListViewSelectionChangeHandler(object sender, SelectionChangedEventArgs e) {
             var item = (sender as ListView).SelectedItem as Package;
             item.Name = "Name: " + item.Name;
             item.Author = "Author: " + item.Author;
@@ -25,21 +21,17 @@ namespace CardsForMemory.Pages
             CardsPagePlayBtn.IsEnabled = true;
         }
 
-        private void CardsPageAddBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            if (null == CardsPageAddBtn.Flyout)
-            {
+        private void CardsPageAddBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
+            if (null == CardsPageAddBtn.Flyout) {
                 CardsPageAddBtn.Flyout = new Flyout { Content = new TextBlock { Text = "Not implement Button!" } };
             }
         }
 
-        private void CardsPageEditBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
+        private void CardsPageEditBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
 
         }
 
-        private void CardsPagePlayBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
+        private void CardsPagePlayBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
             this.Frame.Navigate(typeof(RememberPage), 1);
         }
 
