@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Width="900"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <StackPanel Orientation="Horizontal" >
         <!--把Loaded事件绑到StackPanel的RefreshCommand上-->
         <Custom:Interaction.Behaviors>
