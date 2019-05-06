@@ -22,8 +22,11 @@
             <NavigationViewItem Icon="List" Content="Cards" Tag="cards"/>
             <NavigationViewItem Icon="Play" Content="Remember" Tag="remember"/>
             <NavigationViewItem Icon="Audio" Content="Music" Tag="music"/>
-        </NavigationView.MenuItems>
+            <!--HXH-->
+            <NavigationViewItem Icon="Help" Content="Exam" Tag="exam"/>
 
+
+        </NavigationView.MenuItems>
         <Frame x:Name="ContentFrame">
             <Frame.ContentTransitions>
                 <TransitionCollection>
@@ -32,4 +35,7 @@
             </Frame.ContentTransitions>
         </Frame>
     </NavigationView>
+
+    
+    
 </Page>

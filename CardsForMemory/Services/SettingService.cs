@@ -29,12 +29,7 @@ namespace CardsForMemory.Services {
         /// <inheritdoc />
         public void Init() {
             //throw new NotImplementedException();
-            string first = "yes";
-            if (_localSetting.Values.ContainsKey(first))
-            {
-
-            }
-            else
+            if (_localSetting.Values["First"] == null)
                 RestoreSettings();
         }
 

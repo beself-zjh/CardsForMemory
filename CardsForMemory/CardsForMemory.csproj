@@ -98,6 +98,7 @@
     <Compile Include="IServices\ISettingService.cs" />
     <Compile Include="Locator\ViewModelLocator.cs" />
     <Compile Include="Pages\CardsPage.xaml.cs" />
+    <Compile Include="Pages\ExamPage.cs" />
     <Compile Include="Pages\RememberPage.xaml.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\MainPage.xaml.cs" />
@@ -113,6 +114,7 @@
     <None Include="CardsForMemory_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HXHChange.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -130,6 +132,10 @@
     <Page Include="Pages\CardsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ExamPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RememberPage.xaml">
       <Generator>MSBuild:Compile</Generator>

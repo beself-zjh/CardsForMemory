@@ -1,0 +1,8 @@
+﻿App.XAML.CS  加入一处private    line19
+最后加入剽窃一段
+
+
+
+Mainpage.cs 开头加入一个定义
+
+Setting.page.cs和xaml全员剽窃

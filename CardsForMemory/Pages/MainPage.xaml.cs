@@ -6,6 +6,15 @@ namespace CardsForMemory.Pages
 {
     public sealed partial class MainPage : Page
     {
+        /// <summary>
+        /// 又开始剽窃了
+        /// </summary> 
+        public static MainPage Current;
+
+
+
+        //LWH
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,6 +52,11 @@ namespace CardsForMemory.Pages
 
                     case "music":
                         ContentFrame.Navigate(typeof(MusicPage));
+                        break;
+
+                        //HXH
+                    case "exam":
+                        ContentFrame.Navigate(typeof(ExamPage));
                         break;
                 }
             }
