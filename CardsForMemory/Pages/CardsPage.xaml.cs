@@ -1,4 +1,5 @@
-﻿using CardsForMemoryLibrary.Models;
+﻿using CardsForMemory.Services;
+using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml.Controls;
 
@@ -13,6 +14,9 @@ namespace CardsForMemory.Pages {
 
         private void CardsPageListViewSelectionChangeHandler(object sender, SelectionChangedEventArgs e) {
             var item = (sender as ListView).SelectedItem as Package;
+            if (item == null) {
+                return;
+            }
             item.Name = "Name: " + item.Name;
             item.Author = "Author: " + item.Author;
             item.Description = "Description: " + item.Description;
@@ -32,6 +36,8 @@ namespace CardsForMemory.Pages {
         }
 
         private void CardsPagePlayBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
+            var gv=GlobalVariableService.getInstance();
+
             this.Frame.Navigate(typeof(RememberPage), 1);
         }
 
