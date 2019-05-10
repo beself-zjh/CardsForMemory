@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -9,7 +11,15 @@ namespace CardsForMemory {
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
     /// </summary>
-    sealed partial class App : Application {
+    sealed partial class App : Application
+    {
+
+        ///<summary>
+        ///
+        ///</summary>
+        private const string SelectedAppThemeKey = "SelectedAppTheme";
+
+
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。
@@ -76,5 +86,40 @@ namespace CardsForMemory {
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
         }
+
+        /// <summary>
+        /// 获取或设置根元素的RequestedTheme(使用LocalSettings保存)
+        /// </summary>
+        public static ElementTheme RootTheme
+        {
+            get
+            {
+                if (Window.Current.Content is FrameworkElement rootElement)
+                {
+                    return rootElement.RequestedTheme;
+                }
+
+                return ElementTheme.Default;
+            }
+            set
+            {
+                if (Window.Current.Content is FrameworkElement rootElement)
+                {
+                    rootElement.RequestedTheme = value;
+                }
+
+                ApplicationData.Current.LocalSettings.Values[SelectedAppThemeKey] = value.ToString();
+            }
+        }
+
+        public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
+        {
+                if (!typeof(TEnum).GetTypeInfo().IsEnum)
+                    {
+        throw new InvalidOperationException("Generic parameter 'TEnum' must be an enum.");
+                    }
+                return (TEnum)Enum.Parse(typeof(TEnum), text);
+         }
+
     }
 }

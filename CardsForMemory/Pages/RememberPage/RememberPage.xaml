@@ -107,7 +107,6 @@
                 <TextBlock
                     x:Name="RememberPageClockText"
                     Text="{x:Bind vm.Time,Converter={StaticResource ClockText},Mode=OneWay}"
-                    Foreground="Black" 
                     FontSize="50" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center"/>

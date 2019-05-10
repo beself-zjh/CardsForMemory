@@ -38,7 +38,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         }
 
         private const int ClockWidth = 200;//时钟的宽度
-        private const int RingWidth = 4;//时钟圆环的宽度 limit:0<RingWidth<100
+        private const int RingWidth = 10;//时钟圆环的宽度 limit:0<RingWidth<100
         private int _style = ClockWidth * 100 + RingWidth;
         public int Style {
             get => _style;
