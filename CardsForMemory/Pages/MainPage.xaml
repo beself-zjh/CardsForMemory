@@ -4,23 +4,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.Xaml.Interactivity"
+    xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <NavigationView x:Name="MainPageNavView"
-    ItemInvoked="MainPageNavViewItemInvoke"
-    Loaded="MainPageNavViewLoaded">
+        ItemInvoked="MainPageNavViewItemInvoke">
+        <!--把Loaded事件绑到NavigationView的OnLoaded上-->
+        <Custom:Interaction.Behaviors>
+            <Custom1:EventTriggerBehavior EventName="Loaded">
+                <Custom1:InvokeCommandAction Command="{x:Bind vm.OnLoaded}"/>
+            </Custom1:EventTriggerBehavior>
+        </Custom:Interaction.Behaviors>
 
         <NavigationView.MenuItems>
             <NavigationViewItem x:Uid="HomeNavItem" Content="Home" Tag="home">
                 <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="Home" />
+                    <SymbolIcon Symbol="Home"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItemSeparator/>
             <NavigationViewItemHeader Content="Main pages"/>
             <NavigationViewItem Icon="List" Content="Cards" Tag="cards"/>
-            <NavigationViewItem Icon="Play" Content="Remember" Tag="remember"/>
+            <NavigationViewItem x:Name="RememberPageName" Icon="Play" Content="Remember" Tag="remember"/>
             <NavigationViewItem Icon="Audio" Content="Music" Tag="music"/>
         </NavigationView.MenuItems>
 

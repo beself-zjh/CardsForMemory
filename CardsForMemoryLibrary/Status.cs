@@ -1,10 +1,9 @@
-﻿using CardsForMemoryLibrary.IServices;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace CardsForMemoryLibrary.Services {
-    class GlobalVariableService : IGlobalVariableService {
+namespace CardsForMemoryLibrary {
+    public class Status {
         private Dictionary<string, object> m;
-        private GlobalVariableService() {
+        private Status() {
             m = new Dictionary<string, object>();
         }
         public object this[string index] {
@@ -16,13 +15,13 @@ namespace CardsForMemoryLibrary.Services {
             }
         }
 
-        private static GlobalVariableService instance = null;
+        private static Status instance = null;
         private static readonly object instanceLock = new object();
-        public static GlobalVariableService getInstance() {
+        public static Status getInstance() {
             if (instance == null) {
                 lock (instanceLock) {
                     if (instance == null) {
-                        instance = new GlobalVariableService();
+                        instance = new Status();
                     }
                 }
             }

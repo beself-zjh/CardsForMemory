@@ -4,8 +4,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Pages {
     public sealed partial class MainPage : Page {
+        CardsForMemoryLibrary.ViewModels.MainPageViewModel vm;
+
         public MainPage() {
             this.InitializeComponent();
+            CardsForMemory.Locator.ViewModelLocator.Instance.INavigationService.Init(ContentFrame, RememberPageName);
+            vm = CardsForMemory.Locator.ViewModelLocator.Instance.MainPageViewModel;
         }
 
         /// <summary>
@@ -14,38 +18,14 @@ namespace CardsForMemory.Pages {
         private void MainPageNavViewItemInvoke(NavigationView sender, NavigationViewItemInvokedEventArgs args) {
             // 先看是不是设置被点中了
             if (args.IsSettingsInvoked) {
-                ContentFrame.Navigate(typeof(SettingsPage));
+                vm.Navigate("setting");
             } else {
-                // 找到被点中的NavigationViewItem
-                // 特征是它的Content = args.InvokedItem
-                var item = sender.MenuItems.OfType<NavigationViewItem>()
-                    .First(x => (string)x.Content == (string)args.InvokedItem);
-                switch (item.Tag) {
-                    case "home":
-                        ContentFrame.Navigate(typeof(HomePage));
-                        break;
-
-                    case "cards":
-                        ContentFrame.Navigate(typeof(CardsPage));
-                        break;
-
-                    case "remember":
-                        ContentFrame.Navigate(typeof(RememberPage));
-                        break;
-
-                    case "music":
-                        ContentFrame.Navigate(typeof(MusicPage));
-                        break;
-                }
+                var navigationViewItems = sender.MenuItems.OfType<NavigationViewItem>();
+                var tag = navigationViewItems.First(x => {
+                    return x.Content as string == args.InvokedItem as string;
+                });
+                vm.Navigate(tag.Tag as string);
             }
-        }
-
-        /// <summary>
-        /// 当MainPage的NavView加载完毕后调用此函数
-        /// </summary>
-        private void MainPageNavViewLoaded(object sender, RoutedEventArgs e) {
-            // 导航到主页
-            ContentFrame.Navigate(typeof(HomePage));
         }
     }
 }

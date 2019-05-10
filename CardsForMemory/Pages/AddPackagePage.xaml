@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="CardsForMemory.Pages.AddPackagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CardsForMemory.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="5" FontSize="24" Width="200">Name:</TextBlock>
+            <TextBox Margin="5" FontSize="24" Text="{x:Bind vm.Name}"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="5" FontSize="24" Width="200">Author:</TextBlock>
+            <TextBox Margin="5" FontSize="24" Text="{x:Bind vm.Author}"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="5" FontSize="24" Width="200">Description:</TextBlock>
+            <TextBox Margin="5" FontSize="24" Text="{x:Bind vm.Description}"></TextBox>
+        </StackPanel>
+        <Button Margin="5" Command="{x:Bind vm.NextCommand}">Next</Button>
+    </StackPanel>
+</Page>

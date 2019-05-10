@@ -6,10 +6,12 @@ using CardsForMemoryLibrary.IServices;
 
 namespace CardsForMemoryLibrary.ViewModels {
     public class CardsPageViewModel : ViewModelBase {
-        private IPackageService _packageService;
+        private IPackageService packageService;
+        private INavigationService navigationService;
 
-        public CardsPageViewModel(IPackageService packageService) {
-            _packageService = packageService;
+        public CardsPageViewModel(IPackageService packageService, INavigationService navigationService) {
+            this.packageService = packageService;
+            this.navigationService = navigationService;
         }
 
         private IEnumerable<Package> _packages;
@@ -26,25 +28,25 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private RelayCommand _refreshCommand;
         public RelayCommand RefreshCommand => _refreshCommand ?? (_refreshCommand = new RelayCommand(async () => {
-            //await _packageService.InsertAsyncPackage(new Package
-            //{
-            //    Author = "asasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd",
-            //    CreateTime = System.DateTime.Now,
-            //    Description = "asasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd",
-            //    Name = "asasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd",
-            //    UpdateTime = System.DateTime.Now
-            //});
-            var result = await _packageService.GetAsyncAllPackage();
+            var result = await packageService.GetAsyncAllPackage();
             if (result.Result != null) {
                 Packages = result.Result;
             }
         }));
 
+        private RelayCommand _addCommand;
+        public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(() => {
+            navigationService.Navigate("add package");
+        }));
+
         private RelayCommand _playCommand;
-        public RelayCommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(() => {
-            var gv = CardsForMemoryLibrary.Services.GlobalVariableService.getInstance();
-            gv["package.id"]=_selectionPackage.Id;
-            gv["package.i"]=0;
+        public RelayCommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(async () => {
+            var status = Status.getInstance();
+            var result = await packageService.GetAsyncPackage(_selectionPackage.Id);
+            if (result.Result != null) {
+                status["package"] = result.Result;
+                status["package.i"] = 0;
+            }
         }));
     }
 }

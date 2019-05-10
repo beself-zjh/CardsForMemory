@@ -48,7 +48,7 @@
         <StackPanel Margin="5,0,0,0" Width="400">
             <!--三个按钮-->
             <StackPanel Orientation="Horizontal">
-                <Button Margin="5" x:Name="CardsPageAddBtn" Click="CardsPageAddBtnClickHandler">
+                <Button Margin="5" x:Name="CardsPageAddBtn" Command="{x:Bind vm.AddCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Add"/>
                         <TextBlock Margin="5,0,0,0" FontSize="24"><Run Text="Add"/></TextBlock>
