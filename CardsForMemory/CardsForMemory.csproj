@@ -95,11 +95,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CardInfo.xaml.cs">
+      <DependentUpon>CardInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddPackagePage.xaml.cs">
-      <DependentUpon>AddPackagePage.xaml</DependentUpon>
+    <Compile Include="Controls\PackageInfo.xaml.cs">
+      <DependentUpon>PackageInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EditCardsPage.xaml.cs">
       <DependentUpon>EditCardsPage.xaml</DependentUpon>
@@ -150,11 +153,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\CardInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Toast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AddPackagePage.xaml">
+    <Page Include="Controls\PackageInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

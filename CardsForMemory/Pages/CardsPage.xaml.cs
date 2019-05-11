@@ -28,7 +28,7 @@ namespace CardsForMemory.Pages {
         }
 
         private void CardsPageEditBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
-            new AddPackagePage();
+            
         }
 
         private void CardsPagePlayBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
@@ -36,10 +36,5 @@ namespace CardsForMemory.Pages {
 
             this.Frame.Navigate(typeof(RememberPage), 1);
         }
-
-        //private void StackPanel_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        //{
-        //    (DataContext as CardsPageViewModel).StackPanelLoaded();
-        //}
     }
 }

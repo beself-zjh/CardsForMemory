@@ -1,24 +1,13 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using CardsForMemory.Locator;
+using CardsForMemoryLibrary.ViewModels;
+using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Pages {
     public sealed partial class EditCardsPage : Page {
+        private EditCardsPageViewModel vm = ViewModelLocator.Instance.EditCardsPageViewModel;
+
         public EditCardsPage() {
-            this.InitializeComponent();
-            ViewModelSetup();
+            InitializeComponent();
         }
-
-        #region 设置vm
-        /// <summary>
-        /// 此页ViewModel,在xaml里用,所以起一个vm的名字而不是viewModel
-        /// </summary>
-        private CardsForMemoryLibrary.ViewModels.EditCardsPageViewModel vm;
-        /// <summary>
-        /// 设置ViewModel
-        /// </summary>
-        private void ViewModelSetup() {
-            vm = Locator.ViewModelLocator.Instance.EditCardsPageViewModel;
-        }
-        #endregion
-
     }
 }

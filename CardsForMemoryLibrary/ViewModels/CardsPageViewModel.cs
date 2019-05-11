@@ -33,20 +33,22 @@ namespace CardsForMemoryLibrary.ViewModels {
                 Packages = result.Result;
             }
         }));
-
+        
         private RelayCommand _addCommand;
         public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(() => {
+            //TODO
             navigationService.Navigate("add package");
         }));
 
+        private RelayCommand _editCommand;
+        public RelayCommand EditCommand => _editCommand ?? (_editCommand = new RelayCommand(() => {
+            //TODO
+            navigationService.Navigate("edit package");
+        }));
+
         private RelayCommand _playCommand;
-        public RelayCommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(async () => {
-            var status = Status.getInstance();
-            var result = await packageService.GetAsyncPackage(_selectionPackage.Id);
-            if (result.Result != null) {
-                status["package"] = result.Result;
-                status["package.i"] = 0;
-            }
+        public RelayCommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(() => {
+            //TODO
         }));
     }
 }

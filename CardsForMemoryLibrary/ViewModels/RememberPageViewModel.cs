@@ -9,10 +9,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private IPackageService packageService;
         private IReviseService reviseService;
         private IFeedbackService feedbackService;
-
-        private List<Card> cards;
-        private int cardI;
-
+        
         public RememberPageViewModel(IPackageService p, IReviseService r, IFeedbackService f) {
             packageService = p;
             reviseService = r;

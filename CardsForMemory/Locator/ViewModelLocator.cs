@@ -22,7 +22,9 @@ namespace CardsForMemory.Locator {
 
         public MainPageViewModel MainPageViewModel => SimpleIoc.Default.GetInstance<MainPageViewModel>();
 
-        public AddPackagePageViewModel AddPackagePageViewModel => SimpleIoc.Default.GetInstance<AddPackagePageViewModel>();
+        public PackageInfoViewModel PackageInfoViewModel => SimpleIoc.Default.GetInstance<PackageInfoViewModel>();
+
+        public CardInfoViewModel CardInfoViewModel => SimpleIoc.Default.GetInstance<CardInfoViewModel>();
 
         public INavigationService INavigationService => SimpleIoc.Default.GetInstance<INavigationService>();
 
@@ -40,7 +42,8 @@ namespace CardsForMemory.Locator {
             SimpleIoc.Default.Register<RememberPageViewModel>();
             SimpleIoc.Default.Register<EditCardsPageViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
-            SimpleIoc.Default.Register<AddPackagePageViewModel>();
+            SimpleIoc.Default.Register<PackageInfoViewModel>();
+            SimpleIoc.Default.Register<CardInfoViewModel>();
 
         }
     }

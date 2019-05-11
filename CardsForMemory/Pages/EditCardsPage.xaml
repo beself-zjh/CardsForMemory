@@ -8,7 +8,17 @@
     mc:Ignorable="d"
     Width="900"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="block">
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="list">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="140"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -26,51 +36,48 @@
         <Button Grid.Row="0" Grid.Column="1" Margin="20">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="Add"/>
-                <TextBlock Margin="5,0,0,0" FontSize="24">Add</TextBlock>
+                <TextBlock Style="{StaticResource block}">Add</TextBlock>
             </StackPanel>
         </Button>
         <Button Grid.Row="1" Grid.Column="1" Margin="20">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="Edit"/>
-                <TextBlock Margin="5,0,0,0" FontSize="24">Edit</TextBlock>
+                <TextBlock Style="{StaticResource block}">Edit</TextBlock>
             </StackPanel>
         </Button>
         <Button Grid.Row="2" Grid.Column="1" Margin="20">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="Delete"/>
-                <TextBlock Margin="5,0,0,0" FontSize="24">Delete</TextBlock>
+                <TextBlock Style="{StaticResource block}">Delete</TextBlock>
             </StackPanel>
         </Button>
         <Button Grid.Row="3" Grid.Column="1" Margin="20">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="View"/>
-                <TextBlock Margin="5,0,0,0" FontSize="24">Preview</TextBlock>
+                <TextBlock Style="{StaticResource block}">Preview</TextBlock>
             </StackPanel>
         </Button>
         
         <!--左列表-->
         <ListView
-            Grid.Column="0"
-            Grid.Row="0"
             Grid.RowSpan="5"
-            x:Name="cardsListView"
             ItemsSource="{x:Bind vm.Cards}"
             IsMultiSelectCheckBoxEnabled="False">
             <!--列表头部-->
             <ListView.Header>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Width="140" Margin="5"><Run Text="Question"/></TextBlock>
-                    <TextBlock Width="140" Margin="5"><Run Text="Answer"/></TextBlock>
-                    <TextBlock Width="140" Margin="5"><Run Text="UpdateTime"/></TextBlock>
+                    <TextBlock Style="{StaticResource list}">Question</TextBlock>
+                    <TextBlock Style="{StaticResource list}">Answer</TextBlock>
+                    <TextBlock Style="{StaticResource list}">UpdateTime</TextBlock>
                 </StackPanel>
             </ListView.Header>
             <!--列表模板-->
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="lib:Card">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Width="140" Margin="5" Text="{x:Bind Question}"/>
-                        <TextBlock Width="140" Margin="5" Text="{x:Bind Answer}"/>
-                        <TextBlock Width="140" Margin="5" Text="{x:Bind UpdateTime}"/>
+                        <TextBlock Style="{StaticResource list}" Text="{x:Bind Question}"/>
+                        <TextBlock Style="{StaticResource list}" Text="{x:Bind Answer}"/>
+                        <TextBlock Style="{StaticResource list}" Text="{x:Bind UpdateTime}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

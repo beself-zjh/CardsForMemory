@@ -1,20 +1,21 @@
-﻿using Windows.UI.Xaml;
+﻿using CardsForMemory.Locator;
+using CardsForMemoryLibrary.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace CardsForMemory.Controls {
-    public sealed partial class Toast : UserControl {
-        public Toast(string content, int showTime = 2) {
+    public sealed partial class CardInfo : UserControl {
+        CardInfoViewModel vm = ViewModelLocator.Instance.CardInfoViewModel;
+
+        private Popup popup;
+        public CardInfo() {
             RequestedTheme = App.RootTheme;
             InitializeComponent();
-            Popup popup = new Popup { Child = this };
+            popup = new Popup { Child = this };
             Width = Window.Current.Bounds.Width;
             Height = Window.Current.Bounds.Height;
             Loaded += (sender, e) => {
-                ToastText.Text = content;
-                fadeOut.BeginTime = System.TimeSpan.FromSeconds(showTime);
-                fadeOut.Begin();
-                fadeOut.Completed += (a, b) => { popup.IsOpen = false; };
                 Window.Current.SizeChanged += (a, b) => {
                     Width = b.Size.Width;
                     Height = b.Size.Height;
@@ -26,6 +27,7 @@ namespace CardsForMemory.Controls {
                     Height = b.Size.Height;
                 };
             };
+            vm.initCloseWindowAction(() => { popup.IsOpen = false; });
             popup.IsOpen = true;
         }
     }

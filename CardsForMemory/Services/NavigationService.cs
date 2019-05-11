@@ -1,4 +1,5 @@
-﻿using CardsForMemory.Pages;
+﻿using CardsForMemory.Controls;
+using CardsForMemory.Pages;
 using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Services {
@@ -35,7 +36,7 @@ namespace CardsForMemory.Services {
                     frame.Navigate(typeof(SettingsPage));
                     break;
                 case "add package":
-                    frame.Navigate(typeof(AddPackagePage));
+                    new PackageInfo();
                     break;
                 case "edit package":
                     frame.Navigate(typeof(EditCardsPage));
