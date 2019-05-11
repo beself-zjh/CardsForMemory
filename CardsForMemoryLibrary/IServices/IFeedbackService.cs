@@ -13,7 +13,9 @@ namespace CardsForMemoryLibrary.IServices {
         ///     复习反馈
         /// </summary>
         /// <param name="card"></param>
-        Task Utility(Card card, Level level);
+        Task isEasy(Card card);
+        Task isNormal(Card card);
+        Task isDifficult(Card card);
 
         /// <summary>
         ///     提交答案(针对选择题)

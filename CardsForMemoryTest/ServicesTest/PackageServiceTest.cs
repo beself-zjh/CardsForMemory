@@ -14,7 +14,7 @@ namespace CardsForMemoryTest.ServicesTest {
             await ss.Result.DeleteAllAsync<Package>();
 
             var packageService = new PackageService(new SqliteConnectionService());
-            await packageService.InsertAsyncPackage(new Package() {
+            await packageService.AppendAsyncPackage(new Package() {
                 Name = "new",
                 Author = "h",
                 Description = "h"

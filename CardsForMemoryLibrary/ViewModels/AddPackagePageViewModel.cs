@@ -32,7 +32,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(async () => {
             if (Name != "" && Author != "" && Description != "") {
                 var status = Status.getInstance();
-                await packageService.InsertAsyncPackage(new Package {
+                await packageService.AppendAsyncPackage(new Package {
                     Name = Name,
                     Author = Author,
                     Description = Description

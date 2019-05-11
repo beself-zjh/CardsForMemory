@@ -20,7 +20,7 @@ namespace CardsForMemoryLibrary.Services {
             _connectionService = connectionServiece;
         }
 
-        public async Task<ServiceResult> InsertAsyncPackage(Package package) {
+        public async Task<ServiceResult<int>> AppendAsyncPackage(Package package) {
             var connection = _connectionService.GetAsyncConnection();
             Package newPackage = new Package() {
                 Author = package.Author,
@@ -29,9 +29,9 @@ namespace CardsForMemoryLibrary.Services {
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now
             };
-            await connection.Result.InsertAsync(newPackage);
 
-            return new ServiceResult() {
+            return new ServiceResult<int>() {
+                Result = await connection.Result.InsertAsync(newPackage),
                 Status = ServiceResultStatus.OK,
                 Message = "Success"
             };

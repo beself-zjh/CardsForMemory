@@ -14,7 +14,7 @@ namespace CardsForMemoryLibrary.IServices {
         ///     创建一个卡包
         /// </summary>
         /// <param name="package"></param>
-        Task<ServiceResult> InsertAsyncPackage(Package package);
+        Task<ServiceResult<int>> AppendAsyncPackage(Package package);
 
         /// <summary>
         ///     删除一个卡包及其卡片
