@@ -40,7 +40,7 @@ namespace CardsForMemoryLibrary.ViewModels {
             //TODO
             if (Name != "" && Author != "" && Description != "") {
                 var status = Status.getInstance();
-                await packageService.InsertAsyncPackage(new Package {
+                await packageService.AppendAsyncPackage(new Package {
                     Name = Name,
                     Author = Author,
                     Description = Description

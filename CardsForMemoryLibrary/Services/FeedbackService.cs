@@ -20,7 +20,19 @@ namespace CardsForMemoryLibrary.Services {
             _cardService = cardService;
         }
 
-        public async Task Utility(Card card, Level level) {
+        public async Task isEasy(Card card) {
+            await Utility(card, Level.Easy);
+        }
+
+        public async Task isNormal(Card card) {
+            await Utility(card, Level.Normal);
+        }
+
+        public async Task isDifficult(Card card) {
+            await Utility(card, Level.Difficult);
+        }
+
+        private async Task Utility(Card card, Level level) {
             var updateCard = new Card() {
                 Id = card.Id,
                 Answer = card.Answer,
