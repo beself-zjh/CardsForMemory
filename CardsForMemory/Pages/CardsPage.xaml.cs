@@ -1,5 +1,4 @@
-﻿using CardsForMemory.Services;
-using CardsForMemoryLibrary.Models;
+﻿using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml.Controls;
 
@@ -8,7 +7,7 @@ namespace CardsForMemory.Pages {
         private CardsPageViewModel vm;
 
         public CardsPage() {
-            this.InitializeComponent();
+            InitializeComponent();
             CardsPageEditBtn.IsEnabled = false;
             CardsPagePlayBtn.IsEnabled = false;
             DataContext = Locator.ViewModelLocator.Instance.CardsPageViewModel;
@@ -28,14 +27,8 @@ namespace CardsForMemory.Pages {
             CardsPagePlayBtn.IsEnabled = true;
         }
 
-        private void CardsPageAddBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
-            if (null == CardsPageAddBtn.Flyout) {
-                CardsPageAddBtn.Flyout = new Flyout { Content = new TextBlock { Text = "Not implement Button!" } };
-            }
-        }
-
         private void CardsPageEditBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
-
+            new AddPackagePage();
         }
 
         private void CardsPagePlayBtnClickHandler(object sender, Windows.UI.Xaml.RoutedEventArgs e) {

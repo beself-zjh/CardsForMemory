@@ -11,14 +11,7 @@ namespace CardsForMemory {
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
     /// </summary>
-    sealed partial class App : Application
-    {
-
-        ///<summary>
-        ///
-        ///</summary>
-        private const string SelectedAppThemeKey = "SelectedAppTheme";
-
+    sealed partial class App : Application {
 
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
@@ -90,36 +83,29 @@ namespace CardsForMemory {
         /// <summary>
         /// 获取或设置根元素的RequestedTheme(使用LocalSettings保存)
         /// </summary>
-        public static ElementTheme RootTheme
-        {
-            get
-            {
-                if (Window.Current.Content is FrameworkElement rootElement)
-                {
+        public static ElementTheme RootTheme {
+            get {
+                if (Window.Current.Content is FrameworkElement rootElement) {
                     return rootElement.RequestedTheme;
+                } else {
+                    return ElementTheme.Default;
                 }
-
-                return ElementTheme.Default;
             }
-            set
-            {
-                if (Window.Current.Content is FrameworkElement rootElement)
-                {
+            set {
+                if (Window.Current.Content is FrameworkElement rootElement) {
                     rootElement.RequestedTheme = value;
+                } else {
+                    ApplicationData.Current.LocalSettings.Values["SelectedAppTheme"] = value.ToString();
                 }
-
-                ApplicationData.Current.LocalSettings.Values[SelectedAppThemeKey] = value.ToString();
             }
         }
 
-        public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
-        {
-                if (!typeof(TEnum).GetTypeInfo().IsEnum)
-                    {
-        throw new InvalidOperationException("Generic parameter 'TEnum' must be an enum.");
-                    }
-                return (TEnum)Enum.Parse(typeof(TEnum), text);
-         }
+        public static TEnum GetEnum<TEnum>(string text) where TEnum : struct {
+            if (!typeof(TEnum).GetTypeInfo().IsEnum) {
+                throw new InvalidOperationException("Generic parameter 'TEnum' must be an enum.");
+            }
+            return (TEnum)Enum.Parse(typeof(TEnum), text);
+        }
 
     }
 }

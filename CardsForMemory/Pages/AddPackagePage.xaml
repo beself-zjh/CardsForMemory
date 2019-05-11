@@ -1,26 +1,52 @@
-﻿<Page
+﻿<UserControl
     x:Class="CardsForMemory.Pages.AddPackagePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CardsForMemory.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="5" FontSize="24" Width="200">Name:</TextBlock>
-            <TextBox Margin="5" FontSize="24" Text="{x:Bind vm.Name}"></TextBox>
+    <Grid>
+        <!--透明灰色蒙版-->
+        <Border
+            Background="#aa000000"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"/>
+        <StackPanel
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            Margin="45,45"
+            Orientation="Vertical"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock" x:Key="textBlock">
+                    <Setter Property="Margin" Value="5"></Setter>
+                    <Setter Property="FontSize" Value="24"></Setter>
+                    <Setter Property="Width" Value="200"></Setter>
+                </Style>
+                <Style TargetType="TextBox" x:Key="textBox">
+                    <Setter Property="Margin" Value="5"></Setter>
+                    <Setter Property="FontSize" Value="24"></Setter>
+                    <Setter Property="Width" Value="300"></Setter>
+                </Style>
+            </StackPanel.Resources>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource textBlock}">Name:</TextBlock>
+                <TextBox Style="{StaticResource textBox}" Text="{x:Bind vm.Name}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource textBlock}">Author:</TextBlock>
+                <TextBox Style="{StaticResource textBox}" Text="{x:Bind vm.Author}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource textBlock}">Description:</TextBlock>
+                <TextBox Style="{StaticResource textBox}" Text="{x:Bind vm.Description}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10" Width="120">Cancel</Button>
+                <Button Margin="10" Width="120">Next</Button>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="5" FontSize="24" Width="200">Author:</TextBlock>
-            <TextBox Margin="5" FontSize="24" Text="{x:Bind vm.Author}"></TextBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="5" FontSize="24" Width="200">Description:</TextBlock>
-            <TextBox Margin="5" FontSize="24" Text="{x:Bind vm.Description}"></TextBox>
-        </StackPanel>
-        <Button Margin="5" Command="{x:Bind vm.NextCommand}">Next</Button>
-    </StackPanel>
-</Page>
+    </Grid>
+</UserControl>
