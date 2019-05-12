@@ -41,13 +41,13 @@ namespace CardsForMemoryLibrary.IServices {
         /// <param name="card">
         ///     The card is required to have no primary key.
         /// </param>
-        Task<ServiceResult> InsertAsyncCard(Card card);
+        Task<ServiceResult> AppendAsyncCard(int packageId, string question, string answer);
 
         /// <summary>
         ///     插入一组卡片
         /// </summary>
         /// <param name="cards">卡片组</param>
-        Task<ServiceResult> InsertAsyncCards(List<Card> cards);
+        Task<ServiceResult> AppendAsyncCards(List<Card> cards);
 
         /// <summary>
         ///     删除一个卡片

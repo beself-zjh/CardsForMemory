@@ -20,12 +20,12 @@ namespace CardsForMemoryLibrary.Services {
             _connectionService = connectionServiece;
         }
 
-        public async Task<ServiceResult<int>> AppendAsyncPackage(Package package) {
+        public async Task<ServiceResult<int>> AppendAsyncPackage(string author, string description, string name) {
             var connection = _connectionService.GetAsyncConnection();
             Package newPackage = new Package() {
-                Author = package.Author,
-                Description = package.Description,
-                Name = package.Name,
+                Author = author,
+                Description = description,
+                Name = name,
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now
             };

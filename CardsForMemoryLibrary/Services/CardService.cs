@@ -109,7 +109,14 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult> InsertAsyncCard(Card card) {
+        public async Task<ServiceResult> AppendAsyncCard(int packageId, string question, string answer) {
+            Card card = new Card() {
+                PackageId = packageId,
+                Question = question,
+                Answer = answer,
+                Proficiency = 0,
+                UpdateTime = DateTime.Now
+            };
             var connection = _connectionService.GetAsyncConnection();
             try {
                 await connection.Result.InsertAsync(card);
@@ -126,7 +133,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult> InsertAsyncCards(List<Card> cards) {
+        public async Task<ServiceResult> AppendAsyncCards(List<Card> cards) {
             var connection = _connectionService.GetAsyncConnection();
             try {
                 foreach (var card in cards) {

@@ -23,7 +23,7 @@ namespace CardsForMemoryTest.ServicesTest {
             Assert.AreEqual(0, cardList.Result.Count);
 
 
-            await cardService.InsertAsyncCard(card);//插入一个Card
+            await cardService.AppendAsyncCard(0, "1", "1");//插入一个Card
 
             cardList = await cardService.GetAsyncAllCards();//获取CardTable全部内容
             Assert.AreEqual(1, cardList.Result.Count);
@@ -52,7 +52,7 @@ namespace CardsForMemoryTest.ServicesTest {
                 });
             }
 
-            await cardService.InsertAsyncCards(cardList);
+            await cardService.AppendAsyncCards(cardList);
             cardList = (await cardService.GetAsyncAllCards()).Result;
             Assert.AreEqual(8, cardList.Count);
 
@@ -74,7 +74,7 @@ namespace CardsForMemoryTest.ServicesTest {
                 PackageId = 1
             };
 
-            await cardService.InsertAsyncCard(card);
+            await cardService.AppendAsyncCard(0, "0", "0");
 
             card.PackageId = 2;
             await cardService.EditAsyncCard(card);

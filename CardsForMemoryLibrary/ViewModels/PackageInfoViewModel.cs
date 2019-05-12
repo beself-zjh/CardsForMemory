@@ -40,11 +40,7 @@ namespace CardsForMemoryLibrary.ViewModels {
             //TODO
             if (Name != "" && Author != "" && Description != "") {
                 var status = Status.getInstance();
-                await packageService.AppendAsyncPackage(new Package {
-                    Name = Name,
-                    Author = Author,
-                    Description = Description
-                });
+                await packageService.AppendAsyncPackage(Author, Description, Name);
                 var result = await packageService.GetAsyncAllPackage();
                 if (result.Result != null) {
                     int id = 0;
