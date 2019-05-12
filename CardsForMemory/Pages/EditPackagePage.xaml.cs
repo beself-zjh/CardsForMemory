@@ -3,10 +3,10 @@ using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Pages {
-    public sealed partial class EditCardsPage : Page {
-        private EditCardsPageViewModel vm = ViewModelLocator.Instance.EditCardsPageViewModel;
+    public sealed partial class EditPackagePage : Page {
+        private EditPackagePageViewModel vm = ViewModelLocator.Instance.EditPackagePageViewModel;
 
-        public EditCardsPage() {
+        public EditPackagePage() {
             InitializeComponent();
             Loaded += async (s, e) => {
                 await vm.UpdateCards();

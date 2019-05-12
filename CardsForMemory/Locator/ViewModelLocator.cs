@@ -14,11 +14,11 @@ namespace CardsForMemory.Locator {
         /// </summary>
         public static readonly ViewModelLocator Instance = new ViewModelLocator();
 
-        public CardsPageViewModel CardsPageViewModel => SimpleIoc.Default.GetInstance<CardsPageViewModel>();
+        public PackagePageViewModel PackagePageViewModel => SimpleIoc.Default.GetInstance<PackagePageViewModel>();
 
         public RememberPageViewModel RememberPageViewModel => SimpleIoc.Default.GetInstance<RememberPageViewModel>();
 
-        public EditCardsPageViewModel EditCardsPageViewModel => SimpleIoc.Default.GetInstance<EditCardsPageViewModel>();
+        public EditPackagePageViewModel EditPackagePageViewModel => SimpleIoc.Default.GetInstance<EditPackagePageViewModel>();
 
         public MainPageViewModel MainPageViewModel => SimpleIoc.Default.GetInstance<MainPageViewModel>();
 
@@ -38,9 +38,9 @@ namespace CardsForMemory.Locator {
             SimpleIoc.Default.Register<IFeedbackService, FeedbackService>();
             SimpleIoc.Default.Register<IReviseService, ReviseService>();
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
-            SimpleIoc.Default.Register<CardsPageViewModel>();
+            SimpleIoc.Default.Register<PackagePageViewModel>();
             SimpleIoc.Default.Register<RememberPageViewModel>();
-            SimpleIoc.Default.Register<EditCardsPageViewModel>();
+            SimpleIoc.Default.Register<EditPackagePageViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<PackageInfoViewModel>();
             SimpleIoc.Default.Register<CardInfoViewModel>();

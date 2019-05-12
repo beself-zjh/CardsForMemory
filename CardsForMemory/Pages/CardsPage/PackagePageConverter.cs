@@ -1,8 +1,7 @@
-﻿using CardsForMemory.Locator;
-using System;
+﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace CardsForMemory.CardsPageConverter {
+namespace CardsForMemory.PackagePageConverter {
     public class NameConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, string language) {
             return "Name: " + value as string;

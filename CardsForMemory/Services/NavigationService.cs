@@ -24,7 +24,7 @@ namespace CardsForMemory.Services {
                     frame.Navigate(typeof(HomePage));
                     break;
                 case "cards":
-                    frame.Navigate(typeof(CardsPage));
+                    frame.Navigate(typeof(PackagePage));
                     break;
                 case "remember":
                     frame.Navigate(typeof(RememberPage));
@@ -39,7 +39,7 @@ namespace CardsForMemory.Services {
                     new PackageInfo();
                     break;
                 case "edit package":
-                    frame.Navigate(typeof(EditCardsPage));
+                    frame.Navigate(typeof(EditPackagePage));
                     break;
                 case "card":
                     new CardInfo(CardsForMemoryLibrary.Status.getInstance()["card action"] as System.Action);

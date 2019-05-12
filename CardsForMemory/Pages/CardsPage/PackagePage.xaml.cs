@@ -4,10 +4,10 @@ using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Pages {
-    public sealed partial class CardsPage : Page {
-        private CardsPageViewModel vm = ViewModelLocator.Instance.CardsPageViewModel;
+    public sealed partial class PackagePage : Page {
+        private PackagePageViewModel vm = ViewModelLocator.Instance.PackagePageViewModel;
 
-        public CardsPage() {
+        public PackagePage() {
             InitializeComponent();
         }
 

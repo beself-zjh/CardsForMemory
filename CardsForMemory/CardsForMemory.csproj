@@ -104,9 +104,9 @@
     <Compile Include="Controls\PackageInfo.xaml.cs">
       <DependentUpon>PackageInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CardsPage\CardsPageConverter.cs" />
-    <Compile Include="Pages\EditCardsPage.xaml.cs">
-      <DependentUpon>EditCardsPage.xaml</DependentUpon>
+    <Compile Include="Pages\CardsPage\PackagePageConverter.cs" />
+    <Compile Include="Pages\EditPackagePage.xaml.cs">
+      <DependentUpon>EditPackagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RememberPage\RememberPageConverter.cs" />
     <Compile Include="Locator\ViewModelLocator.cs" />
@@ -125,8 +125,8 @@
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CardsPage\CardsPage.xaml.cs">
-      <DependentUpon>CardsPage.xaml</DependentUpon>
+    <Compile Include="Pages\CardsPage\PackagePage.xaml.cs">
+      <DependentUpon>PackagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NavigationService.cs" />
@@ -164,7 +164,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EditCardsPage.xaml">
+    <Page Include="Pages\EditPackagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,7 +188,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CardsPage\CardsPage.xaml">
+    <Page Include="Pages\CardsPage\PackagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CardsForMemoryLibrary.ViewModels {
-    public class EditCardsPageViewModel : ViewModelBase {
+    public class EditPackagePageViewModel : ViewModelBase {
         ICardService ICardService;
         INavigationService INavigationService;
 
-        public EditCardsPageViewModel(ICardService ICardService, INavigationService INavigationService) {
+        public EditPackagePageViewModel(ICardService ICardService, INavigationService INavigationService) {
             this.ICardService = ICardService;
             this.INavigationService = INavigationService;
         }

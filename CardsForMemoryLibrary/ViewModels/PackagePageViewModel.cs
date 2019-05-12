@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using CardsForMemoryLibrary.IServices;
 
 namespace CardsForMemoryLibrary.ViewModels {
-    public class CardsPageViewModel : ViewModelBase {
+    public class PackagePageViewModel : ViewModelBase {
         private IPackageService packageService;
         private INavigationService navigationService;
 
-        public CardsPageViewModel(IPackageService packageService, INavigationService navigationService) {
+        public PackagePageViewModel(IPackageService packageService, INavigationService navigationService) {
             this.packageService = packageService;
             this.navigationService = navigationService;
         }
