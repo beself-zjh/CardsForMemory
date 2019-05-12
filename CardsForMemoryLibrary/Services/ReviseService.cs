@@ -13,7 +13,7 @@ namespace CardsForMemoryLibrary.Services {
             _cardService = cardService;
         }
 
-        public async Task<List<Card>> SmartRevise(List<int> packageIds, int num) {
+        public Task<List<Card>> SmartRevise(List<int> packageIds, int num) {
             throw new NotImplementedException();
             //var currentDate = DateTime.Today;
             //List<Card> cards = new List<Card>();
