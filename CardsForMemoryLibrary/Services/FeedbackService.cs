@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using CardsForMemoryLibrary.IServices;
+﻿using CardsForMemoryLibrary.IServices;
 using CardsForMemoryLibrary.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CardsForMemoryLibrary.Services {
     public class FeedbackService : IFeedbackService {

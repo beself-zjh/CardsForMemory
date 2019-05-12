@@ -1,4 +1,5 @@
-﻿using CardsForMemoryLibrary.ViewModels;
+﻿using CardsForMemory.Locator;
+using CardsForMemoryLibrary.ViewModels;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -6,6 +7,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace CardsForMemory.Pages {
     public sealed partial class RememberPage : Page {
+        private RememberPageViewModel vm = ViewModelLocator.Instance.RememberPageViewModel;
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
 
@@ -13,22 +15,8 @@ namespace CardsForMemory.Pages {
 
         public RememberPage() {
             InitializeComponent();
-            ViewModelSetup();
             TimerSetup();
         }
-
-        #region 设置vm
-        /// <summary>
-        /// 此页ViewModel,在xaml里用,所以起一个vm的名字而不是viewModel
-        /// </summary>
-        private RememberPageViewModel vm;
-        /// <summary>
-        /// 设置ViewModel
-        /// </summary>
-        private void ViewModelSetup() {
-            vm = Locator.ViewModelLocator.Instance.RememberPageViewModel;
-        }
-        #endregion
 
         #region 设置timer
         /// <summary>

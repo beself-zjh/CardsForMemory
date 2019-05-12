@@ -1,5 +1,6 @@
 ﻿using CardsForMemory.Locator;
 using CardsForMemoryLibrary.ViewModels;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -9,7 +10,7 @@ namespace CardsForMemory.Controls {
         CardInfoViewModel vm = ViewModelLocator.Instance.CardInfoViewModel;
 
         private Popup popup;
-        public CardInfo() {
+        public CardInfo(Action action) {
             RequestedTheme = App.RootTheme;
             InitializeComponent();
             popup = new Popup { Child = this };
@@ -26,8 +27,10 @@ namespace CardsForMemory.Controls {
                     Width = b.Size.Width;
                     Height = b.Size.Height;
                 };
+                vm.ClearHandler();
             };
-            vm.initCloseWindowAction(() => { popup.IsOpen = false; });
+            vm.Next += (a, b) => { popup.IsOpen = false; action(); };
+            vm.Cancel += (a, b) => { popup.IsOpen = false; };
             popup.IsOpen = true;
         }
     }

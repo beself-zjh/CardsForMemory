@@ -41,6 +41,9 @@ namespace CardsForMemory.Services {
                 case "edit package":
                     frame.Navigate(typeof(EditCardsPage));
                     break;
+                case "card":
+                    new CardInfo(CardsForMemoryLibrary.Status.getInstance()["card action"] as System.Action);
+                    break;
                 default:
                     throw new System.NotImplementedException();
             }

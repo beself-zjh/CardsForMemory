@@ -8,7 +8,10 @@ namespace CardsForMemoryLibrary {
         }
         public object this[string index] {
             get {
-                return m[index];
+                if (m.ContainsKey(index))
+                    return m[index];
+                else
+                    return null;
             }
             set {
                 m[index] = value;

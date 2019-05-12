@@ -1,143 +1,91 @@
-﻿<Page
-    x:Class="CardsForMemory.Pages.RememberPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="using:CardsForMemory.RememberPageConverter"
-    xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Custom="using:Microsoft.Xaml.Interactivity"
-    mc:Ignorable="d"
-    x:Name="rememberPage"
-    Width="750"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <UserControl.Resources>
-        <local:ClockWidth x:Key="ClockWidth"></local:ClockWidth>
-        <local:RingWidth x:Key="RingWidth"></local:RingWidth>
-        <local:RingStatus x:Key="RingStatus"></local:RingStatus>
-        <local:ClockText x:Key="ClockText"></local:ClockText>
-        <local:InColor x:Key="InColor"></local:InColor>
-        <local:OutColor x:Key="OutColor"></local:OutColor>
-    </UserControl.Resources>
-
+﻿<Page x:Class="CardsForMemory.Pages.RememberPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="using:CardsForMemory.RememberPageConverter" xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
+        xmlns:Custom="using:Microsoft.Xaml.Interactivity" mc:Ignorable="d" x:Name="rememberPage" Width="750"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <local:ClockWidth x:Key="ClockWidth" />
+        <local:RingWidth x:Key="RingWidth" />
+        <local:RingStatus x:Key="RingStatus" />
+        <local:ClockText x:Key="ClockText" />
+        <local:InColor x:Key="InColor" />
+        <local:OutColor x:Key="OutColor" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
         <!--把Loaded事件绑到Grid的OnLoaded上-->
         <Custom:Interaction.Behaviors>
             <Custom1:EventTriggerBehavior EventName="Loaded">
-                <Custom1:InvokeCommandAction Command="{x:Bind vm.OnLoaded,Mode=OneWay}"/>
+                <Custom1:InvokeCommandAction Command="{x:Bind vm.OnLoaded,Mode=OneWay}" />
             </Custom1:EventTriggerBehavior>
         </Custom:Interaction.Behaviors>
-
         <!--浮动屏蔽-->
-        <Grid
-            x:Name="RememberPageShieldingLayer"
-            Background="White"
-            Grid.RowSpan="3"
-            Canvas.ZIndex="1"
-            
-            Visibility="Collapsed">
+        <Grid x:Name="RememberPageShieldingLayer" Background="White" Grid.RowSpan="3" Canvas.ZIndex="1"
+                Visibility="Collapsed">
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <TextBlock
-                FontSize="64"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">先选一个牌库吧!</TextBlock>
+            <TextBlock FontSize="64" HorizontalAlignment="Center" VerticalAlignment="Center">先选一个牌库吧!</TextBlock>
         </Grid>
-
-        <TextBlock
-            Grid.Row="0"
-            x:Name="Problem"
-            Text="{x:Bind vm.Question,Mode=OneWay}"
-            Padding="20"
-            FontSize="64"></TextBlock>
-
+        <TextBlock Grid.Row="0" x:Name="Problem" Text="{x:Bind vm.Question,Mode=OneWay}" Padding="20" FontSize="64" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="240"></ColumnDefinition>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="240" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="240"></RowDefinition>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="240" />
             </Grid.RowDefinitions>
-
-            <TextBlock
-                Grid.ColumnSpan="2"
-                Grid.RowSpan="2"
-                TextWrapping="Wrap"
-                x:Name="Items"
-                Text="{x:Bind vm.Answer,Mode=OneWay}"
-                Padding="20"
-                FontSize="64"></TextBlock>
+            <TextBlock Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap" x:Name="Items"
+                    Text="{x:Bind vm.Answer,Mode=OneWay}" Padding="20" FontSize="64" />
             <!--计时器-->
-            <Grid
-                Grid.Column="1"
-                Grid.Row="1"
-                Width="{x:Bind vm.Style,Converter={StaticResource ClockWidth}, Mode=OneWay}"
-                Height="{x:Bind vm.Style,Converter={StaticResource ClockWidth},Mode=OneWay}"
-                Margin="10"
-                x:Name="RememberPageClock">
+            <Grid Grid.Column="1" Grid.Row="1"
+                    Width="{x:Bind vm.Style,Converter={StaticResource ClockWidth}, Mode=OneWay}"
+                    Height="{x:Bind vm.Style,Converter={StaticResource ClockWidth},Mode=OneWay}" Margin="10"
+                    x:Name="RememberPageClock">
                 <!--外环-->
-                <Ellipse 
-                    x:Name="RememberPageOuterClock"
-                    Stroke="{x:Bind vm.Time,Converter={StaticResource OutColor},Mode=OneWay}"
-                    StrokeThickness="{x:Bind vm.Style,Converter={StaticResource RingWidth},Mode=OneWay}"/>
+                <Ellipse x:Name="RememberPageOuterClock"
+                        Stroke="{x:Bind vm.Time,Converter={StaticResource OutColor},Mode=OneWay}"
+                        StrokeThickness="{x:Bind vm.Style,Converter={StaticResource RingWidth},Mode=OneWay}" />
                 <!--内环-->
-                <Ellipse
-                    x:Name="RememberPageInnerClock"
-                    Stroke="{x:Bind vm.Time,Converter={StaticResource InColor},Mode=OneWay}"
-                    StrokeThickness="{x:Bind vm.Style,Converter={StaticResource RingWidth},Mode=OneWay}"
-                    StrokeDashArray="{x:Bind vm.Time,Converter={StaticResource RingStatus},Mode=OneWay}"
-                    RenderTransformOrigin="0.5,0.5">
+                <Ellipse x:Name="RememberPageInnerClock"
+                        Stroke="{x:Bind vm.Time,Converter={StaticResource InColor},Mode=OneWay}"
+                        StrokeThickness="{x:Bind vm.Style,Converter={StaticResource RingWidth},Mode=OneWay}"
+                        StrokeDashArray="{x:Bind vm.Time,Converter={StaticResource RingStatus},Mode=OneWay}"
+                        RenderTransformOrigin="0.5,0.5">
                     <Ellipse.RenderTransform>
-                        <RotateTransform Angle="-90"/>
+                        <RotateTransform Angle="-90" />
                     </Ellipse.RenderTransform>
                 </Ellipse>
                 <!--中间的文字-->
-                <TextBlock
-                    x:Name="RememberPageClockText"
-                    Text="{x:Bind vm.Time,Converter={StaticResource ClockText},Mode=OneWay}"
-                    FontSize="50" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"/>
+                <TextBlock x:Name="RememberPageClockText"
+                        Text="{x:Bind vm.Time,Converter={StaticResource ClockText},Mode=OneWay}" FontSize="50"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Grid>
         </Grid>
-
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackPanel
-                Grid.Column="0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <Button Content="这不很简单嘛"/>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="这不很简单嘛" />
             </StackPanel>
-            <StackPanel
-                Grid.Column="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <Button Content="哎呀,还不能立刻有思路啊"/>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="哎呀,还不能立刻有思路啊" />
             </StackPanel>
-            <StackPanel
-                Grid.Column="2"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <Button Content="哇,我完全想不起来"/>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="哇,我完全想不起来" />
             </StackPanel>
         </Grid>
     </Grid>
-
 </Page>

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.XPath;
-using CardsForMemoryLibrary.IServices;
+﻿using CardsForMemoryLibrary.IServices;
 using CardsForMemoryLibrary.Models;
 using SQLite;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CardsForMemoryLibrary.Services {
     /// <summary>

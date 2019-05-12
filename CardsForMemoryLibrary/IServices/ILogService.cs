@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CardsForMemoryLibrary.Models;
 using System.Threading.Tasks;
-using CardsForMemoryLibrary.Models;
 
 namespace CardsForMemoryLibrary.IServices {
     /// <summary>

@@ -26,14 +26,14 @@ namespace CardsForMemoryLibrary.ViewModels {
             set => Set(nameof(SelectionPackage), ref _selectionPackage, value);
         }
 
-        private RelayCommand _refreshCommand;
-        public RelayCommand RefreshCommand => _refreshCommand ?? (_refreshCommand = new RelayCommand(async () => {
+        private RelayCommand _loadedCommand;
+        public RelayCommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(async () => {
             var result = await packageService.GetAsyncAllPackage();
             if (result.Result != null) {
                 Packages = result.Result;
             }
         }));
-        
+
         private RelayCommand _addCommand;
         public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(() => {
             //TODO
@@ -42,7 +42,8 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private RelayCommand _editCommand;
         public RelayCommand EditCommand => _editCommand ?? (_editCommand = new RelayCommand(() => {
-            //TODO
+            var status = Status.getInstance();
+            status["package"] = SelectionPackage;
             navigationService.Navigate("edit package");
         }));
 

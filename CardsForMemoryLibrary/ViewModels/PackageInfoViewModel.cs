@@ -1,5 +1,4 @@
 ﻿using CardsForMemoryLibrary.IServices;
-using CardsForMemoryLibrary.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -37,17 +36,13 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private RelayCommand _nextCommand;
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(async () => {
-            //TODO
             if (Name != "" && Author != "" && Description != "") {
                 var status = Status.getInstance();
-                await packageService.AppendAsyncPackage(Author, Description, Name);
-                var result = await packageService.GetAsyncAllPackage();
-                if (result.Result != null) {
-                    int id = 0;
-                    result.Result.ForEach((Package p) => {
-                        id = id > p.Id ? id : p.Id;
-                    });
-                    status["new.id"] = id;
+                int? packageId = (await packageService.AppendAsyncPackage(Name, Author, Description))?.Result;
+                if (packageId != null) {
+                    status["package"] = await packageService.GetAsyncPackage(packageId.Value);
+                } else {
+                    throw new System.Exception();
                 }
                 closeWindow?.Invoke();
                 navigationService.Navigate("edit package");

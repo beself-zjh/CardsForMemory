@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.System;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 
 namespace CardsForMemory.Pages {
 
@@ -19,17 +14,18 @@ namespace CardsForMemory.Pages {
                 return String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
             }
         }
+
         public SettingsPage() {
-            this.InitializeComponent();
-            Loaded += OnSettingsPageLoaded;
+            InitializeComponent();
+            Loaded += (a, b) => {
+                var currentTheme = App.RootTheme.ToString();
+                (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
+            };
         }
-        private async void OnFeedbackButtonClick(object sender, RoutedEventArgs e) {
-            await Launcher.LaunchUriAsync(new Uri("feedback-hub:"));
-        }
-        private void OnSettingsPageLoaded(object sender, RoutedEventArgs e) {
-            var currentTheme = App.RootTheme.ToString();
-            (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
-        }
+
+        //private async void OnFeedbackButtonClick(object sender, RoutedEventArgs e) {
+        //    await Launcher.LaunchUriAsync(new Uri("feedback-hub:"));
+        //}
 
         private void OnThemeRadioButtonChecked(object sender, RoutedEventArgs e) {
             var selectedTheme = ((RadioButton)sender)?.Tag?.ToString();
@@ -50,12 +46,5 @@ namespace CardsForMemory.Pages {
                 }
             }
         }
-
-        private void OnThemeRadioButtonKeyDown(object sender, KeyRoutedEventArgs e) {
-            if (e.Key == VirtualKey.Up) {
-                //MainPage.Current.PageHeader.Focus(FocusState.Programmatic);
-            }
-        }
-
     }
 }

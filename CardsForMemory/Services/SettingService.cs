@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CardsForMemory.IServices;
 using Windows.Storage;
-using CardsForMemory.IServices;
 
 namespace CardsForMemory.Services {
     public class SettingService : ISettingService {

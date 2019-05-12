@@ -1,7 +1,5 @@
-﻿using System;
+﻿using SQLite;
 using System.Collections.Generic;
-using System.Text;
-using SQLite;
 
 namespace CardsForMemoryLibrary.Services {
     /// <summary>

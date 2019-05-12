@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using CardsForMemoryLibrary.Models;
+﻿using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.Services;
 using NUnit.Framework;
+using System.Threading.Tasks;
 
 namespace CardsForMemoryTest.ServicesTest {
     public class PackageServiceTest {
@@ -14,11 +11,7 @@ namespace CardsForMemoryTest.ServicesTest {
             await ss.Result.DeleteAllAsync<Package>();
 
             var packageService = new PackageService(new SqliteConnectionService());
-            await packageService.AppendAsyncPackage(new Package() {
-                Name = "new",
-                Author = "h",
-                Description = "h"
-            });
+            await packageService.AppendAsyncPackage("new", "h", "h");
             var packageList = (await packageService.GetAsyncAllPackage()).Result;
             var ap = packageList[0];
             Assert.AreEqual(1, packageList.Count);

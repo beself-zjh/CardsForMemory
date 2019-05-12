@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using CardsForMemoryLibrary.Models;
-using CardsForMemoryLibrary.IServices;
+﻿using CardsForMemoryLibrary.IServices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -9,7 +7,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private IPackageService packageService;
         private IReviseService reviseService;
         private IFeedbackService feedbackService;
-        
+
         public RememberPageViewModel(IPackageService p, IReviseService r, IFeedbackService f) {
             packageService = p;
             reviseService = r;

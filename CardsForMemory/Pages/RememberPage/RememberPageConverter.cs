@@ -1,42 +1,47 @@
-﻿namespace CardsForMemory.RememberPageConverter {
-    public class RingWidth : Windows.UI.Xaml.Data.IValueConverter {
-        public object Convert(object value, System.Type targetType, object parameter, string language) {
-            var vm = Locator.ViewModelLocator.Instance.RememberPageViewModel;
+﻿using CardsForMemory.Locator;
+using System;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
+
+namespace CardsForMemory.RememberPageConverter {
+    public class RingWidth : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var vm = ViewModelLocator.Instance.RememberPageViewModel;
             return (double)(vm.Style % 100);
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, string language) {
-            throw new System.NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
         }
     }
 
-    public class ClockWidth : Windows.UI.Xaml.Data.IValueConverter {
-        public object Convert(object value, System.Type targetType, object parameter, string language) {
-            var vm = Locator.ViewModelLocator.Instance.RememberPageViewModel;
+    public class ClockWidth : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var vm = ViewModelLocator.Instance.RememberPageViewModel;
             return (double)(vm.Style / 100);
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, string language) {
-            throw new System.NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
         }
     }
 
-    public class RingStatus : Windows.UI.Xaml.Data.IValueConverter {
-        public object Convert(object value, System.Type targetType, object parameter, string language) {
-            var vm = Locator.ViewModelLocator.Instance.RememberPageViewModel;
+    public class RingStatus : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var vm = ViewModelLocator.Instance.RememberPageViewModel;
             int ClockWidth = vm.Style / 100, RingWidth = vm.Style % 100, Second = vm.Time % 60;
             double circumference = (ClockWidth - RingWidth) * 3.1415926535898 / RingWidth;
             return new Windows.UI.Xaml.Media.DoubleCollection { circumference * Second / 60, circumference };
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, string language) {
-            throw new System.NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
         }
     }
 
-    public class ClockText : Windows.UI.Xaml.Data.IValueConverter {
-        public object Convert(object value, System.Type targetType, object parameter, string language) {
-            var vm = Locator.ViewModelLocator.Instance.RememberPageViewModel;
+    public class ClockText : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var vm = ViewModelLocator.Instance.RememberPageViewModel;
             string second = (vm.Time % 60).ToString(), minute = (vm.Time / 60).ToString();
             if (second.Length == 1) {
                 second = "0" + second;
@@ -47,38 +52,38 @@
             return minute + ":" + second;
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, string language) {
-            throw new System.NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
         }
     }
 
-    public class InColor : Windows.UI.Xaml.Data.IValueConverter {
-        public object Convert(object value, System.Type targetType, object parameter, string language) {
-            var vm = Locator.ViewModelLocator.Instance.RememberPageViewModel;
+    public class InColor : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var vm = ViewModelLocator.Instance.RememberPageViewModel;
             if (vm.Time / 60 % 2 == 0) {
-                return new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.DeepSkyBlue);
+                return new SolidColorBrush(Windows.UI.Colors.DeepSkyBlue);
             } else {
-                return new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Gray);
+                return new SolidColorBrush(Windows.UI.Colors.Gray);
             }
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, string language) {
-            throw new System.NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
         }
     }
 
-    public class OutColor : Windows.UI.Xaml.Data.IValueConverter {
-        public object Convert(object value, System.Type targetType, object parameter, string language) {
-            var vm = Locator.ViewModelLocator.Instance.RememberPageViewModel;
+    public class OutColor : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            var vm = ViewModelLocator.Instance.RememberPageViewModel;
             if (vm.Time / 60 % 2 == 0) {
-                return new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Gray);
+                return new SolidColorBrush(Windows.UI.Colors.Gray);
             } else {
-                return new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.DeepSkyBlue);
+                return new SolidColorBrush(Windows.UI.Colors.DeepSkyBlue);
             }
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, string language) {
-            throw new System.NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
         }
     }
 }

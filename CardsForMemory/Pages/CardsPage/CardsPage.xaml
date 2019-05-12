@@ -1,0 +1,91 @@
+﻿<Page x:Class="CardsForMemory.Pages.CardsPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lib="using:CardsForMemoryLibrary.Models" xmlns:Custom="using:Microsoft.Xaml.Interactivity"
+        xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core" mc:Ignorable="d" Width="900"
+        xmlns:local="using:CardsForMemory.CardsPageConverter"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="block">
+            <Setter Property="Width" Value="140" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="block_wrap">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+        <local:NameConverter x:Key="NameConverter" />
+        <local:CreateTimeConverter x:Key="CreateTimeConverter" />
+        <local:DescriptionConverter x:Key="DescriptionConverter" />
+        <local:UpdateTimeConverter x:Key="UpdateTimeConverter" />
+        <local:AuthorConverter x:Key="AuthorConverter" />
+    </Page.Resources>
+    <StackPanel Orientation="Horizontal">
+        <!--把Loaded事件绑到StackPanel的LoadedCommand上-->
+        <Custom:Interaction.Behaviors>
+            <Custom1:EventTriggerBehavior EventName="Loaded">
+                <Custom1:InvokeCommandAction Command="{x:Bind vm.LoadedCommand}" />
+            </Custom1:EventTriggerBehavior>
+        </Custom:Interaction.Behaviors>
+        <!--左列表-->
+        <ListView Grid.Column="0" SelectionChanged="ListViewSelectChangeHandler"
+                ItemsSource="{x:Bind vm.Packages,Mode=OneWay}" IsMultiSelectCheckBoxEnabled="False">
+            <!--列表头部-->
+            <ListView.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource block}">Name</TextBlock>
+                    <TextBlock Style="{StaticResource block}">Author</TextBlock>
+                    <TextBlock Style="{StaticResource block}">UpdateTime</TextBlock>
+                </StackPanel>
+            </ListView.Header>
+            <!--列表模板-->
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="lib:Package">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource block}" Text="{x:Bind Name,Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource block}" Text="{x:Bind Author,Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource block}" Text="{x:Bind UpdateTime,Mode=OneWay}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--右侧栏-->
+        <StackPanel Margin="5,0,0,0" Width="400">
+            <!--三个按钮-->
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Command="{x:Bind vm.AddCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Add" />
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Add</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Margin="5" Command="{x:Bind vm.EditCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Edit" />
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Edit</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Margin="5" Command="{x:Bind vm.PlayCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Play" />
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Play</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <!--更多信息-->
+            <TextBlock Margin="5" FontSize="32">MoreInformation</TextBlock>
+            <TextBlock Style="{StaticResource block_wrap}"
+                    Text="{x:Bind vm.SelectionPackage.Name,Mode=OneWay,Converter={StaticResource NameConverter}}" />
+            <TextBlock Style="{StaticResource block_wrap}"
+                    Text="{x:Bind vm.SelectionPackage.Author,Mode=OneWay,Converter={StaticResource AuthorConverter}}" />
+            <TextBlock Style="{StaticResource block_wrap}"
+                    Text="{x:Bind vm.SelectionPackage.CreateTime,Mode=OneWay,Converter={StaticResource CreateTimeConverter}}" />
+            <TextBlock Style="{StaticResource block_wrap}"
+                    Text="{x:Bind vm.SelectionPackage.UpdateTime,Mode=OneWay,Converter={StaticResource UpdateTimeConverter}}" />
+            <TextBlock Style="{StaticResource block_wrap}"
+                    Text="{x:Bind vm.SelectionPackage.Description,Mode=OneWay,Converter={StaticResource DescriptionConverter}}" />
+        </StackPanel>
+    </StackPanel>
+</Page>

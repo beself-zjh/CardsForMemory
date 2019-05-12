@@ -8,6 +8,9 @@ namespace CardsForMemory.Pages {
 
         public EditCardsPage() {
             InitializeComponent();
+            Loaded += async (s, e) => {
+                await vm.UpdateCards();
+            };
         }
     }
 }

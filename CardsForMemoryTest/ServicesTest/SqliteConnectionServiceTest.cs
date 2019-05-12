@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CardsForMemoryLibrary.Services;
 using NUnit.Framework;
-using CardsForMemoryLibrary.Services;
 using SQLite;
 
 namespace CardsForMemoryTest.ServicesTest {
