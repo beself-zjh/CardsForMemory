@@ -9,34 +9,34 @@ namespace CardsForMemoryTest.ServicesTest {
         [Test]
         public async Task TestSingleCard() {
             var cardService = new CardService(new SqliteConnectionService());
-            await cardService.DeleteAsyncAllCard();//删除CardTable全部内容
+            await cardService.DeleteAllCardAsync();//删除CardTable全部内容
             var card = new Card() {
                 PackageId = 1,
                 Question = "enheng?",
                 Answer = "no"
             };
 
-            var cardList = await cardService.GetAsyncAllCards();//获取CardTable全部内容
+            var cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
             Assert.AreEqual(0, cardList.Result.Count);
 
 
-            await cardService.AppendAsyncCard(0, "1", "1");//插入一个Card
+            await cardService.AddCardAsync(0, "1", "1");//插入一个Card
 
-            cardList = await cardService.GetAsyncAllCards();//获取CardTable全部内容
+            cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
             Assert.AreEqual(1, cardList.Result.Count);
             Assert.AreEqual(1, cardList.Result[0].PackageId);
 
-            await cardService.DeleteAsyncCard(cardList.Result[0].Id);//删除一个卡片
-            cardList = await cardService.GetAsyncAllCards();//获取CardTable全部内容
+            await cardService.DeleteCardAsync(cardList.Result[0].Id);//删除一个卡片
+            cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
             Assert.AreEqual(0, cardList.Result.Count);
 
-            await cardService.DeleteAsyncAllCard();
+            await cardService.DeleteAllCardAsync();
         }
 
         [Test]
         public async Task TestCardList() {
             var cardService = new CardService(new SqliteConnectionService());
-            await cardService.DeleteAsyncAllCard();
+            await cardService.DeleteAllCardAsync();
             List<Card> cardList = new List<Card>();
             for (int i = 0; i < 5; i++) {
                 cardList.Add(new Card() {
@@ -50,40 +50,40 @@ namespace CardsForMemoryTest.ServicesTest {
             }
 
             await cardService.AppendAsyncCards(cardList);
-            cardList = (await cardService.GetAsyncAllCards()).Result;
+            cardList = (await cardService.GetAllCardsAsync()).Result;
             Assert.AreEqual(8, cardList.Count);
 
-            cardList = (await cardService.GetAsyncCards(1)).Result;
+            cardList = (await cardService.GetCardsAsync(1)).Result;
             Assert.AreEqual(5, cardList.Count);
 
-            await cardService.DeleteAsyncCards(1);
-            cardList = (await cardService.GetAsyncCards(1)).Result;
+            await cardService.DeleteCardsAsync(1);
+            cardList = (await cardService.GetCardsAsync(1)).Result;
             Assert.AreEqual(0, cardList.Count);
 
-            await cardService.DeleteAsyncAllCard();
+            await cardService.DeleteAllCardAsync();
         }
 
         [Test]
         public async Task TestEditCard() {
             var cardService = new CardService(new SqliteConnectionService());
-            await cardService.DeleteAsyncAllCard();
+            await cardService.DeleteAllCardAsync();
             var card = new Card() {
                 PackageId = 1
             };
 
-            await cardService.AppendAsyncCard(0, "0", "0");
+            await cardService.AddCardAsync(0, "0", "0");
 
             card.PackageId = 2;
-            await cardService.EditAsyncCard(card);
+            await cardService.EditCardAsync(card);
 
-            var cardList = await cardService.GetAsyncAllCards();
+            var cardList = await cardService.GetAllCardsAsync();
 
-            card = (await cardService.GetAsyncCard(cardList.Result[0].Id)).Result;
+            card = (await cardService.GetCardAsync(cardList.Result[0].Id)).Result;
             Assert.AreEqual(2, card.PackageId);
-            cardList = await cardService.GetAsyncAllCards();
+            cardList = await cardService.GetAllCardsAsync();
             Assert.AreEqual(1, cardList.Result.Count);
 
-            await cardService.DeleteAsyncAllCard();
+            await cardService.DeleteAllCardAsync();
         }
     }
 }

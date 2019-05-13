@@ -52,7 +52,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <!--右侧栏-->
-        <StackPanel Margin="5,0,0,0" Width="400">
+        <StackPanel Width="450" Margin="0,0,0,0">
             <!--三个按钮-->
             <StackPanel Orientation="Horizontal">
                 <Button Margin="5" Command="{x:Bind vm.AddCommand}">
@@ -73,19 +73,25 @@
                         <TextBlock Margin="5,0,0,0" FontSize="24">Play</TextBlock>
                     </StackPanel>
                 </Button>
+                <Button Margin="5" Command="{x:Bind vm.DeleteCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Delete" />
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Delete</TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
             <!--更多信息-->
             <TextBlock Margin="5" FontSize="32">MoreInformation</TextBlock>
             <TextBlock Style="{StaticResource block_wrap}"
-                    Text="{x:Bind vm.SelectionPackage.Name,Mode=OneWay,Converter={StaticResource NameConverter}}" />
+                    Text="{x:Bind vm.SelectionPackage,Mode=OneWay,Converter={StaticResource NameConverter}}" />
             <TextBlock Style="{StaticResource block_wrap}"
-                    Text="{x:Bind vm.SelectionPackage.Author,Mode=OneWay,Converter={StaticResource AuthorConverter}}" />
+                    Text="{x:Bind vm.SelectionPackage,Mode=OneWay,Converter={StaticResource AuthorConverter}}" />
             <TextBlock Style="{StaticResource block_wrap}"
-                    Text="{x:Bind vm.SelectionPackage.CreateTime,Mode=OneWay,Converter={StaticResource CreateTimeConverter}}" />
+                    Text="{x:Bind vm.SelectionPackage,Mode=OneWay,Converter={StaticResource CreateTimeConverter}}" />
             <TextBlock Style="{StaticResource block_wrap}"
-                    Text="{x:Bind vm.SelectionPackage.UpdateTime,Mode=OneWay,Converter={StaticResource UpdateTimeConverter}}" />
+                    Text="{x:Bind vm.SelectionPackage,Mode=OneWay,Converter={StaticResource UpdateTimeConverter}}" />
             <TextBlock Style="{StaticResource block_wrap}"
-                    Text="{x:Bind vm.SelectionPackage.Description,Mode=OneWay,Converter={StaticResource DescriptionConverter}}" />
+                    Text="{x:Bind vm.SelectionPackage,Mode=OneWay,Converter={StaticResource DescriptionConverter}}" />
         </StackPanel>
     </StackPanel>
 </Page>

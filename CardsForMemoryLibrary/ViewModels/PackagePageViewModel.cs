@@ -8,10 +8,12 @@ namespace CardsForMemoryLibrary.ViewModels {
     public class PackagePageViewModel : ViewModelBase {
         private IPackageService packageService;
         private INavigationService navigationService;
+        private IToastService toastService;
 
-        public PackagePageViewModel(IPackageService packageService, INavigationService navigationService) {
+        public PackagePageViewModel(IPackageService packageService, INavigationService navigationService, IToastService toastService) {
             this.packageService = packageService;
             this.navigationService = navigationService;
+            this.toastService = toastService;
         }
 
         private IEnumerable<Package> _packages;
@@ -28,7 +30,7 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private RelayCommand _loadedCommand;
         public RelayCommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(async () => {
-            var result = await packageService.GetAsyncAllPackage();
+            var result = await packageService.GetAllPackageAsync();
             if (result.Result != null) {
                 Packages = result.Result;
             }
@@ -36,20 +38,43 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private RelayCommand _addCommand;
         public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(() => {
-            //TODO
-            navigationService.Navigate("add package");
+            var status = Status.getInstance();
+            status["package"] = null;
+            navigationService.Navigate("package info");
         }));
 
         private RelayCommand _editCommand;
         public RelayCommand EditCommand => _editCommand ?? (_editCommand = new RelayCommand(() => {
+            if (SelectionPackage == null) {
+                toastService.Toast("jp`先にカードのカバンを選んでください。");
+                return;
+            }
             var status = Status.getInstance();
             status["package"] = SelectionPackage;
-            navigationService.Navigate("edit package");
+            navigationService.Navigate("package info");
         }));
 
         private RelayCommand _playCommand;
         public RelayCommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(() => {
-            //TODO
+            if (SelectionPackage == null) {
+                toastService.Toast("jp`先にカードのカバンを選んでください。");
+                return;
+            }
+            var status = Status.getInstance();
+            status["package"] = SelectionPackage;
+            navigationService.Navigate("remember");
+        }));
+
+        private RelayCommand _deleteCommand;
+        public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(() => {
+            if (SelectionPackage == null) {
+                toastService.Toast("jp`先にカードのカバンを選んでください。");
+                return;
+            }
+            packageService.DeletePackageAsync(SelectionPackage.Id);
+            LoadedCommand.Execute(null);
+            var status = Status.getInstance();
+            status["package"] = null;
         }));
     }
 }

@@ -12,18 +12,18 @@ namespace CardsForMemoryLibrary.IServices {
         ///     单卡片获取
         /// </summary>
         /// <param name="cardId">卡片ID</param>
-        Task<ServiceResult<Card>> GetAsyncCard(int cardId);
+        Task<ServiceResult<Card>> GetCardAsync(int cardId);
 
         /// <summary>
         ///     卡包卡片获取
         /// </summary>
         /// <param name="packageId">卡包ID</param>
-        Task<ServiceResult<List<Card>>> GetAsyncCards(int packageId);
+        Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId);
 
         /// <summary>
         ///     全卡片获取
         /// </summary>
-        Task<ServiceResult<List<Card>>> GetAsyncAllCards();
+        Task<ServiceResult<List<Card>>> GetAllCardsAsync();
 
         /// <summary>
         ///     修改某个卡片
@@ -31,7 +31,7 @@ namespace CardsForMemoryLibrary.IServices {
         /// <param name="card">
         ///     The card is required to have a primary key.
         /// </param>
-        Task<ServiceResult> EditAsyncCard(Card card);
+        Task<ServiceResult> EditCardAsync(Card card);
 
         /// <summary>
         ///     插入卡片
@@ -39,32 +39,26 @@ namespace CardsForMemoryLibrary.IServices {
         /// <param name="card">
         ///     The card is required to have no primary key.
         /// </param>
-        Task<ServiceResult> AppendAsyncCard(int packageId, string question, string answer);
-
-        /// <summary>
-        ///     插入一组卡片
-        /// </summary>
-        /// <param name="cards">卡片组</param>
-        Task<ServiceResult> AppendAsyncCards(List<Card> cards);
+        Task<ServiceResult> AddCardAsync(int packageId, string question, string answer);
 
         /// <summary>
         ///     删除一个卡片
         /// </summary>
         /// <param name="cardId"></param>
         /// <returns></returns>
-        Task<ServiceResult> DeleteAsyncCard(int cardId);
+        Task<ServiceResult> DeleteCardAsync(int cardId);
 
         /// <summary>
         ///     删除卡包内所有卡片
         /// </summary>
         /// <param name="packageId"></param>
         /// <returns></returns>
-        Task<ServiceResult> DeleteAsyncCards(int packageId);
+        Task<ServiceResult> DeleteCardsAsync(int packageId);
 
         /// <summary>
         ///     删除全部卡片
         /// </summary>
         /// <returns></returns>
-        Task<ServiceResult> DeleteAsyncAllCard();
+        Task<ServiceResult> DeleteAllCardAsync();
     }
 }

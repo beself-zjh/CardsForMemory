@@ -15,7 +15,7 @@
             <NavigationViewItem Icon="Home" Content="Home" Tag="home" />
             <NavigationViewItemSeparator />
             <NavigationViewItemHeader Content="Main pages" />
-            <NavigationViewItem Icon="List" Content="Package" Tag="cards" />
+            <NavigationViewItem Icon="List" Content="Package" Tag="package" />
             <NavigationViewItem Icon="Play" Content="Remember" Tag="remember" x:Name="RememberPageName" />
             <NavigationViewItem Icon="Audio" Content="Music" Tag="music" />
         </NavigationView.MenuItems>

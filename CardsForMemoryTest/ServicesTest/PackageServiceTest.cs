@@ -11,18 +11,18 @@ namespace CardsForMemoryTest.ServicesTest {
             await ss.Result.DeleteAllAsync<Package>();
 
             var packageService = new PackageService(new SqliteConnectionService());
-            await packageService.AppendAsyncPackage("new", "h", "h");
-            var packageList = (await packageService.GetAsyncAllPackage()).Result;
+            await packageService.AddPackageAsync("new", "h", "h");
+            var packageList = (await packageService.GetAllPackageAsync()).Result;
             var ap = packageList[0];
             Assert.AreEqual(1, packageList.Count);
             Assert.AreEqual("new", packageList[0].Name);
 
             ap.Name = "aaa";
-            await packageService.EditAsyncPackage(ap);
-            packageList = (await packageService.GetAsyncAllPackage()).Result;
+            await packageService.EditPackageAsync(ap);
+            packageList = (await packageService.GetAllPackageAsync()).Result;
             Assert.AreEqual("aaa", packageList[0].Name);
 
-            await packageService.DeleteAsyncPackage(ap.Id);
+            await packageService.DeletePackageAsync(ap.Id);
 
         }
     }

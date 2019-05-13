@@ -1,4 +1,6 @@
 ﻿using CardsForMemory.Locator;
+using CardsForMemoryLibrary;
+using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -27,7 +29,19 @@ namespace CardsForMemory.Controls {
                     Height = b.Size.Height;
                 };
             };
-            vm.initCloseWindowAction(() => { popup.IsOpen = false; });
+            vm.InitCloseWindowAction(() => { popup.IsOpen = false; });
+
+            var status = Status.getInstance();
+            if (status["package"] is Package package) {
+                vm.Name = package.Name;
+                vm.Author = package.Author;
+                vm.Description = package.Description;
+            } else {
+                vm.Name = "";
+                vm.Author = "";
+                vm.Description = "";
+            }
+
             popup.IsOpen = true;
         }
     }

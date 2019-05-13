@@ -30,12 +30,12 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _nextCommand;
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(() => {
             if (Question != "" && Answer != "") {
-                //TODO
-                var status = Status.getInstance();
-                Card card = status["card"] as Card ?? new Card();
-                card.Question = Question;
-                card.Answer = Answer;
-                status["card"] = card;
+                //TODO card
+                //var status = Status.getInstance();
+                //Card card = status["card"] as Card ?? new Card();
+                //card.Question = Question;
+                //card.Answer = Answer;
+                //status["card"] = card;
                 Next?.Invoke(this, null);
             }
         }));

@@ -19,7 +19,7 @@ namespace CardsForMemoryLibrary.Services {
             _connectionService = connectionServiece;
         }
 
-        public async Task<ServiceResult<int>> AppendAsyncPackage(string author, string description, string name) {
+        public async Task<ServiceResult<Package>> AddPackageAsync(string name, string author, string description) {
             var connection = _connectionService.GetAsyncConnection();
             Package newPackage = new Package() {
                 Author = author,
@@ -28,15 +28,16 @@ namespace CardsForMemoryLibrary.Services {
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now
             };
+            await connection.Result.InsertAsync(newPackage);
 
-            return new ServiceResult<int>() {
-                Result = await connection.Result.InsertAsync(newPackage),
+            return new ServiceResult<Package>() {
+                Result = newPackage,
                 Status = ServiceResultStatus.OK,
                 Message = "Success"
             };
         }
 
-        public async Task<ServiceResult> DeleteAsyncPackage(int packageId) {
+        public async Task<ServiceResult> DeletePackageAsync(int packageId) {
             var connection = _connectionService.GetAsyncConnection();
             await connection.Result.DeleteAsync<Package>(packageId);
 
@@ -46,7 +47,7 @@ namespace CardsForMemoryLibrary.Services {
             };
         }
 
-        public async Task<ServiceResult> EditAsyncPackage(Package package) {
+        public async Task<ServiceResult> EditPackageAsync(Package package) {
             var connection = _connectionService.GetAsyncConnection();
             Package newPackage = new Package() {
                 Id = package.Id,
@@ -64,7 +65,7 @@ namespace CardsForMemoryLibrary.Services {
             };
         }
 
-        public async Task<ServiceResult<List<Package>>> GetAsyncAllPackage() {
+        public async Task<ServiceResult<List<Package>>> GetAllPackageAsync() {
             var connection = _connectionService.GetAsyncConnection();
             var packageList = await connection.Result.Table<Package>().ToListAsync();
 
@@ -75,7 +76,7 @@ namespace CardsForMemoryLibrary.Services {
             };
         }
 
-        public async Task<ServiceResult<Package>> GetAsyncPackage(int packageId) {
+        public async Task<ServiceResult<Package>> GetPackageAsync(int packageId) {
             var connection = _connectionService.GetAsyncConnection();
             Package package = await connection.Result.FindAsync<Package>(packageId);
 

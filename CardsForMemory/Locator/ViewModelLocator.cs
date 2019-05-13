@@ -38,6 +38,7 @@ namespace CardsForMemory.Locator {
             SimpleIoc.Default.Register<IFeedbackService, FeedbackService>();
             SimpleIoc.Default.Register<IReviseService, ReviseService>();
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
+            SimpleIoc.Default.Register<IToastService, ToastService>();
             SimpleIoc.Default.Register<PackagePageViewModel>();
             SimpleIoc.Default.Register<RememberPageViewModel>();
             SimpleIoc.Default.Register<EditPackagePageViewModel>();

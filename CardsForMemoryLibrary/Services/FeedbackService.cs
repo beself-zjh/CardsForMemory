@@ -57,7 +57,7 @@ namespace CardsForMemoryLibrary.Services {
 
             if (updateCard.Proficiency > 10000)
                 updateCard.Proficiency = 10000;
-            await _cardService.EditAsyncCard(updateCard);
+            await _cardService.EditCardAsync(updateCard);
         }
 
         public bool Submit(Card card, string answer) {

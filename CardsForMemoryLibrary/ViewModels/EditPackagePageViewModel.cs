@@ -18,7 +18,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         public async Task UpdateCards() {
             var status = Status.getInstance();
             if (status["package"] != null) {
-                Cards = (await ICardService.GetAsyncCards((status["package"] as Package).Id))?.Result;
+                Cards = (await ICardService.GetCardsAsync((status["package"] as Package).Id)).Result;
             }
         }
 
@@ -32,26 +32,27 @@ namespace CardsForMemoryLibrary.ViewModels {
         public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(() => {
             var status = Status.getInstance();
             status["card action"] = new System.Action(() => {
-                List<Card> NewCards = new List<Card>(Cards as List<Card>);
-                NewCards.Add(status["card"] as Card);
-                Cards = NewCards;
+                //TODO card
+                //List<Card> NewCards = new List<Card>(Cards as List<Card>);
+                //NewCards.Add(status["card"] as Card);
+                //Cards = NewCards;
             });
             INavigationService.Navigate("card");
         }));
         
         private RelayCommand _editCommand;
         public RelayCommand EditCommand => _editCommand ?? (_editCommand = new RelayCommand(() => {
-            //TODO
+            //TODO card
         }));
         
         private RelayCommand _deleteCommand;
         public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(() => {
-            //TODO
+            //TODO card
         }));
         
         private RelayCommand _previewCommand;
         public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(() => {
-            //TODO
+            //TODO card
         }));
     }
 }

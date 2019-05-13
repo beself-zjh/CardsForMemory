@@ -1,20 +1,23 @@
 ﻿using CardsForMemoryLibrary.IServices;
+using CardsForMemoryLibrary.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 
 namespace CardsForMemoryLibrary.ViewModels {
     public class PackageInfoViewModel : ViewModelBase {
         private INavigationService navigationService;
         private IPackageService packageService;
+        private IToastService toastService;
 
-        public PackageInfoViewModel(INavigationService navigationService, IPackageService packageService) {
+        public PackageInfoViewModel(INavigationService navigationService, IPackageService packageService, IToastService toastService) {
             this.navigationService = navigationService;
             this.packageService = packageService;
+            this.toastService = toastService;
         }
 
-        private static System.Action closeWindow;
-        public void initCloseWindowAction(System.Action closeWindow) =>
-            PackageInfoViewModel.closeWindow = closeWindow;
+        private static Action CloseWindow;
+        public void InitCloseWindowAction(Action closeWindow) => CloseWindow = closeWindow;
 
         private string _name = "";
         public string Name {
@@ -38,20 +41,31 @@ namespace CardsForMemoryLibrary.ViewModels {
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(async () => {
             if (Name != "" && Author != "" && Description != "") {
                 var status = Status.getInstance();
-                int? packageId = (await packageService.AppendAsyncPackage(Name, Author, Description))?.Result;
-                if (packageId != null) {
-                    status["package"] = await packageService.GetAsyncPackage(packageId.Value);
+                //通过status["package"]判断是Add还是Edit
+                if (status["package"] is Package package) {
+                    package.Name = Name;
+                    package.Author = Author;
+                    package.Description = Description;
+                    var result = await packageService.EditPackageAsync(package);
+                    status["package"] = package;
                 } else {
-                    throw new System.Exception();
+                    var result = await packageService.AddPackageAsync(Name, Author, Description);
+                    if (result.Result != null) {
+                        status["package"] = result.Result;
+                    } else {
+                        toastService.Toast(result.Message, 5);
+                        return;
+                    }
                 }
-                closeWindow?.Invoke();
-                navigationService.Navigate("edit package");
+
+                CloseWindow?.Invoke();
+                navigationService.Navigate("cards");
             }
         }));
 
         private RelayCommand _cancelCommand;
         public RelayCommand CancelCommand => _cancelCommand ?? (_cancelCommand = new RelayCommand(() => {
-            closeWindow?.Invoke();
+            CloseWindow?.Invoke();
         }));
     }
 }

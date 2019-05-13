@@ -24,7 +24,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult<Card>> GetAsyncCard(int cardId) {
+        public async Task<ServiceResult<Card>> GetCardAsync(int cardId) {
             var connection = _connectionService.GetAsyncConnection();
             ServiceResult<Card> serviceResult = new ServiceResult<Card>();
             switch (connection.Status) {
@@ -45,7 +45,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult<List<Card>>> GetAsyncCards(int packageId) {
+        public async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId) {
             var connection = _connectionService.GetAsyncConnection();
             ServiceResult<List<Card>> serviceResult = new ServiceResult<List<Card>>();
             switch (connection.Status) {
@@ -68,7 +68,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult<List<Card>>> GetAsyncAllCards() {
+        public async Task<ServiceResult<List<Card>>> GetAllCardsAsync() {
             var connection = _connectionService.GetAsyncConnection();
             ServiceResult<List<Card>> serviceResult = new ServiceResult<List<Card>>();
             switch (connection.Status) {
@@ -88,7 +88,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult> EditAsyncCard(Card card) {
+        public async Task<ServiceResult> EditCardAsync(Card card) {
             var connection = _connectionService.GetAsyncConnection();
             var result = connection.Result.Table<Card>()
                 .Where(i => i.Id == card.Id);
@@ -107,7 +107,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult> AppendAsyncCard(int packageId, string question, string answer) {
+        public async Task<ServiceResult> AddCardAsync(int packageId, string question, string answer) {
             Card card = new Card() {
                 PackageId = packageId,
                 Question = question,
@@ -131,26 +131,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult> AppendAsyncCards(List<Card> cards) {
-            var connection = _connectionService.GetAsyncConnection();
-            try {
-                foreach (var card in cards) {
-                    await connection.Result.InsertAsync(card);
-                }
-            } catch (SQLiteException e) {
-                return new ServiceResult() {
-                    Status = ServiceResultStatusHelper.FromSQLiteResult(e.Result),
-                    Message = e.Message
-                };
-            }
-            return new ServiceResult() {
-                Status = ServiceResultStatus.OK,
-                Message = "Success"
-            };
-        }
-
-        /// <inheritdoc />
-        public async Task<ServiceResult> DeleteAsyncCard(int cardId) {
+        public async Task<ServiceResult> DeleteCardAsync(int cardId) {
             var connection = _connectionService.GetAsyncConnection();
             await connection.Result.DeleteAsync<Card>(cardId);
 
@@ -161,7 +142,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult> DeleteAsyncCards(int packageId) {
+        public async Task<ServiceResult> DeleteCardsAsync(int packageId) {
             var connection = _connectionService.GetAsyncConnection();
             var cardsList = await connection.Result.Table<Card>()
                 .Where(i => i.PackageId == packageId)
@@ -175,7 +156,7 @@ namespace CardsForMemoryLibrary.Services {
             };
         }
 
-        public async Task<ServiceResult> DeleteAsyncAllCard() {
+        public async Task<ServiceResult> DeleteAllCardAsync() {
             var connection = _connectionService.GetAsyncConnection();
             await connection.Result.DeleteAllAsync<Card>();
 

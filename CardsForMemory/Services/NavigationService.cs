@@ -1,9 +1,12 @@
 ﻿using CardsForMemory.Controls;
 using CardsForMemory.Pages;
+using CardsForMemoryLibrary;
+using CardsForMemoryLibrary.IServices;
+using System;
 using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Services {
-    public class NavigationService : CardsForMemoryLibrary.IServices.INavigationService {
+    public class NavigationService : INavigationService {
         public static Frame frame;
         public static NavigationViewItem navigationViewItem;
 
@@ -15,7 +18,7 @@ namespace CardsForMemory.Services {
         }
 
         public void Set_RememberPageName(string append) {
-            navigationViewItem.Content = "Remember" + append;
+            navigationViewItem.Content = "Remember " + append;
         }
 
         public void Navigate(string Tag) {
@@ -23,7 +26,7 @@ namespace CardsForMemory.Services {
                 case "home":
                     frame.Navigate(typeof(HomePage));
                     break;
-                case "cards":
+                case "package":
                     frame.Navigate(typeof(PackagePage));
                     break;
                 case "remember":
@@ -35,17 +38,17 @@ namespace CardsForMemory.Services {
                 case "setting":
                     frame.Navigate(typeof(SettingsPage));
                     break;
-                case "add package":
+                case "package info":
                     new PackageInfo();
                     break;
-                case "edit package":
+                case "cards":
                     frame.Navigate(typeof(EditPackagePage));
                     break;
                 case "card":
-                    new CardInfo(CardsForMemoryLibrary.Status.getInstance()["card action"] as System.Action);
+                    new CardInfo(Status.getInstance()["card action"] as Action);
                     break;
                 default:
-                    throw new System.NotImplementedException();
+                    throw new NotImplementedException();
             }
         }
     }
