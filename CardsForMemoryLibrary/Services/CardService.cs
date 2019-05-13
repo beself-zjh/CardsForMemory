@@ -107,7 +107,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         /// <inheritdoc />
-        public async Task<ServiceResult> AddCardAsync(int packageId, string question, string answer) {
+        public async Task<ServiceResult<Card>> AddCardAsync(int packageId, string question, string answer) {
             Card card = new Card() {
                 PackageId = packageId,
                 Question = question,
@@ -119,14 +119,16 @@ namespace CardsForMemoryLibrary.Services {
             try {
                 await connection.Result.InsertAsync(card);
             } catch (SQLiteException e) {
-                return new ServiceResult() {
+                return new ServiceResult<Card>() {
                     Status = ServiceResultStatusHelper.FromSQLiteResult(e.Result),
-                    Message = e.Message
+                    Message = e.Message,
+                    Result = null
                 };
             }
-            return new ServiceResult() {
+            return new ServiceResult<Card>() {
                 Status = ServiceResultStatus.OK,
-                Message = "Success"
+                Message = "Success",
+                Result = card
             };
         }
 

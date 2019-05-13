@@ -52,7 +52,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <!--右侧栏-->
-        <StackPanel Width="450" Margin="0,0,0,0">
+        <StackPanel Width="400" Margin="0,0,0,0">
             <!--三个按钮-->
             <StackPanel Orientation="Horizontal">
                 <Button Margin="5" Command="{x:Bind vm.AddCommand}">
@@ -67,16 +67,24 @@
                         <TextBlock Margin="5,0,0,0" FontSize="24">Edit</TextBlock>
                     </StackPanel>
                 </Button>
+                <Button Margin="5" Command="{x:Bind vm.DeleteCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Delete" />
+                        <TextBlock Margin="5,0,0,0" FontSize="24">Delete</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Button Margin="5" Command="{x:Bind vm.PlayCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Play" />
                         <TextBlock Margin="5,0,0,0" FontSize="24">Play</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Margin="5" Command="{x:Bind vm.DeleteCommand}">
+                <Button Margin="5" Command="{x:Bind vm.EditCardsCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="Delete" />
-                        <TextBlock Margin="5,0,0,0" FontSize="24">Delete</TextBlock>
+                        <SymbolIcon Symbol="Edit" />
+                        <TextBlock Margin="5,0,0,0" FontSize="24">EditCards</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>

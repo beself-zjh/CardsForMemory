@@ -1,9 +1,12 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using CardsForMemory.Services;
+using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Pages {
     public sealed partial class MusicPage : Page {
         public MusicPage() {
-            this.InitializeComponent();
+            InitializeComponent();
+            ToastService toastService=new ToastService();
+            toastService.Toast("en`Hello, welcome to use.",5);
         }
     }
 }

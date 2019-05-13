@@ -9,7 +9,7 @@
         /// <para>"setting":frame.Navigate(typeof(SettingsPage));</para>
         /// <para>"package info":new PackageInfo();</para>
         /// <para>"cards":frame.Navigate(typeof(EditPackagePage));</para>
-        /// <para>"card":new CardInfo(Status.getInstance()["card action"] as Action);</para>
+        /// <para>"card":new CardInfo();</para>
         /// <para>"default:throw new NotImplementedException();</para>
         /// </summary>
         /// <param name="Tag">代表着目的地的字符串</param>

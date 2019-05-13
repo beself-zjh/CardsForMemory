@@ -3,24 +3,29 @@ using CardsForMemoryLibrary.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CardsForMemoryLibrary.ViewModels {
     public class EditPackagePageViewModel : ViewModelBase {
-        ICardService ICardService;
-        INavigationService INavigationService;
+        ICardService cardService;
+        INavigationService navigationService;
+        IToastService toastService;
 
-        public EditPackagePageViewModel(ICardService ICardService, INavigationService INavigationService) {
-            this.ICardService = ICardService;
-            this.INavigationService = INavigationService;
+        public EditPackagePageViewModel(ICardService cardService, INavigationService navigationService, IToastService toastService) {
+            this.cardService = cardService;
+            this.navigationService = navigationService;
+            this.toastService = toastService;
         }
 
-        public async Task UpdateCards() {
-            var status = Status.getInstance();
-            if (status["package"] != null) {
-                Cards = (await ICardService.GetCardsAsync((status["package"] as Package).Id)).Result;
+        private RelayCommand _loadedCommand;
+        public RelayCommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(async () => {
+            var status = Status.s;
+            if (status["package"] is Package package) {
+                int packageId = package.Id;
+                Cards = (await cardService.GetCardsAsync(packageId)).Result;
+            } else {
+                toastService.Toast("zh`怎么回事小老弟?到了这个页面竟然package是空的???");
             }
-        }
+        }));
 
         private IEnumerable<Card> _cards;
         public IEnumerable<Card> Cards {
@@ -28,31 +33,45 @@ namespace CardsForMemoryLibrary.ViewModels {
             set => Set(nameof(Cards), ref _cards, value);
         }
 
+        private Card _selectionCard;
+        public Card SelectionCard {
+            get => _selectionCard;
+            set => Set(nameof(SelectionCard), ref _selectionCard, value);
+        }
+
         private RelayCommand _addCommand;
         public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(() => {
-            var status = Status.getInstance();
-            status["card action"] = new System.Action(() => {
-                //TODO card
-                //List<Card> NewCards = new List<Card>(Cards as List<Card>);
-                //NewCards.Add(status["card"] as Card);
-                //Cards = NewCards;
-            });
-            INavigationService.Navigate("card");
+            var status = Status.s;
+            status["card"] = null;
+            navigationService.Navigate("card");
         }));
-        
+
         private RelayCommand _editCommand;
         public RelayCommand EditCommand => _editCommand ?? (_editCommand = new RelayCommand(() => {
-            //TODO card
+            if (SelectionCard == null) {
+                toastService.Toast("jp`まずカードを選んでください。");
+                return;
+            }
+            var status = Status.s;
+            status["card"] = SelectionCard;
+            navigationService.Navigate("card");
         }));
-        
+
         private RelayCommand _deleteCommand;
         public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(() => {
-            //TODO card
+            if (SelectionCard == null) {
+                toastService.Toast("jp`まずカードを選んでください。");
+                return;
+            }
+            cardService.DeleteCardAsync(SelectionCard.Id);
+            LoadedCommand.Execute(null);
+            var status = Status.s;
+            status["card"] = null;
         }));
-        
+
         private RelayCommand _previewCommand;
         public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(() => {
-            //TODO card
+            //TODO PreviewCommand
         }));
     }
 }

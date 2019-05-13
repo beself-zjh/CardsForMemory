@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using Windows.Media.Core;
 using Windows.Media.Playback;
@@ -48,7 +50,12 @@ namespace CardsForMemory.Controls {
                 if (!tmp.Exists) {
                     tmp.Create();
                 }
-                var path = tmp + "\\tts.mp3";
+
+                var md5 = new MD5CryptoServiceProvider();
+                var filename = BitConverter.ToString(md5.ComputeHash(Encoding.Default.GetBytes(content)), 4, 8);
+                filename = filename.Replace("-", "");
+
+                var path = tmp + $"\\{filename}.mp3";
                 Download(api, path);
                 var player = new MediaPlayer {
                     Source = MediaSource.CreateFromUri(new Uri(path)),
@@ -56,12 +63,13 @@ namespace CardsForMemory.Controls {
                     IsLoopingEnabled = false
                 };
 
-                var timer = new Timer(10000) { AutoReset = false };
+                var timer = new Timer(showTime*2000) { AutoReset = false };
                 timer.Elapsed += (a, b) => {
                     player?.Dispose();
                 };
                 timer.Enabled = true;
             });
+            thread.Start();
         }
 
 

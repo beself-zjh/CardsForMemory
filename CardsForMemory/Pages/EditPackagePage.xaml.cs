@@ -1,4 +1,5 @@
 ﻿using CardsForMemory.Locator;
+using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml.Controls;
 
@@ -8,9 +9,10 @@ namespace CardsForMemory.Pages {
 
         public EditPackagePage() {
             InitializeComponent();
-            Loaded += async (s, e) => {
-                await vm.UpdateCards();
-            };
+        }
+
+        private void ListViewSelectionChanged(object sender, SelectionChangedEventArgs e) {
+            vm.SelectionCard = sender is ListView listView ? listView.SelectedItem is Card item ? item : null : null;
         }
     }
 }

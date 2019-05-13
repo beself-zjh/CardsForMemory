@@ -45,7 +45,7 @@ namespace CardsForMemory.Services {
                     frame.Navigate(typeof(EditPackagePage));
                     break;
                 case "card":
-                    new CardInfo(Status.getInstance()["card action"] as Action);
+                    new CardInfo();
                     break;
                 default:
                     throw new NotImplementedException();

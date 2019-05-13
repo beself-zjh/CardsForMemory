@@ -1,6 +1,7 @@
 ﻿using CardsForMemory.Locator;
+using CardsForMemoryLibrary;
+using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.ViewModels;
-using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -9,11 +10,10 @@ namespace CardsForMemory.Controls {
     public sealed partial class CardInfo : UserControl {
         CardInfoViewModel vm = ViewModelLocator.Instance.CardInfoViewModel;
 
-        private Popup popup;
-        public CardInfo(Action action) {
+        public CardInfo() {
             RequestedTheme = App.RootTheme;
             InitializeComponent();
-            popup = new Popup { Child = this };
+            Popup popup = new Popup { Child = this };
             Width = Window.Current.Bounds.Width;
             Height = Window.Current.Bounds.Height;
             Loaded += (sender, e) => {
@@ -27,10 +27,18 @@ namespace CardsForMemory.Controls {
                     Width = b.Size.Width;
                     Height = b.Size.Height;
                 };
-                vm.ClearHandler();
             };
-            vm.Next += (a, b) => { popup.IsOpen = false; action(); };
-            vm.Cancel += (a, b) => { popup.IsOpen = false; };
+            vm.InitCloseWindowAction(() => { popup.IsOpen = false; });
+
+            //处理状态中的card参数
+            if (Status.s["card"] is Card card) {
+                vm.Question = card.Question;
+                vm.Answer = card.Answer;
+            } else {
+                vm.Question = "";
+                vm.Answer = "";
+            }
+
             popup.IsOpen = true;
         }
     }

@@ -39,7 +39,7 @@ namespace CardsForMemoryLibrary.IServices {
         /// <param name="card">
         ///     The card is required to have no primary key.
         /// </param>
-        Task<ServiceResult> AddCardAsync(int packageId, string question, string answer);
+        Task<ServiceResult<Card>> AddCardAsync(int packageId, string question, string answer);
 
         /// <summary>
         ///     删除一个卡片

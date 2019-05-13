@@ -1,5 +1,6 @@
 ﻿using CardsForMemoryLibrary.IServices;
 using CardsForMemoryLibrary.Models;
+using CardsForMemoryLibrary.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -19,19 +20,19 @@ namespace CardsForMemoryLibrary.ViewModels {
         private static Action CloseWindow;
         public void InitCloseWindowAction(Action closeWindow) => CloseWindow = closeWindow;
 
-        private string _name = "";
+        private string _name;
         public string Name {
             get => _name;
             set => Set(nameof(Name), ref _name, value);
         }
 
-        private string _author = "";
+        private string _author;
         public string Author {
             get => _author;
             set => Set(nameof(Author), ref _author, value);
         }
 
-        private string _description = "";
+        private string _description;
         public string Description {
             get => _description;
             set => Set(nameof(Description), ref _description, value);
@@ -40,13 +41,16 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _nextCommand;
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(async () => {
             if (Name != "" && Author != "" && Description != "") {
-                var status = Status.getInstance();
+                var status = Status.s;
                 //通过status["package"]判断是Add还是Edit
                 if (status["package"] is Package package) {
                     package.Name = Name;
                     package.Author = Author;
                     package.Description = Description;
                     var result = await packageService.EditPackageAsync(package);
+                    if (result.Status != ServiceResultStatus.OK) {
+                        toastService.Toast(result.Message,5);
+                    }
                     status["package"] = package;
                 } else {
                     var result = await packageService.AddPackageAsync(Name, Author, Description);
@@ -57,7 +61,6 @@ namespace CardsForMemoryLibrary.ViewModels {
                         return;
                     }
                 }
-
                 CloseWindow?.Invoke();
                 navigationService.Navigate("cards");
             }

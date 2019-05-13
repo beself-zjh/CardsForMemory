@@ -9,12 +9,11 @@ using Windows.UI.Xaml.Controls.Primitives;
 namespace CardsForMemory.Controls {
     public sealed partial class PackageInfo : UserControl {
         PackageInfoViewModel vm = ViewModelLocator.Instance.PackageInfoViewModel;
-
-        private Popup popup;
+        
         public PackageInfo() {
             RequestedTheme = App.RootTheme;
             InitializeComponent();
-            popup = new Popup { Child = this };
+            Popup popup = new Popup { Child = this };
             Width = Window.Current.Bounds.Width;
             Height = Window.Current.Bounds.Height;
             Loaded += (sender, e) => {
@@ -31,8 +30,8 @@ namespace CardsForMemory.Controls {
             };
             vm.InitCloseWindowAction(() => { popup.IsOpen = false; });
 
-            var status = Status.getInstance();
-            if (status["package"] is Package package) {
+            //处理状态中的package参数
+            if (Status.s["package"] is Package package) {
                 vm.Name = package.Name;
                 vm.Author = package.Author;
                 vm.Description = package.Description;
