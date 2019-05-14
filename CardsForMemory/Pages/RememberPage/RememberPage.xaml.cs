@@ -3,16 +3,11 @@ using CardsForMemoryLibrary.ViewModels;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace CardsForMemory.Pages {
     public sealed partial class RememberPage : Page {
         private RememberPageViewModel vm = ViewModelLocator.Instance.RememberPageViewModel;
-
-        protected override void OnNavigatedTo(NavigationEventArgs e) {
-
-        }
-
+        
         public RememberPage() {
             InitializeComponent();
             TimerSetup();

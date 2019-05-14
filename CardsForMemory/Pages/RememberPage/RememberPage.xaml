@@ -6,6 +6,8 @@
         xmlns:Custom="using:Microsoft.Xaml.Interactivity" mc:Ignorable="d" x:Name="rememberPage" Width="750"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
+        <local:AntiVis x:Key="AntiVis" />
+        <local:Vis x:Key="Vis" />
         <local:ClockWidth x:Key="ClockWidth" />
         <local:RingWidth x:Key="RingWidth" />
         <local:RingStatus x:Key="RingStatus" />
@@ -22,19 +24,21 @@
         <!--把Loaded事件绑到Grid的OnLoaded上-->
         <Custom:Interaction.Behaviors>
             <Custom1:EventTriggerBehavior EventName="Loaded">
-                <Custom1:InvokeCommandAction Command="{x:Bind vm.OnLoaded,Mode=OneWay}" />
+                <Custom1:InvokeCommandAction Command="{x:Bind vm.OnLoaded}" />
             </Custom1:EventTriggerBehavior>
         </Custom:Interaction.Behaviors>
         <!--浮动屏蔽-->
         <Grid x:Name="RememberPageShieldingLayer" Background="White" Grid.RowSpan="3" Canvas.ZIndex="1"
-                Visibility="Collapsed">
+                Visibility="{x:Bind vm.Visibility,Converter={StaticResource AntiVis},Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBlock FontSize="64" HorizontalAlignment="Center" VerticalAlignment="Center">先选一个牌库吧!</TextBlock>
         </Grid>
-        <TextBlock Grid.Row="0" x:Name="Problem" Text="{x:Bind vm.Question,Mode=OneWay}" Padding="20" FontSize="64" />
+        <!--Question-->
+        <TextBlock Grid.Row="0" x:Name="Problem" Padding="20" TextWrapping="Wrap" FontSize="16"
+                Text="{x:Bind vm.Question,Mode=OneWay}" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -44,11 +48,13 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="240" />
             </Grid.RowDefinitions>
+            <!--Answer-->
             <TextBlock Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap" x:Name="Items"
-                    Text="{x:Bind vm.Answer,Mode=OneWay}" Padding="20" FontSize="64" />
+                    Text="{x:Bind vm.Answer,Mode=OneWay}" Padding="20" FontSize="16"
+                    Visibility="{x:Bind vm.AnswerVis,Converter={StaticResource Vis},Mode=OneWay}" />
             <!--计时器-->
             <Grid Grid.Column="1" Grid.Row="1"
-                    Width="{x:Bind vm.Style,Converter={StaticResource ClockWidth}, Mode=OneWay}"
+                    Width="{x:Bind vm.Style,Converter={StaticResource ClockWidth},Mode=OneWay}"
                     Height="{x:Bind vm.Style,Converter={StaticResource ClockWidth},Mode=OneWay}" Margin="10"
                     x:Name="RememberPageClock">
                 <!--外环-->
@@ -78,13 +84,20 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="这不很简单嘛" />
+                <Button Content="这不很简单嘛" Command="{x:Bind vm.EasyCommand}"
+                        Visibility="{x:Bind vm.AnswerVis,Converter={StaticResource AntiVis},Mode=OneWay}" />
             </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="哎呀,还不能立刻有思路啊" />
+                <Button Content="哎呀,还不能立刻有思路啊" Command="{x:Bind vm.NormalCommand}"
+                        Visibility="{x:Bind vm.AnswerVis,Converter={StaticResource AntiVis},Mode=OneWay}" />
             </StackPanel>
             <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="哇,我完全想不起来" />
+                <Button Content="哇,我完全想不起来" Command="{x:Bind vm.DiffCommand}"
+                        Visibility="{x:Bind vm.AnswerVis,Converter={StaticResource AntiVis},Mode=OneWay}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Next" Command="{x:Bind vm.NextCommand}"
+                        Visibility="{x:Bind vm.AnswerVis,Converter={StaticResource Vis},Mode=OneWay}" />
             </StackPanel>
         </Grid>
     </Grid>
