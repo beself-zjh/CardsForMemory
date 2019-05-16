@@ -97,6 +97,7 @@ namespace CardsForMemory.Controls {
                 return true;
             } catch (Exception) {
                 writeStream.Close();
+                File.Delete(localfile);
                 return false;
             }
         }
