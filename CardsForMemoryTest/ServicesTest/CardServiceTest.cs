@@ -55,5 +55,22 @@ namespace CardsForMemoryTest.ServicesTest {
 
             await cardService.DeleteAllCardAsync();
         }
+
+        [Test]
+        public async Task TestRevise() {
+            var cardService = new CardService(new SqliteConnectionService());
+            await cardService.DeleteAllCardAsync();
+
+            await cardService.AddCardAsync(0, "0", "0");
+            await cardService.AddCardAsync(0, "0", "0");
+            await cardService.AddCardAsync(0, "0", "0");
+
+            var o = (await cardService.GetOldCardNum(0)).Result;
+            var n = (await cardService.GetNewCardNum(0)).Result;
+
+            Assert.AreEqual(0, o);
+            Assert.AreEqual(3, n);
+            Assert.AreEqual(2, (await cardService.GetCardsAsync(0,0,2)).Result.Count);
+        }
     }
 }

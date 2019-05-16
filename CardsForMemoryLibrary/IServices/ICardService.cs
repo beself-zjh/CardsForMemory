@@ -20,14 +20,14 @@ namespace CardsForMemoryLibrary.IServices {
         /// <param name="packageId">卡包ID</param>
         Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId);
 
-        //todo Karl:根据id,旧卡数量,新卡数量,返回一个List<Card>
-        //Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId);
+        //Karl:根据id,旧卡数量,新卡数量,返回一个List<Card>
+        Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int old, int news);
         
-        //todo Karl:根据id,返回旧卡数量
-        //Task<ServiceResult<int>> 
+        //Karl:根据id,返回旧卡数量
+        Task<ServiceResult<int>> GetNewCardNum(int packageId);
 
-        //todo Karl:根据id,返回新卡数量
-        //Task<ServiceResult<int>> 
+        //Karl:根据id,返回新卡数量
+        Task<ServiceResult<int>> GetOldCardNum(int packageId);
 
         /// <summary>
         ///     全卡片获取

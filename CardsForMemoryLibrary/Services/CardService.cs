@@ -3,6 +3,7 @@ using CardsForMemoryLibrary.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CardsForMemoryLibrary.Services {
@@ -65,6 +66,40 @@ namespace CardsForMemoryLibrary.Services {
             }
 
             return serviceResult;
+        }
+
+        public async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int old, int news) {
+            List<Card> cards = (await GetCardsAsync(packageId)).Result;
+
+            var OldStart = cards.FindIndex(i => i.Proficiency == 0);
+
+            return new ServiceResult<List<Card>>() {
+                Result = cards.OrderBy(i => i.Proficiency).Skip(OldStart - old).Take(old + news).ToList(),
+                Message = "Success",
+                Status = ServiceResultStatus.OK
+            };
+        }
+
+        public async Task<ServiceResult<int>> GetNewCardNum(int packageId) {
+            List<Card> cards = (await GetCardsAsync(packageId)).Result;
+
+            var OldStart = cards.FindIndex(i => i.Proficiency == 0);
+            return new ServiceResult<int>() {
+                Result = cards.Count() - OldStart,
+                Message = "Success",
+                Status = ServiceResultStatus.OK
+            };
+        }
+
+        public async Task<ServiceResult<int>> GetOldCardNum(int packageId) {
+            List<Card> cards = (await GetCardsAsync(packageId)).Result;
+
+            var OldStart = cards.FindIndex(i => i.Proficiency == 0);
+            return new ServiceResult<int>() {
+                Result = OldStart,
+                Message = "Success",
+                Status = ServiceResultStatus.OK
+            };
         }
 
         /// <inheritdoc />
