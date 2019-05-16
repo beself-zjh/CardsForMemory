@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CardsForMemory.Services;
+using CardsForMemoryLibrary;
+using System;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography;
@@ -40,6 +42,9 @@ namespace CardsForMemory.Controls {
                 };
             };
             popup.IsOpen = true;
+            if (new SettingService()["sound"] as string=="False") {
+                return;
+            }
             var thread = new Thread(() => {
                 if (!content.Contains("`")) {
                     return;
@@ -63,7 +68,7 @@ namespace CardsForMemory.Controls {
                     IsLoopingEnabled = false
                 };
 
-                var timer = new Timer(showTime*2000) { AutoReset = false };
+                var timer = new Timer(showTime * 2000) { AutoReset = false };
                 timer.Elapsed += (a, b) => {
                     player?.Dispose();
                 };

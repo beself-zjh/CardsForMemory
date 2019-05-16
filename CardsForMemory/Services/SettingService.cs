@@ -5,7 +5,15 @@ using Windows.Storage;
 namespace CardsForMemory.Services {
     public class SettingService : ISettingService {
         private IPropertySet ls;
-        public SettingService() => ls = ApplicationData.Current.LocalSettings.Values;
+        private int refer = 0;
+        public SettingService() {
+            ls = ApplicationData.Current.LocalSettings.Values;
+            if (refer++ == 0) {
+                if(this["sound"] is null) {
+                    this["sound"] = false.ToString();
+                }
+            }
+        }
 
         public object this[string key] {
             get => ls.ContainsKey(key) ? ls[key] : null;

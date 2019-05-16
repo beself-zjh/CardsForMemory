@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CardsForMemory.Services;
+using System;
 using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -11,7 +11,7 @@ namespace CardsForMemory {
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
     /// </summary>
-    sealed partial class App : Application {
+    public sealed partial class App : Application {
 
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
@@ -56,6 +56,9 @@ namespace CardsForMemory {
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
+            
+            SettingService s = new SettingService();
+            RootTheme = GetEnum<ElementTheme>((s["SelectedAppTheme"] ?? "Default") as string);
         }
 
         /// <summary>
@@ -63,7 +66,7 @@ namespace CardsForMemory {
         /// </summary>
         ///<param name="sender">导航失败的框架</param>
         ///<param name="e">有关导航失败的详细信息</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e) {
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e) {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
@@ -94,9 +97,9 @@ namespace CardsForMemory {
             set {
                 if (Window.Current.Content is FrameworkElement rootElement) {
                     rootElement.RequestedTheme = value;
-                } else {
-                    ApplicationData.Current.LocalSettings.Values["SelectedAppTheme"] = value.ToString();
                 }
+                SettingService s = new SettingService();
+                s["SelectedAppTheme"] = value.ToString();
             }
         }
 
