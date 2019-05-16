@@ -32,6 +32,18 @@ namespace CardsForMemoryLibrary.ViewModels {
             set => Set(nameof(Answer), ref _answer, value);
         }
 
+        private RelayCommand _loadedCommand;
+        public RelayCommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(() => {
+            //处理状态中的card参数
+            if (Status.s["card"] is Card card) {
+                Question = card.Question;
+                Answer = card.Answer;
+            } else {
+                Question = "";
+                Answer = "";
+            }
+        }));
+
         private RelayCommand _nextCommand;
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(async () => {
             if (Question != "" && Answer != "") {

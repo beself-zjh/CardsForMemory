@@ -10,6 +10,7 @@
         /// <para>"package info":new PackageInfo();</para>
         /// <para>"cards":frame.Navigate(typeof(EditPackagePage));</para>
         /// <para>"card":new CardInfo();</para>
+        /// <para>"card view":new CardView();</para>
         /// <para>"default:throw new NotImplementedException();</para>
         /// </summary>
         /// <param name="Tag">代表着目的地的字符串</param>

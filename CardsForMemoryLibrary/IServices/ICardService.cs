@@ -21,7 +21,7 @@ namespace CardsForMemoryLibrary.IServices {
         Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId);
 
         //Karl:根据id,旧卡数量,新卡数量,返回一个List<Card>
-        Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int old, int news);
+        Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int Old, int New);
         
         //Karl:根据id,返回旧卡数量
         Task<ServiceResult<int>> GetNewCardNum(int packageId);

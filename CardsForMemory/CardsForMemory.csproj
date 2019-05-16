@@ -98,13 +98,20 @@
     <Compile Include="Controls\CardInfo.xaml.cs">
       <DependentUpon>CardInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CardView.xaml.cs">
+      <DependentUpon>CardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\QueryNewOld\QueryNewOldConverter.cs" />
+    <Compile Include="Controls\QueryNewOld\QueryNewOld.xaml.cs">
+      <DependentUpon>QueryNewOld.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PackageInfo.xaml.cs">
       <DependentUpon>PackageInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CardsPage\PackagePageConverter.cs" />
+    <Compile Include="Pages\PackagePage\PackagePageConverter.cs" />
     <Compile Include="Pages\EditPackagePage.xaml.cs">
       <DependentUpon>EditPackagePage.xaml</DependentUpon>
     </Compile>
@@ -125,7 +132,7 @@
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CardsPage\PackagePage.xaml.cs">
+    <Compile Include="Pages\PackagePage\PackagePage.xaml.cs">
       <DependentUpon>PackagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,6 +163,14 @@
     <Page Include="Controls\CardInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\QueryNewOld\QueryNewOld.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Toast.xaml">
       <SubType>Designer</SubType>
@@ -189,7 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CardsPage\PackagePage.xaml">
+    <Page Include="Pages\PackagePage\PackagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

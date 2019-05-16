@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="CardsForMemory.Controls.PackageInfo"
+﻿<UserControl x:Class="CardsForMemory.Controls.QueryNewOld"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
-        xmlns:Custom="using:Microsoft.Xaml.Interactivity" mc:Ignorable="d">
+        xmlns:Custom="using:Microsoft.Xaml.Interactivity"
+        xmlns:local="using:CardsForMemory.QueryNewOldConverter" mc:Ignorable="d">
     <!--样式静态资源-->
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="block">
@@ -26,6 +27,8 @@
             <Setter Property="Width" Value="120" />
             <Setter Property="Background" Value="{ThemeResource SystemAccentColor}" />
         </Style>
+        <local:NewMaxConverter x:Key="NewMaxConverter" />
+        <local:OldMaxConverter x:Key="OldMaxConverter" />
     </UserControl.Resources>
     <Custom:Interaction.Behaviors>
         <Custom1:EventTriggerBehavior EventName="Loaded">
@@ -37,17 +40,16 @@
         <Border Background="#aa000000" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         <StackPanel Padding="50" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock Style="{StaticResource block}">需要学习的参数</TextBlock>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource block}">Name:</TextBlock>
-                <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Name,Mode=TwoWay}" />
+                <TextBlock Style="{StaticResource block}">新卡数量:</TextBlock>
+                <TextBox Style="{StaticResource box}" Text="{x:Bind vm.New,Mode=TwoWay}"
+                        PlaceholderText="{x:Bind vm.NewMax,Mode=OneWay,Converter={StaticResource NewMaxConverter}}" InputScope="Number" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource block}">Author:</TextBlock>
-                <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Author,Mode=TwoWay}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource block}">Description:</TextBlock>
-                <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Description,Mode=TwoWay}" />
+                <TextBlock Style="{StaticResource block}">旧卡数量:</TextBlock>
+                <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Old,Mode=TwoWay}"
+                        PlaceholderText="{x:Bind vm.OldMax,Mode=OneWay,Converter={StaticResource OldMaxConverter}}" InputScope="Number" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button Style="{StaticResource button}" Command="{x:Bind vm.CancelCommand}">Cancel</Button>

@@ -80,14 +80,11 @@ namespace CardsForMemoryLibrary.ViewModels {
         }));
 
         private RelayCommand _playCommand;
-        public RelayCommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(async () => {
+        public RelayCommand PlayCommand => _playCommand ?? (_playCommand = new RelayCommand(() => {
             if (!IsSelected()) { return; }
             if (IsWorked()) { return; }
             status["package"] = SelectionPackage;
-            var cards = (await cardService.GetCardsAsync(SelectionPackage.Id)).Result;
-            status["cards"] = cards;
-            status["cardi"] = cards.Count;
-            navigationService.Navigate("remember");
+            navigationService.Navigate("query");
         }));
 
         private RelayCommand _deleteCommand;

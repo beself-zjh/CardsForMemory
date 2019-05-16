@@ -38,6 +38,20 @@ namespace CardsForMemoryLibrary.ViewModels {
             set => Set(nameof(Description), ref _description, value);
         }
 
+        private RelayCommand _loadedCommand;
+        public RelayCommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(() => {
+            //处理状态中的package参数
+            if (Status.s["package"] is Package package) {
+                Name = package.Name;
+                Author = package.Author;
+                Description = package.Description;
+            } else {
+                Name = "";
+                Author = "";
+                Description = "";
+            }
+        }));
+
         private RelayCommand _nextCommand;
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(async () => {
             if (Name != "" && Author != "" && Description != "") {
@@ -49,7 +63,7 @@ namespace CardsForMemoryLibrary.ViewModels {
                     package.Description = Description;
                     var result = await packageService.EditPackageAsync(package);
                     if (result.Status != ServiceResultStatus.OK) {
-                        toastService.Toast(result.Message,5);
+                        toastService.Toast(result.Message, 5);
                     }
                     status["package"] = package;
                 } else {

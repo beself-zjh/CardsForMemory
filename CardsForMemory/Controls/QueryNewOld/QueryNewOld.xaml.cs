@@ -5,10 +5,10 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace CardsForMemory.Controls {
-    public sealed partial class PackageInfo : UserControl {
-        PackageInfoViewModel vm = ViewModelLocator.Instance.PackageInfoViewModel;
-        
-        public PackageInfo() {
+    public sealed partial class QueryNewOld : UserControl {
+        private QueryNewOldViewModel vm = ViewModelLocator.Instance.QueryNewOldViewModel;
+
+        public QueryNewOld() {
             RequestedTheme = App.RootTheme;
             InitializeComponent();
             Popup popup = new Popup { Child = this };

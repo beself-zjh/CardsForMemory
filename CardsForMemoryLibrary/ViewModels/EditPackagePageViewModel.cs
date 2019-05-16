@@ -71,7 +71,13 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private RelayCommand _previewCommand;
         public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(() => {
-            //TODO PreviewCommand
+            if (SelectionCard == null) {
+                toastService.Toast("jp`まずカードを選んでください。");
+                return;
+            }
+            var status = Status.s;
+            status["card"] = SelectionCard;
+            navigationService.Navigate("card view");
         }));
     }
 }

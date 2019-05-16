@@ -1,9 +1,12 @@
-﻿<Page x:Class="CardsForMemory.Pages.EditPackagePage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:lib="using:CardsForMemoryLibrary.Models"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Custom="using:Microsoft.Xaml.Interactivity"
+﻿<Page x:Class="CardsForMemory.Pages.EditPackagePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lib="using:CardsForMemoryLibrary.Models"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Custom="using:Microsoft.Xaml.Interactivity"
         xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" Width="900"
-        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        Width="900" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <Style TargetType="TextBlock" x:Key="block">
             <Setter Property="Margin" Value="5,0,0,0" />
@@ -61,8 +64,8 @@
             </StackPanel>
         </Button>
         <!--左列表-->
-        <ListView Grid.RowSpan="5" ItemsSource="{x:Bind vm.Cards,Mode=OneWay}" IsMultiSelectCheckBoxEnabled="False"
-                SelectionChanged="ListViewSelectionChanged">
+        <ListView Grid.RowSpan="5" ItemsSource="{x:Bind vm.Cards,Mode=OneWay}"
+                IsMultiSelectCheckBoxEnabled="False" SelectionChanged="ListViewSelectionChanged">
             <!--列表头部-->
             <ListView.Header>
                 <StackPanel Orientation="Horizontal">
@@ -75,9 +78,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="lib:Card">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource list}" Text="{x:Bind Question,Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource list}"
+                                Text="{x:Bind Question,Mode=OneWay}" />
                         <TextBlock Style="{StaticResource list}" Text="{x:Bind Answer,Mode=OneWay}" />
-                        <TextBlock Style="{StaticResource list}" Text="{x:Bind UpdateTime,Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource list}"
+                                Text="{x:Bind UpdateTime,Mode=OneWay}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
