@@ -87,4 +87,65 @@ namespace CardsForMemoryLibrary.Services {
             };
         }
     }
+
+    //采用继承来处理Virtual Package这个例外
+    public class PackageServiceEx : PackageService {
+        public PackageServiceEx(ISqliteConnectionService connectionServiece) : base(connectionServiece) { }
+
+        public new async Task<ServiceResult> DeletePackageAsync(int packageId) {
+            if (packageId != -1) {
+                return await base.DeletePackageAsync(packageId);
+            } else {
+                return new ServiceResult {
+                    Message = "Can't Delete Virtual Package",
+                    Status = ServiceResultStatus.Error
+                };
+            }
+        }
+
+        public new async Task<ServiceResult> EditPackageAsync(Package package) {
+            if (package.Id != -1) {
+                return await base.EditPackageAsync(package);
+            } else {
+                return new ServiceResult {
+                    Message = "Can't Edit Virtual Package",
+                    Status = ServiceResultStatus.Error
+                };
+            }
+        }
+
+        public new async Task<ServiceResult<List<Package>>> GetAllPackageAsync() {
+            var list = await base.GetAllPackageAsync();
+            list.Result.Insert(0, new Package {
+                Name = "Virtual Package",
+                Author = "System",
+                Description = "All Old Card in One",
+                CreateTime = DateTime.Now,
+                UpdateTime = DateTime.Now,
+                Style = 0,
+                Id = -1
+            });
+            return list;
+        }
+
+        public new async Task<ServiceResult<Package>> GetPackageAsync(int packageId) {
+            if (packageId == -1) {
+                return new ServiceResult<Package>() {
+                    Result = new Package {
+                        Name = "Virtual Package",
+                        Author = "System",
+                        Description = "All Old Card in One",
+                        CreateTime = DateTime.Now,
+                        UpdateTime = DateTime.Now,
+                        Style = 0,
+                        Id = -1
+                    },
+                    Status = ServiceResultStatus.OK,
+                    Message = "Success"
+                };
+            } else {
+                return await base.GetPackageAsync(packageId);
+            }
+        }
+    }
 }
