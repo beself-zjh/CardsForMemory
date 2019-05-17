@@ -69,5 +69,12 @@ namespace CardsForMemoryLibrary.IServices {
         /// </summary>
         /// <returns></returns>
         Task<ServiceResult> DeleteAllCardAsync();
+
+        /// <summary>
+        ///     复习过的卡片加入到特殊仓库
+        /// </summary>
+        /// <param name="cardId"></param>
+        /// <returns></returns>
+        ServiceResult BeOld(int cardId);
     }
 }

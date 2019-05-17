@@ -32,6 +32,7 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         private async Task Utility(Card card, Level level) {
+            _cardService.BeOld(card.Id);//记录下该卡片已经复习过
             var updateCard = new Card() {
                 Id = card.Id,
                 Answer = card.Answer,

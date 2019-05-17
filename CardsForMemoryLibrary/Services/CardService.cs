@@ -16,6 +16,8 @@ namespace CardsForMemoryLibrary.Services {
         /// </summary>
         private ISqliteConnectionService _connectionService;
 
+        private static List<int> SpecialPackage = new List<int>();
+
         /// <summary>
         ///     构造函数
         /// </summary>
@@ -51,11 +53,22 @@ namespace CardsForMemoryLibrary.Services {
             ServiceResult<List<Card>> serviceResult = new ServiceResult<List<Card>>();
             switch (connection.Status) {
                 case ServiceResultStatus.OK:
-                    serviceResult.Result =
-                        await connection.Result
-                            .Table<Card>()
-                            .Where(i => i.PackageId == packageId)
-                            .ToListAsync();
+                    if (packageId == -1) {//特殊卡包
+                        serviceResult.Result = new List<Card>();
+                        foreach (var id in SpecialPackage) {
+                            var tpCards = await connection.Result.Table<Card>().Where(i => i.Id == id).ToListAsync();
+                            if (tpCards.Count() != 0) {
+                                serviceResult.Result.AddRange(tpCards);
+                            }
+                        }
+                    }
+                    else {//非特殊卡包
+                        serviceResult.Result =
+                            await connection.Result
+                                .Table<Card>()
+                                .Where(i => i.PackageId == packageId)
+                                .ToListAsync();
+                    }
                     serviceResult.Status = connection.Status;
                     serviceResult.Message = connection.Message;
                     break;
@@ -180,6 +193,8 @@ namespace CardsForMemoryLibrary.Services {
 
         /// <inheritdoc />
         public async Task<ServiceResult> DeleteCardsAsync(int packageId) {
+            if (packageId == -1)//特殊卡包不能删除
+                throw new NotImplementedException();
             var connection = _connectionService.GetAsyncConnection();
             var cardsList = await connection.Result.Table<Card>()
                 .Where(i => i.PackageId == packageId)
@@ -197,6 +212,15 @@ namespace CardsForMemoryLibrary.Services {
             var connection = _connectionService.GetAsyncConnection();
             await connection.Result.DeleteAllAsync<Card>();
 
+            return new ServiceResult() {
+                Status = ServiceResultStatus.OK,
+                Message = "Success"
+            };
+        }
+
+        public ServiceResult BeOld(int cardId) {
+            if(!SpecialPackage.Contains(cardId))
+                SpecialPackage.Append(cardId);
             return new ServiceResult() {
                 Status = ServiceResultStatus.OK,
                 Message = "Success"
