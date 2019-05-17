@@ -89,7 +89,7 @@ namespace CardsForMemoryLibrary.Services {
     }
 
     //采用继承来处理Virtual Package这个例外
-    public class PackageServiceEx : PackageService {
+    public class PackageServiceEx : PackageService, IPackageService {
         public PackageServiceEx(ISqliteConnectionService connectionServiece) : base(connectionServiece) { }
 
         public new async Task<ServiceResult> DeletePackageAsync(int packageId) {

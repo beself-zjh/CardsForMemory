@@ -64,6 +64,8 @@ namespace CardsForMemoryLibrary.ViewModels {
                     var result = await packageService.EditPackageAsync(package);
                     if (result.Status != ServiceResultStatus.OK) {
                         toastService.Toast(result.Message, 5);
+                        CloseWindow?.Invoke();
+                        return;
                     }
                     status["package"] = package;
                 } else {

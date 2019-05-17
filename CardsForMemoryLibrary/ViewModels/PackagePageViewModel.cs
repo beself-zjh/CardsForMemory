@@ -1,8 +1,8 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CardsForMemoryLibrary.IServices;
 using CardsForMemoryLibrary.Models;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
-using CardsForMemoryLibrary.IServices;
 
 namespace CardsForMemoryLibrary.ViewModels {
     public class PackagePageViewModel : ViewModelBase {
@@ -54,6 +54,8 @@ namespace CardsForMemoryLibrary.ViewModels {
             var result = await packageService.GetAllPackageAsync();
             if (result.Result != null) {
                 Packages = result.Result;
+            } else {
+                toastService.Toast(result.Message);
             }
         }));
 
@@ -88,10 +90,14 @@ namespace CardsForMemoryLibrary.ViewModels {
         }));
 
         private RelayCommand _deleteCommand;
-        public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(() => {
+        public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(async () => {
             if (!IsSelected()) { return; }
             if (IsWorked()) { return; }
-            packageService.DeletePackageAsync(SelectionPackage.Id);
+            var result = await packageService.DeletePackageAsync(SelectionPackage.Id);
+            if (result.Status != Services.ServiceResultStatus.OK) {
+                toastService.Toast(result.Message);
+                return;
+            }
             LoadedCommand.Execute(null);
             status["package"] = null;
             status["cards"] = null;
