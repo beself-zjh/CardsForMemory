@@ -37,13 +37,13 @@
         <Border Background="#aa000000" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         <StackPanel Padding="50" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock Style="{StaticResource block}" HorizontalAlignment="Left">Question</TextBlock>
+            <TextBlock Style="{StaticResource block}" HorizontalAlignment="Left">问题:</TextBlock>
             <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Question,Mode=TwoWay}" />
-            <TextBlock Style="{StaticResource block}" HorizontalAlignment="Left">Answer</TextBlock>
+            <TextBlock Style="{StaticResource block}" HorizontalAlignment="Left">答案:</TextBlock>
             <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Answer,Mode=TwoWay}" />
             <StackPanel Orientation="Horizontal">
-                <Button Style="{StaticResource button}" Command="{x:Bind vm.CancelCommand}">Cancel</Button>
-                <Button Style="{StaticResource primary-button}" Command="{x:Bind vm.NextCommand}">Next</Button>
+                <Button Style="{StaticResource button}" Command="{x:Bind vm.CancelCommand}">返回</Button>
+                <Button Style="{StaticResource primary-button}" Command="{x:Bind vm.NextCommand}">下一步</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

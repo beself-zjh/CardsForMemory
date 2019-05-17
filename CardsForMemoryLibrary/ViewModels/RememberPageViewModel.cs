@@ -74,7 +74,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _easyCommand;
         public RelayCommand EasyCommand => _easyCommand ?? (_easyCommand = new RelayCommand(() => {
             if (Answer != "") {
-                toastService.Toast("jp`これは簡単じゃないですか？", 3);
+                toastService.Toast("zh`这是不是很简单.", 3);
                 if (status["cardi"] is int cardi) {
                     if (status["cards"] is List<Card> cards) {
                         feedbackService.isEasy(cards[cardi - 1]);
@@ -87,7 +87,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _normalCommand;
         public RelayCommand NormalCommand => _normalCommand ?? (_normalCommand = new RelayCommand(() => {
             if (Answer != "") {
-                toastService.Toast("jp`まあ、すぐには思いつきませんね。", 3);
+                toastService.Toast("zh`呀,这个一下子想不起来呢", 3);
                 if (status["cardi"] is int cardi) {
                     if (status["cards"] is List<Card> cards) {
                         feedbackService.isNormal(cards[cardi - 1]);
@@ -100,7 +100,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _diffCommand;
         public RelayCommand DiffCommand => _diffCommand ?? (_diffCommand = new RelayCommand(() => {
             if (Answer != "") {
-                toastService.Toast("jp`うわ、全然思い出せません。", 3);
+                toastService.Toast("jp`哇,完全想不出来", 3);
                 if (status["cardi"] is int cardi) {
                     if (status["cards"] is List<Card> cards) {
                         feedbackService.isDifficult(cards[cardi - 1]);
@@ -119,12 +119,12 @@ namespace CardsForMemoryLibrary.ViewModels {
                     status["time"] = 0;
                     Question = "恭喜,题答完了";
                     Answer = "";
-                    toastService.Toast("jp`おめでとうございます。問題は全部答えました。", 4);
+                    toastService.Toast("zh`恭喜,题答完了", 4);
                 } else {
                     if (status["cards"] is List<Card> cards) {
                         Question = cards[cardi - 1].Question;
                         Answer = cards[cardi - 1].Answer;
-                        toastService.Toast("jp`はい、次の問題");
+                        toastService.Toast("zh`好,下个问题");
                     }
                 }
             }

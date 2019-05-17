@@ -49,7 +49,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _editCommand;
         public RelayCommand EditCommand => _editCommand ?? (_editCommand = new RelayCommand(() => {
             if (SelectionCard == null) {
-                toastService.Toast("jp`まずカードを選んでください。");
+                toastService.Toast("zh`请选择一个卡片");
                 return;
             }
             var status = Status.s;
@@ -60,7 +60,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _deleteCommand;
         public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(() => {
             if (SelectionCard == null) {
-                toastService.Toast("jp`まずカードを選んでください。");
+                toastService.Toast("zh`请选择一个卡片");
                 return;
             }
             cardService.DeleteCardAsync(SelectionCard.Id);
@@ -72,7 +72,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private RelayCommand _previewCommand;
         public RelayCommand PreviewCommand => _previewCommand ?? (_previewCommand = new RelayCommand(() => {
             if (SelectionCard == null) {
-                toastService.Toast("jp`まずカードを選んでください。");
+                toastService.Toast("zh`请选择一个卡片");
                 return;
             }
             var status = Status.s;

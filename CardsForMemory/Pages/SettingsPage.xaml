@@ -4,17 +4,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" Width="900"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" Margin="4">
-        <TextBlock Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal" Text="Theme Mode" />
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal" Text="应用颜色主题" />
         <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
-            <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="Light" />
-            <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="Dark" />
-            <RadioButton Tag="Default" Checked="OnThemeRadioButtonChecked" Content="Use system setting" />
+            <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="亮" />
+            <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="暗" />
+            <RadioButton Tag="Default" Checked="OnThemeRadioButtonChecked" Content="默认" />
         </StackPanel>
         <ToggleSwitch Margin="10" OffContent="声音已关闭" OnContent="声音已打开"
                 IsOn="{x:Bind SoundSwitch,Mode=TwoWay}" />
         <ToggleSwitch Margin="10" OffContent="不自动填入卡包最大值" OnContent="自动填入卡包最大值"
                 IsOn="{x:Bind MaxNumberSwitch,Mode=TwoWay}" />
-        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0,40,0,0" FontWeight="Normal" Text="About" />
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0,40,0,0" FontWeight="Normal" Text="关于" />
         <RichTextBlock MaxWidth="840" Margin="0,10,0,0" IsTextSelectionEnabled="True">
             <Paragraph>We are Heaven's Door(黑蚊子多).The name come from ｢Jojo's Wonderful Adventure: Impervious Diamonds｣</Paragraph>
             <Paragraph>There is a stand called Heaven's Door. Its ability is read and modify other's memory.</Paragraph>

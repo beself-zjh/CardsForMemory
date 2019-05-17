@@ -41,7 +41,7 @@ namespace CardsForMemoryLibrary.ViewModels {
                 question = card.Question;
                 answer = card.Answer;
                 ShowText = question;
-                ButtonText = "See Answer";
+                ButtonText = "看答案";
             } else {
                 toastService.Toast("DEBUG:status[\"card\"]不是Card!!");
                 CloseWindow?.Invoke();
@@ -52,10 +52,10 @@ namespace CardsForMemoryLibrary.ViewModels {
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(() => {
             if(ButtonText=="See Answer") {
                 ShowText = answer;
-                ButtonText = "See Question";
+                ButtonText = "看问题";
             } else {
                 ShowText = question;
-                ButtonText = "See Answer";
+                ButtonText = "看答案";
             }
         }));
 

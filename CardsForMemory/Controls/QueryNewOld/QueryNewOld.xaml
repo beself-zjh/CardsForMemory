@@ -52,8 +52,8 @@
                         PlaceholderText="{x:Bind vm.OldMax,Mode=OneWay,Converter={StaticResource OldMaxConverter}}" InputScope="Number" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Style="{StaticResource button}" Command="{x:Bind vm.CancelCommand}">Cancel</Button>
-                <Button Style="{StaticResource primary-button}" Command="{x:Bind vm.NextCommand}">Next</Button>
+                <Button Style="{StaticResource button}" Command="{x:Bind vm.CancelCommand}">返回</Button>
+                <Button Style="{StaticResource primary-button}" Command="{x:Bind vm.NextCommand}">下一步</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -42,25 +42,25 @@
         <Button Grid.Row="0" Style="{StaticResource button}" Command="{x:Bind vm.AddCommand}">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="Add" />
-                <TextBlock Style="{StaticResource block}">Add</TextBlock>
+                <TextBlock Style="{StaticResource block}">添加</TextBlock>
             </StackPanel>
         </Button>
         <Button Grid.Row="1" Style="{StaticResource button}" Command="{x:Bind vm.EditCommand}">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="Edit" />
-                <TextBlock Style="{StaticResource block}">Edit</TextBlock>
+                <TextBlock Style="{StaticResource block}">编辑</TextBlock>
             </StackPanel>
         </Button>
         <Button Grid.Row="2" Style="{StaticResource button}" Command="{x:Bind vm.DeleteCommand}">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="Delete" />
-                <TextBlock Style="{StaticResource block}">Delete</TextBlock>
+                <TextBlock Style="{StaticResource block}">删除</TextBlock>
             </StackPanel>
         </Button>
         <Button Grid.Row="3" Style="{StaticResource button}" Command="{x:Bind vm.PreviewCommand}">
             <StackPanel Orientation="Horizontal">
                 <SymbolIcon Symbol="View" />
-                <TextBlock Style="{StaticResource block}">Preview</TextBlock>
+                <TextBlock Style="{StaticResource block}">预览</TextBlock>
             </StackPanel>
         </Button>
         <!--左列表-->
@@ -69,9 +69,9 @@
             <!--列表头部-->
             <ListView.Header>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource list}">Question</TextBlock>
-                    <TextBlock Style="{StaticResource list}">Answer</TextBlock>
-                    <TextBlock Style="{StaticResource list}">UpdateTime</TextBlock>
+                    <TextBlock Style="{StaticResource list}">问题</TextBlock>
+                    <TextBlock Style="{StaticResource list}">答案</TextBlock>
+                    <TextBlock Style="{StaticResource list}">更新时间</TextBlock>
                 </StackPanel>
             </ListView.Header>
             <!--列表模板-->

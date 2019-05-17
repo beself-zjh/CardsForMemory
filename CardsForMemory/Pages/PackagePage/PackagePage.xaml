@@ -37,9 +37,9 @@
             <!--列表头部-->
             <ListView.Header>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource block}">Name</TextBlock>
-                    <TextBlock Style="{StaticResource block}">Author</TextBlock>
-                    <TextBlock Style="{StaticResource block}">UpdateTime</TextBlock>
+                    <TextBlock Style="{StaticResource block}">名字</TextBlock>
+                    <TextBlock Style="{StaticResource block}">作者</TextBlock>
+                    <TextBlock Style="{StaticResource block}">更新时间</TextBlock>
                 </StackPanel>
             </ListView.Header>
             <!--列表模板-->
@@ -61,19 +61,19 @@
                 <Button Margin="5" Command="{x:Bind vm.AddCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Add" />
-                        <TextBlock Margin="5,0,0,0" FontSize="24">Add</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">添加</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Margin="5" Command="{x:Bind vm.EditCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Edit" />
-                        <TextBlock Margin="5,0,0,0" FontSize="24">Edit</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">编辑</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Margin="5" Command="{x:Bind vm.DeleteCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Delete" />
-                        <TextBlock Margin="5,0,0,0" FontSize="24">Delete</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">删除</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -82,18 +82,18 @@
                 <Button Margin="5" Command="{x:Bind vm.PlayCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Play" />
-                        <TextBlock Margin="5,0,0,0" FontSize="24">Play</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">开始记忆</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Margin="5" Command="{x:Bind vm.EditCardsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Edit" />
-                        <TextBlock Margin="5,0,0,0" FontSize="24">EditCards</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="24">编辑卡片</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
             <!--更多信息-->
-            <TextBlock Margin="5" FontSize="32">MoreInformation</TextBlock>
+            <TextBlock Margin="5" FontSize="32">更多信息</TextBlock>
             <TextBlock Style="{StaticResource block_wrap}"
                     Text="{x:Bind vm.SelectionPackage,Mode=OneWay,Converter={StaticResource NameConverter}}" />
             <TextBlock Style="{StaticResource block_wrap}"

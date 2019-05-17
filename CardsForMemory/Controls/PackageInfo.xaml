@@ -38,20 +38,20 @@
         <StackPanel Padding="50" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource block}">Name:</TextBlock>
+                <TextBlock Style="{StaticResource block}">名字:</TextBlock>
                 <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Name,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource block}">Author:</TextBlock>
+                <TextBlock Style="{StaticResource block}">作者:</TextBlock>
                 <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Author,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource block}">Description:</TextBlock>
+                <TextBlock Style="{StaticResource block}">描述:</TextBlock>
                 <TextBox Style="{StaticResource box}" Text="{x:Bind vm.Description,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Style="{StaticResource button}" Command="{x:Bind vm.CancelCommand}">Cancel</Button>
-                <Button Style="{StaticResource primary-button}" Command="{x:Bind vm.NextCommand}">Next</Button>
+                <Button Style="{StaticResource button}" Command="{x:Bind vm.CancelCommand}">返回</Button>
+                <Button Style="{StaticResource primary-button}" Command="{x:Bind vm.NextCommand}">下一步</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

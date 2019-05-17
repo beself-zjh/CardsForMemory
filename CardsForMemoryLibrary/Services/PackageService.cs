@@ -97,7 +97,7 @@ namespace CardsForMemoryLibrary.Services {
                 return await base.DeletePackageAsync(packageId);
             } else {
                 return new ServiceResult {
-                    Message = "Can't Delete Virtual Package",
+                    Message = "不能删除虚拟卡包",
                     Status = ServiceResultStatus.Error
                 };
             }
@@ -108,7 +108,7 @@ namespace CardsForMemoryLibrary.Services {
                 return await base.EditPackageAsync(package);
             } else {
                 return new ServiceResult {
-                    Message = "Can't Edit Virtual Package",
+                    Message = "不能编辑虚拟卡包",
                     Status = ServiceResultStatus.Error
                 };
             }
@@ -117,9 +117,9 @@ namespace CardsForMemoryLibrary.Services {
         public new async Task<ServiceResult<List<Package>>> GetAllPackageAsync() {
             var list = await base.GetAllPackageAsync();
             list.Result.Insert(0, new Package {
-                Name = "Virtual Package",
-                Author = "System",
-                Description = "All Old Card in One",
+                Name = "虚拟卡包",
+                Author = "系统",
+                Description = "包含所有学习过的卡",
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now,
                 Style = 0,
@@ -132,9 +132,9 @@ namespace CardsForMemoryLibrary.Services {
             if (packageId == -1) {
                 return new ServiceResult<Package>() {
                     Result = new Package {
-                        Name = "Virtual Package",
-                        Author = "System",
-                        Description = "All Old Card in One",
+                        Name = "虚拟卡包",
+                        Author = "系统",
+                        Description = "包含所有学习过的卡",
                         CreateTime = DateTime.Now,
                         UpdateTime = DateTime.Now,
                         Style = 0,

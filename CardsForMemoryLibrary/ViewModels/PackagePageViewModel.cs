@@ -33,7 +33,7 @@ namespace CardsForMemoryLibrary.ViewModels {
         private Status status = Status.s;
         private bool IsSelected() {
             if (SelectionPackage == null) {
-                toastService.Toast("jp`先にカードのカバンを選んでください。");
+                toastService.Toast("zh`先选一个卡包吧");
             }
             return SelectionPackage != null;
         }

@@ -15,8 +15,8 @@
             <NavigationViewItem Icon="Home" Content="Home" Tag="home" Visibility="Collapsed" />
             <NavigationViewItemSeparator Visibility="Collapsed" />
             <NavigationViewItemHeader Content="Main pages" Visibility="Collapsed" />
-            <NavigationViewItem Icon="List" Content="Package" Tag="package" />
-            <NavigationViewItem Icon="Play" Content="Remember" Tag="remember" x:Name="RememberPageName" />
+            <NavigationViewItem Icon="List" Content="卡包" Tag="package" />
+            <NavigationViewItem Icon="Play" Content="记忆" Tag="remember" x:Name="RememberPageName" />
             <NavigationViewItem Icon="Audio" Content="Music" Tag="music" Visibility="Collapsed" />
         </NavigationView.MenuItems>
         <Frame x:Name="ContentFrame">
