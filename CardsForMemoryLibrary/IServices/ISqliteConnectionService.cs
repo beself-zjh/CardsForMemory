@@ -10,6 +10,6 @@ namespace CardsForMemoryLibrary.IServices {
         ///     获得数据库连接
         /// </summary>
         /// <returns>SqliteConnection</returns>
-        ServiceResult<SQLiteAsyncConnection> GetAsyncConnection(bool test=false);
+        ServiceResult<SQLiteAsyncConnection> GetAsyncConnection();
     }
 }

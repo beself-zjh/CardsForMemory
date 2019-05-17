@@ -4,11 +4,13 @@ using SQLite;
 
 namespace CardsForMemoryLibrary.Services {
     public class SqliteConnectionService : ISqliteConnectionService {
+        private string databaseName;
+
         /// <inheritdoc />
-        public ServiceResult<SQLiteAsyncConnection> GetAsyncConnection(bool test = false) {
+        public ServiceResult<SQLiteAsyncConnection> GetAsyncConnection() {
             SQLiteAsyncConnection connection;
             try {
-                connection = new SQLiteAsyncConnection("CardsForMemory" + (test ? "Test" : ""));
+                connection = new SQLiteAsyncConnection(databaseName);
             } catch (SQLiteException e) {
                 return new ServiceResult<SQLiteAsyncConnection> {
                     Status = ServiceResultStatusHelper.FromSQLiteResult(e.Result),
@@ -20,6 +22,10 @@ namespace CardsForMemoryLibrary.Services {
                 Result = connection,
                 Status = ServiceResultStatus.OK
             };
+        }
+
+        public SqliteConnectionService(bool test = false) {
+            databaseName = "CardsForMemory" + (test ? "Test" : "");
         }
 
         static SqliteConnectionService() {
