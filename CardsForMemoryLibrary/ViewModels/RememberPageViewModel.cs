@@ -6,14 +6,10 @@ using System.Collections.Generic;
 
 namespace CardsForMemoryLibrary.ViewModels {
     public class RememberPageViewModel : ViewModelBase {
-        private IPackageService packageService;
-        private IReviseService reviseService;
         private IFeedbackService feedbackService;
         private IToastService toastService;
 
-        public RememberPageViewModel(IPackageService packageService, IReviseService reviseService, IFeedbackService feedbackService, IToastService toastService) {
-            this.packageService = packageService;
-            this.reviseService = reviseService;
+        public RememberPageViewModel(IFeedbackService feedbackService, IToastService toastService) {
             this.feedbackService = feedbackService;
             this.toastService = toastService;
         }
@@ -52,11 +48,13 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private Status status = Status.s;
 
-        private RelayCommand _onLoaded;
-        public RelayCommand OnLoaded => _onLoaded ?? (_onLoaded = new RelayCommand(() => {
-            Time = 0;
+        private RelayCommand _loadedCommand;
+        public RelayCommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(() => {
             AnswerVis = false;
             if (status["cardi"] is int cardi) {
+                if (cardi == 0) {
+                    return;
+                }
                 if (status["cards"] is List<Card> cards) {
                     Question = cards[cardi - 1].Question;
                     Answer = cards[cardi - 1].Answer;
@@ -66,7 +64,7 @@ namespace CardsForMemoryLibrary.ViewModels {
             }
             Visibility = false;
         }));
-
+        
         private bool _answerVis;
         public bool AnswerVis {
             get => _answerVis;
@@ -77,7 +75,11 @@ namespace CardsForMemoryLibrary.ViewModels {
         public RelayCommand EasyCommand => _easyCommand ?? (_easyCommand = new RelayCommand(() => {
             if (Answer != "") {
                 toastService.Toast("jp`これは簡単じゃないですか？", 3);
-                //TODO easy
+                if (status["cardi"] is int cardi) {
+                    if (status["cards"] is List<Card> cards) {
+                        feedbackService.isEasy(cards[cardi - 1]);
+                    }
+                }
                 AnswerVis = true;
             }
         }));
@@ -86,7 +88,11 @@ namespace CardsForMemoryLibrary.ViewModels {
         public RelayCommand NormalCommand => _normalCommand ?? (_normalCommand = new RelayCommand(() => {
             if (Answer != "") {
                 toastService.Toast("jp`まあ、すぐには思いつきませんね。", 3);
-                //TODO normal
+                if (status["cardi"] is int cardi) {
+                    if (status["cards"] is List<Card> cards) {
+                        feedbackService.isNormal(cards[cardi - 1]);
+                    }
+                }
                 AnswerVis = true;
             }
         }));
@@ -95,7 +101,11 @@ namespace CardsForMemoryLibrary.ViewModels {
         public RelayCommand DiffCommand => _diffCommand ?? (_diffCommand = new RelayCommand(() => {
             if (Answer != "") {
                 toastService.Toast("jp`うわ、全然思い出せません。", 3);
-                //TODO diff
+                if (status["cardi"] is int cardi) {
+                    if (status["cards"] is List<Card> cards) {
+                        feedbackService.isDifficult(cards[cardi - 1]);
+                    }
+                }
                 AnswerVis = true;
             }
         }));
@@ -106,6 +116,7 @@ namespace CardsForMemoryLibrary.ViewModels {
             if (status["cardi"] is int cardi) {
                 status["cardi"] = --cardi;
                 if (cardi == 0) {
+                    status["time"] = 0;
                     Question = "恭喜,题答完了";
                     Answer = "";
                     toastService.Toast("jp`おめでとうございます。問題は全部答えました。", 4);

@@ -8,16 +8,16 @@
         <!--把Loaded事件绑到NavigationView的OnLoaded上-->
         <Custom:Interaction.Behaviors>
             <Custom1:EventTriggerBehavior EventName="Loaded">
-                <Custom1:InvokeCommandAction Command="{x:Bind vm.OnLoaded}" />
+                <Custom1:InvokeCommandAction Command="{x:Bind vm.LoadedCommand}" />
             </Custom1:EventTriggerBehavior>
         </Custom:Interaction.Behaviors>
         <NavigationView.MenuItems>
-            <NavigationViewItem Icon="Home" Content="Home" Tag="home" />
-            <NavigationViewItemSeparator />
-            <NavigationViewItemHeader Content="Main pages" />
+            <NavigationViewItem Icon="Home" Content="Home" Tag="home" Visibility="Collapsed" />
+            <NavigationViewItemSeparator Visibility="Collapsed" />
+            <NavigationViewItemHeader Content="Main pages" Visibility="Collapsed" />
             <NavigationViewItem Icon="List" Content="Package" Tag="package" />
             <NavigationViewItem Icon="Play" Content="Remember" Tag="remember" x:Name="RememberPageName" />
-            <NavigationViewItem Icon="Audio" Content="Music" Tag="music" />
+            <NavigationViewItem Icon="Audio" Content="Music" Tag="music" Visibility="Collapsed" />
         </NavigationView.MenuItems>
         <Frame x:Name="ContentFrame">
             <Frame.ContentTransitions>

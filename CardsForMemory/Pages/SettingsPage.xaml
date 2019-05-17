@@ -10,8 +10,10 @@
             <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="Dark" />
             <RadioButton Tag="Default" Checked="OnThemeRadioButtonChecked" Content="Use system setting" />
         </StackPanel>
-        <ToggleSwitch Margin="10" x:Name="Sound" OffContent="声音已关闭" OnContent="声音已打开"
+        <ToggleSwitch Margin="10" OffContent="声音已关闭" OnContent="声音已打开"
                 IsOn="{x:Bind SoundSwitch,Mode=TwoWay}" />
+        <ToggleSwitch Margin="10" OffContent="不自动填入卡包最大值" OnContent="自动填入卡包最大值"
+                IsOn="{x:Bind MaxNumberSwitch,Mode=TwoWay}" />
         <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0,40,0,0" FontWeight="Normal" Text="About" />
         <RichTextBlock MaxWidth="840" Margin="0,10,0,0" IsTextSelectionEnabled="True">
             <Paragraph>We are Heaven's Door(黑蚊子多).The name come from ｢Jojo's Wonderful Adventure: Impervious Diamonds｣</Paragraph>

@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
+        xmlns:Custom="using:Microsoft.Xaml.Interactivity" mc:Ignorable="d">
     <!--样式静态资源-->
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="block">
@@ -25,6 +27,11 @@
             <Setter Property="Background" Value="{ThemeResource SystemAccentColor}" />
         </Style>
     </UserControl.Resources>
+    <Custom:Interaction.Behaviors>
+        <Custom1:EventTriggerBehavior EventName="Loaded">
+            <Custom1:InvokeCommandAction Command="{x:Bind vm.LoadedCommand}" />
+        </Custom1:EventTriggerBehavior>
+    </Custom:Interaction.Behaviors>
     <Grid>
         <!--透明灰色蒙版-->
         <Border Background="#aa000000" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />

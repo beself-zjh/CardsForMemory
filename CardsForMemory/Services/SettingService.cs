@@ -9,8 +9,11 @@ namespace CardsForMemory.Services {
         public SettingService() {
             ls = ApplicationData.Current.LocalSettings.Values;
             if (refer++ == 0) {
-                if(this["sound"] is null) {
+                if (this["sound"] is null) {
                     this["sound"] = false.ToString();
+                }
+                if (this["max number"] is null) {
+                    this["max number"] = false.ToString();
                 }
             }
         }

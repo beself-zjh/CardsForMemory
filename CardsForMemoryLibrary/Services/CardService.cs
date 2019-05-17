@@ -81,13 +81,36 @@ namespace CardsForMemoryLibrary.Services {
             return serviceResult;
         }
 
-        public async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int old, int news) {
-            List<Card> cards = (await GetCardsAsync(packageId)).Result;
-
-            var OldStart = cards.FindIndex(i => i.Proficiency == 0);
+        public async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int Old, int New) {
+            var cards = (await GetCardsAsync(packageId)).Result;
+            var sorted = new List<Card>();
+            //排序
+            cards.Sort((c1, c2) => {
+                if (c1.Proficiency == c2.Proficiency) {
+                    return 0;
+                } else if (c1.Proficiency > c2.Proficiency) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            });
+            //选旧牌
+            for (int i = 0; i < Old; i++) {
+                sorted.Add(cards[i]);
+            }
+            //选新牌
+            for (int i = 1; i <= New; i++) {
+                sorted.Add(cards[cards.Count - i]);
+            }
+            //打乱
+            Random random = new Random();
+            var newList = new List<Card>();
+            foreach (Card item in sorted) {
+                newList.Insert(random.Next(newList.Count), item);
+            }
 
             return new ServiceResult<List<Card>>() {
-                Result = cards.OrderBy(i => i.Proficiency).Skip(OldStart - old).Take(old + news).ToList(),
+                Result = newList,
                 Message = "Success",
                 Status = ServiceResultStatus.OK
             };
@@ -96,9 +119,8 @@ namespace CardsForMemoryLibrary.Services {
         public async Task<ServiceResult<int>> GetNewCardNum(int packageId) {
             List<Card> cards = (await GetCardsAsync(packageId)).Result;
 
-            var OldStart = cards.FindIndex(i => i.Proficiency == 0);
             return new ServiceResult<int>() {
-                Result = cards.Count() - OldStart,
+                Result = cards.OrderBy(i => i.Proficiency).Count(i => i.Proficiency == 0),
                 Message = "Success",
                 Status = ServiceResultStatus.OK
             };
@@ -107,9 +129,8 @@ namespace CardsForMemoryLibrary.Services {
         public async Task<ServiceResult<int>> GetOldCardNum(int packageId) {
             List<Card> cards = (await GetCardsAsync(packageId)).Result;
 
-            var OldStart = cards.FindIndex(i => i.Proficiency == 0);
             return new ServiceResult<int>() {
-                Result = OldStart,
+                Result = cards.OrderBy(i => i.Proficiency).Count(i => i.Proficiency != 0),
                 Message = "Success",
                 Status = ServiceResultStatus.OK
             };

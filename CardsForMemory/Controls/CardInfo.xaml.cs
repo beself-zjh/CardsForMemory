@@ -1,6 +1,4 @@
 ﻿using CardsForMemory.Locator;
-using CardsForMemoryLibrary;
-using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,16 +27,7 @@ namespace CardsForMemory.Controls {
                 };
             };
             vm.InitCloseWindowAction(() => { popup.IsOpen = false; });
-
-            //处理状态中的card参数
-            if (Status.s["card"] is Card card) {
-                vm.Question = card.Question;
-                vm.Answer = card.Answer;
-            } else {
-                vm.Question = "";
-                vm.Answer = "";
-            }
-
+            
             popup.IsOpen = true;
         }
     }

@@ -24,6 +24,13 @@ namespace CardsForMemory.Pages {
             }
         }
 
+        private bool MaxNumberSwitch {
+            get => new SettingService()["max number"] as string == "True";
+            set {
+                new SettingService()["max number"] = value.ToString();
+            }
+        }
+
         private void OnThemeRadioButtonChecked(object sender, RoutedEventArgs e) {
             var selectedTheme = (sender as RadioButton).Tag.ToString();
             if (selectedTheme == null) {

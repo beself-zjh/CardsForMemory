@@ -26,6 +26,10 @@ namespace CardsForMemory.Locator {
 
         public CardInfoViewModel CardInfoViewModel => SimpleIoc.Default.GetInstance<CardInfoViewModel>();
 
+        public CardViewViewModel CardViewViewModel => SimpleIoc.Default.GetInstance<CardViewViewModel>();
+
+        public QueryNewOldViewModel QueryNewOldViewModel => SimpleIoc.Default.GetInstance<QueryNewOldViewModel>();
+
         public INavigationService INavigationService => SimpleIoc.Default.GetInstance<INavigationService>();
 
         /// <summary>
@@ -36,15 +40,17 @@ namespace CardsForMemory.Locator {
             SimpleIoc.Default.Register<IPackageService, PackageService>();
             SimpleIoc.Default.Register<ISqliteConnectionService, SqliteConnectionService>();
             SimpleIoc.Default.Register<IFeedbackService, FeedbackService>();
-            SimpleIoc.Default.Register<IReviseService, ReviseService>();
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<IToastService, ToastService>();
+            SimpleIoc.Default.Register<ISettingService, SettingService>();
             SimpleIoc.Default.Register<PackagePageViewModel>();
             SimpleIoc.Default.Register<RememberPageViewModel>();
             SimpleIoc.Default.Register<EditPackagePageViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<PackageInfoViewModel>();
             SimpleIoc.Default.Register<CardInfoViewModel>();
+            SimpleIoc.Default.Register<CardViewViewModel>();
+            SimpleIoc.Default.Register<QueryNewOldViewModel>();
 
         }
     }
