@@ -20,46 +20,31 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         public async Task isEasy(Card card) {
-            await Utility(card, Level.Easy);
+            _cardService.BeOld(card.Id);//记录下该卡片已经复习过
+            card.UpdateTime = DateTime.Now;
+            card.Proficiency += 200;
+            if (card.Proficiency > 10000)
+                card.Proficiency = 10000;
+            await _cardService.EditCardAsync(card);
         }
 
         public async Task isNormal(Card card) {
-            await Utility(card, Level.Normal);
+            _cardService.BeOld(card.Id);//记录下该卡片已经复习过
+            card.UpdateTime = DateTime.Now;
+            card.Proficiency += 100;
+            if (card.Proficiency > 10000)
+                card.Proficiency = 10000;
+            await _cardService.EditCardAsync(card);
         }
 
         public async Task isDifficult(Card card) {
-            await Utility(card, Level.Difficult);
-        }
-
-        private async Task Utility(Card card, Level level) {
             _cardService.BeOld(card.Id);//记录下该卡片已经复习过
-            var updateCard = new Card() {
-                Id = card.Id,
-                Answer = card.Answer,
-                Options = card.Options,
-                PackageId = card.PackageId,
-                Proficiency = card.Proficiency,
-                Question = card.Question,
-                UpdateTime = DateTime.Now
-            };
-            switch (level) {
-                case Level.Easy:
-                    updateCard.Proficiency += 200;
-                    break;
-                case Level.Normal:
-                    updateCard.Proficiency += 100;
-                    break;
-                case Level.Difficult:
-                    break;
-                default:
-                    //随便抛了个不知名异常
-                    throw new KeyNotFoundException();
-            }
-
-            if (updateCard.Proficiency > 10000)
-                updateCard.Proficiency = 10000;
-            await _cardService.EditCardAsync(updateCard);
+            card.UpdateTime = DateTime.Now;
+            if (card.Proficiency > 10000)
+                card.Proficiency = 10000;
+            await _cardService.EditCardAsync(card);
         }
+
 
         public bool Submit(Card card, string answer) {
             throw new NotImplementedException();

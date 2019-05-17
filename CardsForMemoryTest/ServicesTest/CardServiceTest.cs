@@ -1,7 +1,9 @@
-﻿using CardsForMemoryLibrary.Models;
+﻿using System;
+using CardsForMemoryLibrary.Models;
 using CardsForMemoryLibrary.Services;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CardsForMemoryTest.ServicesTest {
@@ -71,6 +73,41 @@ namespace CardsForMemoryTest.ServicesTest {
             Assert.AreEqual(0, o);
             Assert.AreEqual(3, n);
             Assert.AreEqual(2, (await cardService.GetCardsAsync(0,0,2)).Result.Count);
+        }
+
+        [Test]
+        public void TTTT() {
+            var card1 = new Card() {
+                Question = "1",
+                UpdateTime = new DateTime(2019,5,16,0,0,0),
+                Proficiency = 100
+            };
+            var card2 = new Card() {
+                Question = "2",
+
+                UpdateTime = new DateTime(2019, 5, 15, 0, 0, 0),
+                Proficiency = 100
+            };
+            var card3 = new Card() {
+                Question = "3",
+
+                UpdateTime = DateTime.Now,
+                Proficiency = 100
+            };
+
+            List<Card> cards = new List<Card>();
+            cards.Add(card1);
+            cards.Add(card2);
+            cards.Add(card3);
+            var sortedCards = cards.OrderByDescending
+                (i => 10000 - 5600 * Math.Pow((DateTime.Now - i.UpdateTime).Hours, 0.06) + i.Proficiency)
+                .ToList();
+            foreach (var i in sortedCards) {
+                Console.WriteLine(i.Proficiency);
+            }
+            Assert.AreEqual("3", sortedCards[0].Question);
+            Assert.AreEqual("1", sortedCards[1].Question);
+            Assert.AreEqual("2", sortedCards[2].Question);
         }
     }
 }

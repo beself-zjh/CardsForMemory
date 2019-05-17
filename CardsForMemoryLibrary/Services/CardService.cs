@@ -54,13 +54,11 @@ namespace CardsForMemoryLibrary.Services {
             switch (connection.Status) {
                 case ServiceResultStatus.OK:
                     if (packageId == -1) {//特殊卡包
-                        serviceResult.Result = new List<Card>();
-                        foreach (var id in SpecialPackage) {
-                            var tpCards = await connection.Result.Table<Card>().Where(i => i.Id == id).ToListAsync();
-                            if (tpCards.Count() != 0) {
-                                serviceResult.Result.AddRange(tpCards);
-                            }
-                        }
+                        serviceResult.Result = 
+                            await connection.Result
+                            .Table<Card>()
+                            .Where(i => i.Proficiency > 0)
+                            .ToListAsync();
                     }
                     else {//非特殊卡包
                         serviceResult.Result =
@@ -82,30 +80,19 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         public async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int Old, int New) {
-            var cards = (await GetCardsAsync(packageId)).Result;
-            var sorted = new List<Card>();
-            //排序
-            cards.Sort((c1, c2) => {
-                if (c1.Proficiency == c2.Proficiency) {
-                    return 0;
-                } else if (c1.Proficiency > c2.Proficiency) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            });
-            //选旧牌
-            for (int i = 0; i < Old; i++) {
-                sorted.Add(cards[i]);
-            }
-            //选新牌
-            for (int i = 1; i <= New; i++) {
-                sorted.Add(cards[cards.Count - i]);
-            }
-            //打乱
+            List<Card> cards = (await GetCardsAsync(packageId)).Result
+                                .OrderByDescending
+                                    (i => Math.Min(10000,10000 - 5600 * Math.Pow((DateTime.Now - i.UpdateTime).Hours, 0.06) + i.Proficiency))
+                                .ToList();
+
+            var oldStart = cards.FindIndex(i => i.UpdateTime == DateTime.MinValue);
+
+            cards = cards.Skip(oldStart - Old).Take(Old + New).ToList();
+
+            //乱序
             Random random = new Random();
             var newList = new List<Card>();
-            foreach (Card item in sorted) {
+            foreach (Card item in cards) {
                 newList.Insert(random.Next(newList.Count), item);
             }
 
@@ -114,13 +101,32 @@ namespace CardsForMemoryLibrary.Services {
                 Message = "Success",
                 Status = ServiceResultStatus.OK
             };
+
+            ////排序
+            //cards.Sort((c1, c2) => {
+            //    if (c1.Proficiency == c2.Proficiency) {
+            //        return 0;
+            //    } else if (c1.Proficiency > c2.Proficiency) {
+            //        return 1;
+            //    } else {
+            //        return -1;
+            //    }
+            //});
+            ////选旧牌
+            //for (int i = 0; i < Old; i++) {
+            //    sorted.Add(cards[i]);
+            //}
+            ////选新牌
+            //for (int i = 1; i <= New; i++) {
+            //    sorted.Add(cards[cards.Count - i]);
+            //}
         }
 
         public async Task<ServiceResult<int>> GetNewCardNum(int packageId) {
             List<Card> cards = (await GetCardsAsync(packageId)).Result;
 
             return new ServiceResult<int>() {
-                Result = cards.OrderBy(i => i.Proficiency).Count(i => i.Proficiency == 0),
+                Result = cards.Count(i => i.UpdateTime == DateTime.MinValue),
                 Message = "Success",
                 Status = ServiceResultStatus.OK
             };
@@ -130,7 +136,7 @@ namespace CardsForMemoryLibrary.Services {
             List<Card> cards = (await GetCardsAsync(packageId)).Result;
 
             return new ServiceResult<int>() {
-                Result = cards.OrderBy(i => i.Proficiency).Count(i => i.Proficiency != 0),
+                Result = cards.Count(i => i.UpdateTime != DateTime.MinValue),
                 Message = "Success",
                 Status = ServiceResultStatus.OK
             };
@@ -182,7 +188,7 @@ namespace CardsForMemoryLibrary.Services {
                 Question = question,
                 Answer = answer,
                 Proficiency = 0,
-                UpdateTime = DateTime.Now
+                UpdateTime = DateTime.MinValue
             };
             var connection = _connectionService.GetAsyncConnection();
             try {
