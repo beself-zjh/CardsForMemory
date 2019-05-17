@@ -5,10 +5,10 @@ using SQLite;
 namespace CardsForMemoryLibrary.Services {
     public class SqliteConnectionService : ISqliteConnectionService {
         /// <inheritdoc />
-        public ServiceResult<SQLiteAsyncConnection> GetAsyncConnection() {
+        public ServiceResult<SQLiteAsyncConnection> GetAsyncConnection(bool test = false) {
             SQLiteAsyncConnection connection;
             try {
-                connection = new SQLiteAsyncConnection("CardsForMemory");
+                connection = new SQLiteAsyncConnection("CardsForMemory" + (test ? "Test" : ""));
             } catch (SQLiteException e) {
                 return new ServiceResult<SQLiteAsyncConnection> {
                     Status = ServiceResultStatusHelper.FromSQLiteResult(e.Result),
@@ -27,6 +27,12 @@ namespace CardsForMemoryLibrary.Services {
             connection.CreateTable<Card>();
             connection.CreateTable<Package>();
             connection.CreateTable<Log>();
+            connection.Close();
+            connection = new SQLiteConnection("CardsForMemoryTest");
+            connection.CreateTable<Card>();
+            connection.CreateTable<Package>();
+            connection.CreateTable<Log>();
+            connection.Close();
         }
     }
 }
