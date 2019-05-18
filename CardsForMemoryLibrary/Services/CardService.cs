@@ -53,20 +53,12 @@ namespace CardsForMemoryLibrary.Services {
             ServiceResult<List<Card>> serviceResult = new ServiceResult<List<Card>>();
             switch (connection.Status) {
                 case ServiceResultStatus.OK:
-                    if (packageId == -1) {//特殊卡包
-                        serviceResult.Result = 
-                            await connection.Result
-                            .Table<Card>()
-                            .Where(i => i.Proficiency > 0)
-                            .ToListAsync();
-                    }
-                    else {//非特殊卡包
-                        serviceResult.Result =
-                            await connection.Result
+                    serviceResult.Result =
+                                await connection.Result
                                 .Table<Card>()
                                 .Where(i => i.PackageId == packageId)
                                 .ToListAsync();
-                    }
+
                     serviceResult.Status = connection.Status;
                     serviceResult.Message = connection.Message;
                     break;
@@ -82,7 +74,7 @@ namespace CardsForMemoryLibrary.Services {
         public async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int Old, int New) {
             List<Card> cards = (await GetCardsAsync(packageId)).Result
                                 .OrderByDescending
-                                    (i => Math.Min(10000,10000 - 5600 * Math.Pow((DateTime.Now - i.UpdateTime).Hours, 0.06) + i.Proficiency))
+                                    (i => Math.Min(10000, 10000 - 5600 * Math.Pow((DateTime.Now - i.UpdateTime).Hours, 0.06) + i.Proficiency))
                                 .ToList();
 
             var oldStart = cards.FindIndex(i => i.UpdateTime == DateTime.MinValue);
@@ -220,8 +212,6 @@ namespace CardsForMemoryLibrary.Services {
 
         /// <inheritdoc />
         public async Task<ServiceResult> DeleteCardsAsync(int packageId) {
-            if (packageId == -1)//特殊卡包不能删除
-                throw new NotImplementedException();
             var connection = _connectionService.GetAsyncConnection();
             var cardsList = await connection.Result.Table<Card>()
                 .Where(i => i.PackageId == packageId)
@@ -246,31 +236,89 @@ namespace CardsForMemoryLibrary.Services {
         }
 
         public ServiceResult BeOld(int cardId) {
-            if(!SpecialPackage.Contains(cardId))
+            if (!SpecialPackage.Contains(cardId))
                 SpecialPackage.Append(cardId);
             return new ServiceResult() {
                 Status = ServiceResultStatus.OK,
                 Message = "Success"
             };
         }
+    }
 
+    public class CardServiceEx : CardService, ICardService {
+        public CardServiceEx(ISqliteConnectionService connectionService) : base(connectionService) { }
 
-        //private ServiceResult<T> GetServiceResult<T>(T result, 
-        //    ServiceResult<SqliteConnectionService> connection) {
-        //    ServiceResult<T> serviceResult = new ServiceResult<T>();
-        //    switch (connection.Status) {
-        //        case ServiceResultStatus.OK:
-        //            serviceResult.Result = result;
-        //            serviceResult.Status = connection.Status;
-        //            serviceResult.Message = connection.Message;
-        //            break;
-        //        default:
-        //            serviceResult.Status = connection.Status;
-        //            serviceResult.Message = connection.Message;
-        //            break;
-        //    }
+        public new async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId) {
+            if (packageId == -1) {
+                var connection = new SqliteConnectionService().GetAsyncConnection();
+                ServiceResult<List<Card>> serviceResult = new ServiceResult<List<Card>>() {
+                    Result = await connection.Result
+                            .Table<Card>()
+                            .Where(i => i.UpdateTime == DateTime.MinValue)
+                            .ToListAsync(),
+                    Status = ServiceResultStatus.OK,
+                    Message = "Success"
+                };
+                return serviceResult;
 
-        //    return serviceResult;
-        //}
+            } else {
+                return await base.GetCardsAsync(packageId);
+            }
+        }
+
+        public new async Task<ServiceResult<List<Card>>> GetCardsAsync(int packageId, int Old, int New) {
+            if (packageId != -1) {
+                return await base.GetCardsAsync(packageId, Old, New);
+            } else {
+                return new ServiceResult<List<Card>>() {
+                    Status = ServiceResultStatus.Error,
+                    Message = "无虚拟卡包访问权限"
+                };
+            }
+        }
+
+        public new async Task<ServiceResult<int>> GetNewCardNum(int packageId) {
+            if (packageId != -1) {
+                return await base.GetNewCardNum(packageId);
+            } else {
+                return new ServiceResult<int>() {
+                    Status = ServiceResultStatus.Error,
+                    Message = "无虚拟卡包访问权限"
+                };
+            }
+        }
+
+        public new async Task<ServiceResult<int>> GetOldCardNum(int packageId) {
+            if (packageId != -1) {
+                return await base.GetOldCardNum(packageId);
+            } else {
+                return new ServiceResult<int>() {
+                    Status = ServiceResultStatus.Error,
+                    Message = "无虚拟卡包访问权限"
+                };
+            }
+        }
+
+        public new async Task<ServiceResult<Card>> AddCardAsync(int packageId, string question, string answer) {
+            if (packageId != -1) {
+                return await base.AddCardAsync(packageId, question, answer);
+            } else {
+                return new ServiceResult<Card>() {
+                    Status = ServiceResultStatus.Error,
+                    Message = "不能向虚拟卡包中插入卡片"
+                };
+            }
+        }
+
+        public new async Task<ServiceResult> DeleteCardsAsync(int packageId) {
+            if (packageId != -1) {
+                return await base.DeleteCardsAsync(packageId);
+            } else {
+                return new ServiceResult() {
+                    Status = ServiceResultStatus.Error,
+                    Message = "没有删除权限"
+                };
+            }
+        }
     }
 }
