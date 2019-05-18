@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 namespace CardsForMemoryTest.ServicesTest {
     public class CardServiceTest {
         private ServiceResult<List<Card>> cardList;
+        private CardServiceEx cardService = new CardServiceEx(new SqliteConnectionService(true));
         [Test]
         public async Task TestDeleteAllCardAsync() {
-            var cardService = new CardService(new SqliteConnectionService(true));
+         
             await cardService.DeleteAllCardAsync();//删除CardTable全部内容
-
-
              cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
             Assert.AreEqual(0, cardList.Result.Count);
         }
@@ -23,7 +22,6 @@ namespace CardsForMemoryTest.ServicesTest {
         public async Task TestAddCardAsync()
         {
             await TestDeleteAllCardAsync();
-            var cardService = new CardService(new SqliteConnectionService(true));
             await cardService.AddCardAsync(0, "1", "1");//插入一个Card
 
             cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
@@ -39,7 +37,6 @@ namespace CardsForMemoryTest.ServicesTest {
 
         [Test]
         public async Task TestEditCard() {
-            var cardService = new CardService(new SqliteConnectionService(true));
             await cardService.DeleteAllCardAsync();
 
             var card=(await cardService.AddCardAsync(0, "0", "0")).Result;
@@ -59,7 +56,7 @@ namespace CardsForMemoryTest.ServicesTest {
 
         [Test]
         public async Task TestRevise() {
-            var cardService = new CardService(new SqliteConnectionService(true));
+
             await cardService.DeleteAllCardAsync();
 
             await cardService.AddCardAsync(0, "0", "0");

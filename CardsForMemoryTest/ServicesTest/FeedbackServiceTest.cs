@@ -10,38 +10,51 @@ namespace CardsForMemoryTest.ServicesTest
 {
     class FeedbackServiceTest
     {
+        private FeedbackService feedbackServic = new FeedbackService(new CardService(new SqliteConnectionService(true)));
+        private Card card = new Card() { Proficiency = 0 };
         [Test]
-        public async Task TestcardProficiency()
+        public void TestcardProficiency()
         {
-            var feedbackServic = new FeedbackService(new CardService(new SqliteConnectionService(true)));
-            var card = new Card()
-            {
-                PackageId = 1,
-                Question = "enheng?",
-                Answer = "no",
-                Proficiency = 0
-            };
-
+            
             Assert.AreEqual(0, card.Proficiency);
+        }
 
+        [Test]
+        public async Task TestisEasy()
+        {
             await feedbackServic.isEasy(card);
             Assert.AreEqual(200, card.Proficiency);
+        }
 
+        public async Task TestisNoemal()
+        {
             await feedbackServic.isNormal(card);
-            Assert.AreEqual(300, card.Proficiency);
+            Assert.AreEqual(100, card.Proficiency);
+        }
 
+        public async Task TestisDifficult()
+        {
             await feedbackServic.isDifficult(card);
-            Assert.AreEqual(300, card.Proficiency);
+            Assert.AreEqual(100, card.Proficiency);
+        }
+        public async Task TestisEasymax()
+        {
 
-            card.Proficiency = card.Proficiency + 10000;
+            card.Proficiency = card.Proficiency + 11000;
             await feedbackServic.isEasy(card);
             Assert.AreEqual(10000, card.Proficiency);
+        }
 
-            card.Proficiency = card.Proficiency + 10000;
+        public async Task TestisNoemalmax()
+        {
+            card.Proficiency = card.Proficiency + 10100;
             await feedbackServic.isNormal(card);
             Assert.AreEqual(10000, card.Proficiency);
+        }
 
-            card.Proficiency = card.Proficiency + 10000;
+        public async Task TestisDifficultmax()
+        {
+            card.Proficiency = card.Proficiency + 11000;
             await feedbackServic.isDifficult(card);
             Assert.AreEqual(10000, card.Proficiency);
         }
