@@ -1,5 +1,6 @@
 ﻿using CardsForMemoryLibrary.IServices;
 using CardsForMemoryLibrary.Models;
+using GalaSoft.MvvmLight.Ioc;
 using SQLite;
 
 namespace CardsForMemoryLibrary.Services {
@@ -22,6 +23,11 @@ namespace CardsForMemoryLibrary.Services {
                 Result = connection,
                 Status = ServiceResultStatus.OK
             };
+        }
+
+        [PreferredConstructor]
+        public SqliteConnectionService() {
+            databaseName = "CardsForMemory";
         }
 
         public SqliteConnectionService(bool test = false) {
