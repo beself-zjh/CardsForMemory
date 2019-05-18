@@ -15,8 +15,5 @@
         /// </summary>
         /// <param name="Tag">代表着目的地的字符串</param>
         void Navigate(string Tag);
-
-        void Init(object Frame, object NavigationViewItem);
-        void Set_RememberPageName(string append);
     }
 }

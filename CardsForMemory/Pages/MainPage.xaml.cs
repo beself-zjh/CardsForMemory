@@ -1,15 +1,16 @@
 ﻿using CardsForMemory.Locator;
+using CardsForMemory.Services;
 using CardsForMemoryLibrary.ViewModels;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 
 namespace CardsForMemory.Pages {
     public sealed partial class MainPage : Page {
-        MainPageViewModel vm = ViewModelLocator.Instance.MainPageViewModel;
+        private MainPageViewModel vm = ViewModelLocator.Instance.MainPageViewModel;
 
         public MainPage() {
             InitializeComponent();
-            ViewModelLocator.Instance.INavigationService.Init(ContentFrame, RememberPageName);
+            new NavigationService().Init(ContentFrame, RememberPageName);
         }
 
         private void MainPageNavViewItemInvoke(NavigationView sender, NavigationViewItemInvokedEventArgs args) {
