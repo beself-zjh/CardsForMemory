@@ -7,7 +7,7 @@ namespace CardsForMemoryTest.ServicesTest {
         [Test]
         public void TestGetAsyncConnection() {
             SqliteConnectionService sqliteConnectionService = 
-                new SqliteConnectionService();
+                new SqliteConnectionService(true);
             ServiceResult<SQLiteAsyncConnection> connection = 
                 sqliteConnectionService.GetAsyncConnection();
             Assert.IsNotNull(connection);

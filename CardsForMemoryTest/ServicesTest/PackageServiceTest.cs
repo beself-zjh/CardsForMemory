@@ -7,7 +7,7 @@ namespace CardsForMemoryTest.ServicesTest {
     public class PackageServiceTest {
         [Test]
         public async Task TestCreateEditGetDelete() {
-            var ss = new SqliteConnectionService().GetAsyncConnection();
+            var ss = new SqliteConnectionService(true).GetAsyncConnection();
             await ss.Result.DeleteAllAsync<Package>();
 
             var packageService = new PackageService(new SqliteConnectionService());

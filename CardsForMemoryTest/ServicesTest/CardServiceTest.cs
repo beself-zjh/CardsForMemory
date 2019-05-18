@@ -8,25 +8,27 @@ using System.Threading.Tasks;
 
 namespace CardsForMemoryTest.ServicesTest {
     public class CardServiceTest {
+        private ServiceResult<List<Card>> cardList;
         [Test]
-        public async Task TestSingleCard() {
-            var cardService = new CardService(new SqliteConnectionService());
+        public async Task TestDeleteAllCardAsync() {
+            var cardService = new CardService(new SqliteConnectionService(true));
             await cardService.DeleteAllCardAsync();//删除CardTable全部内容
-            var card = new Card() {
-                PackageId = 1,
-                Question = "enheng?",
-                Answer = "no"
-            };
 
-            var cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
+
+             cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
             Assert.AreEqual(0, cardList.Result.Count);
+        }
 
-
+        [Test]
+        public async Task TestAddCardAsync()
+        {
+            await TestDeleteAllCardAsync();
+            var cardService = new CardService(new SqliteConnectionService(true));
             await cardService.AddCardAsync(0, "1", "1");//插入一个Card
 
             cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
             Assert.AreEqual(1, cardList.Result.Count);
-            Assert.AreEqual(1, cardList.Result[0].PackageId);
+            Assert.AreEqual(0, cardList.Result[0].PackageId);
 
             await cardService.DeleteCardAsync(cardList.Result[0].Id);//删除一个卡片
             cardList = await cardService.GetAllCardsAsync();//获取CardTable全部内容
@@ -37,13 +39,10 @@ namespace CardsForMemoryTest.ServicesTest {
 
         [Test]
         public async Task TestEditCard() {
-            var cardService = new CardService(new SqliteConnectionService());
+            var cardService = new CardService(new SqliteConnectionService(true));
             await cardService.DeleteAllCardAsync();
-            var card = new Card() {
-                PackageId = 1
-            };
 
-            await cardService.AddCardAsync(0, "0", "0");
+            var card=(await cardService.AddCardAsync(0, "0", "0")).Result;
 
             card.PackageId = 2;
             await cardService.EditCardAsync(card);
@@ -60,7 +59,7 @@ namespace CardsForMemoryTest.ServicesTest {
 
         [Test]
         public async Task TestRevise() {
-            var cardService = new CardService(new SqliteConnectionService());
+            var cardService = new CardService(new SqliteConnectionService(true));
             await cardService.DeleteAllCardAsync();
 
             await cardService.AddCardAsync(0, "0", "0");
