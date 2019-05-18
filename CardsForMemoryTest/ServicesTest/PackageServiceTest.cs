@@ -5,18 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CardsForMemoryTest.ServicesTest
-{
+namespace CardsForMemoryTest.ServicesTest {
     //TestFixture表示需要测试的类，也就是说测试的单元
     [TestFixture]
-    public class PackageServiceTest
-    {
+    public class PackageServiceTest {
         private PackageServiceEx ps = new PackageServiceEx(new SqliteConnectionService(true));
 
         //Test表示测试用例，也就是测试方法
         [Test]
-        public async Task TestGetAllPackageAsync()
-        {
+        public async Task TestGetAllPackageAsync() {
             List<Package> list = (await ps.GetAllPackageAsync()).Result;
             //检验是否有虚拟卡包的存在
             Assert.LessOrEqual(1, list.Count);
@@ -24,8 +21,7 @@ namespace CardsForMemoryTest.ServicesTest
         }
 
         [Test]
-        public async Task TestAddPackageAsync()
-        {
+        public async Task TestAddPackageAsync() {
             Package package = (await ps.AddPackageAsync("0", "1", "2")).Result;
             //检验返回值
             Assert.AreEqual("0", package.Name);
@@ -39,8 +35,7 @@ namespace CardsForMemoryTest.ServicesTest
         }
 
         [Test]
-        public async Task TestDeletePackageAsync()
-        {
+        public async Task TestDeletePackageAsync() {
             await TestAddPackageAsync();
             List<Package> list = (await ps.GetAllPackageAsync()).Result;
             int count = list.Count;
@@ -53,30 +48,35 @@ namespace CardsForMemoryTest.ServicesTest
         }
 
         [Test]
-        public async Task TestEditPackageAsync()
-        {
+        public async Task TestEditPackageAsync() {
             await TestAddPackageAsync();
             List<Package> list = (await ps.GetAllPackageAsync()).Result;
-            int id = list[list.Count-1].Id;
-            var package = new Package()
-            {
+            int id = list[list.Count - 1].Id;
+            var time = DateTime.Today;
+            var package = new Package() {
                 Id = id,
                 Name = "233",
                 Author = "2133",
                 Description = "2133",
-                CreateTime = DateTime.Today,
-                UpdateTime = DateTime.Now
+                CreateTime = time,
             };
             await ps.EditPackageAsync(package);
             list = (await ps.GetAllPackageAsync()).Result;
-            Assert.AreEqual("233", list[list.Count-1].Name);
+            Assert.AreEqual("233", list[list.Count - 1].Name);
+            Assert.AreEqual("2133", list[list.Count - 1].Author);
+            Assert.AreEqual("2133", list[list.Count - 1].Description);
+            Assert.AreEqual(time, list[list.Count - 1].CreateTime);
         }
 
         [Test]
-        public async Task TestGetPackageAsync()
-        {
+        public async Task TestGetPackageAsync() {
             Package package = (await ps.GetPackageAsync(-1)).Result;
             Assert.AreEqual("虚拟卡包", package.Name);
+            package = (await ps.AddPackageAsync("0", "1", "2")).Result;
+            package = (await ps.GetPackageAsync(package.Id)).Result;
+            Assert.AreEqual("0", package.Name);
+            Assert.AreEqual("1", package.Author);
+            Assert.AreEqual("2", package.Description);
         }
 
     }
