@@ -271,8 +271,9 @@ namespace CardsForMemoryLibrary.Services {
                 return await base.GetCardsAsync(packageId, Old, New);
             } else {
                 return new ServiceResult<List<Card>>() {
-                    Status = ServiceResultStatus.Error,
-                    Message = "无虚拟卡包访问权限"
+                    Result = (await GetCardsAsync(packageId)).Result.OrderBy(i => i.Proficiency).Take(Old).ToList(),
+                    Status = ServiceResultStatus.OK,
+                    Message = "Success"
                 };
             }
         }
@@ -282,8 +283,9 @@ namespace CardsForMemoryLibrary.Services {
                 return await base.GetNewCardNum(packageId);
             } else {
                 return new ServiceResult<int>() {
-                    Status = ServiceResultStatus.Error,
-                    Message = "无虚拟卡包访问权限"
+                    Result = 0,
+                    Status = ServiceResultStatus.OK,
+                    Message = "Success"
                 };
             }
         }
@@ -293,8 +295,9 @@ namespace CardsForMemoryLibrary.Services {
                 return await base.GetOldCardNum(packageId);
             } else {
                 return new ServiceResult<int>() {
-                    Status = ServiceResultStatus.Error,
-                    Message = "无虚拟卡包访问权限"
+                    Result = (await GetCardsAsync(packageId)).Result.Count(),
+                    Status = ServiceResultStatus.OK,
+                    Message = "Success"
                 };
             }
         }
