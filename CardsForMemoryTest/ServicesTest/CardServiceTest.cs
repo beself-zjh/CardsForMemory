@@ -66,6 +66,10 @@ namespace CardsForMemoryTest.ServicesTest {
             Assert.AreEqual(3, n);
             Assert.AreEqual(2, (await cardService.GetCardsAsync(0,0,2)).Result.Count);
         }
-        
+
+        [Test]
+        public async Task tt() {
+            await cardService.GetCardsAsync(-1, 1, 0);
+        }
     }
 }
