@@ -61,6 +61,7 @@ namespace CardsForMemoryLibrary.ViewModels {
                 }
             }
         }));
+       
 
         private RelayCommand _nextCommand;
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(async () => {

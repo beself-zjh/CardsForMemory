@@ -5,6 +5,8 @@ using CardsForMemoryLibrary.Services;
 using CardsForMemoryLibrary.ViewModels;
 using Moq;
 using NUnit.Framework;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CardsForMemoryTest.ViewModelTest {
     internal class Mock3 {
@@ -29,6 +31,9 @@ namespace CardsForMemoryTest.ViewModelTest {
         private CardInfoViewModel vm = new CardInfoViewModel(Mock3.navigation,
             new CardServiceEx(new SqliteConnectionService(true)), Mock3.toast);
 
+        private CardServiceEx cardService = new CardServiceEx(new SqliteConnectionService(true));
+        private PackageServiceEx ps = new PackageServiceEx(new SqliteConnectionService(true));
+
         [Test]
         public void LoadedCommandTest() {
             Status.s["card"] = null;
@@ -39,6 +44,31 @@ namespace CardsForMemoryTest.ViewModelTest {
             vm.LoadedCommand.Execute(null);
             Assert.AreEqual(vm.Question, "1");
             Assert.AreEqual(vm.Answer, "1");
+        }
+
+        [Test]
+        public async Task nextCommandTestAsync() {
+            var cardList = (await cardService.GetAllCardsAsync()).Result;
+            var packagelist = (await ps.GetAllPackageAsync()).Result;
+            Assert.LessOrEqual(2, packagelist.Count);
+            Status.s["card"] = null;
+            Package pg = packagelist[packagelist.Count - 1];
+            Status.s["package"] = pg;
+            vm.Question = "1";
+            vm.Answer = "2";
+            vm.NextCommand.Execute(null);
+            Thread.Sleep(500);
+            Assert.AreEqual((Status.s["card"] as Card).Question, vm.Question);
+            Assert.AreEqual((Status.s["card"] as Card).Answer, vm.Answer);
+
+            Card card = cardList[cardList.Count - 1];
+            vm.Question = "3";
+            vm.Answer = "4";
+            Status.s["card"] = card;
+            vm.NextCommand.Execute(null);
+            Thread.Sleep(500);
+            Assert.AreEqual((Status.s["card"] as Card).Question, vm.Question);
+            Assert.AreEqual((Status.s["card"] as Card).Answer, vm.Answer);
         }
     }
 }

@@ -42,6 +42,7 @@ namespace CardsForMemoryLibrary.ViewModels {
                 Question = "";
                 Answer = "";
             }
+
         }));
 
         private RelayCommand _nextCommand;
