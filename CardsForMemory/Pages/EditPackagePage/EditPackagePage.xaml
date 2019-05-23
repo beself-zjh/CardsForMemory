@@ -6,6 +6,7 @@
         xmlns:Custom="using:Microsoft.Xaml.Interactivity"
         xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        xmlns:local="using:CardsForMemory.EditPackagePageConverter"
         Width="900" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <Style TargetType="TextBlock" x:Key="block">
@@ -20,6 +21,7 @@
             <Setter Property="Grid.Column" Value="1" />
             <Setter Property="Margin" Value="20" />
         </Style>
+        <local:DateTimeConverter x:Key="DateTimeConverter" />
     </Page.Resources>
     <Grid>
         <Custom:Interaction.Behaviors>
@@ -28,6 +30,7 @@
             </Custom1:EventTriggerBehavior>
         </Custom:Interaction.Behaviors>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -63,15 +66,21 @@
                 <TextBlock Style="{StaticResource block}">预览</TextBlock>
             </StackPanel>
         </Button>
+        <Button Grid.Row="4" Style="{StaticResource button}" Command="{x:Bind vm.RefreshCommand}">
+            <StackPanel Orientation="Horizontal">
+                <SymbolIcon Symbol="View" />
+                <TextBlock Style="{StaticResource block}">刷新</TextBlock>
+            </StackPanel>
+        </Button>
         <!--左列表-->
-        <ListView Grid.RowSpan="5" ItemsSource="{x:Bind vm.Cards,Mode=OneWay}"
+        <ListView Grid.RowSpan="6" ItemsSource="{x:Bind vm.Cards,Mode=OneWay}"
                 IsMultiSelectCheckBoxEnabled="False" SelectionChanged="ListViewSelectionChanged">
             <!--列表头部-->
             <ListView.Header>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource list}">问题</TextBlock>
                     <TextBlock Style="{StaticResource list}">答案</TextBlock>
-                    <TextBlock Style="{StaticResource list}">更新时间</TextBlock>
+                    <TextBlock Style="{StaticResource list}">上次学习</TextBlock>
                 </StackPanel>
             </ListView.Header>
             <!--列表模板-->
@@ -82,7 +91,7 @@
                                 Text="{x:Bind Question,Mode=OneWay}" />
                         <TextBlock Style="{StaticResource list}" Text="{x:Bind Answer,Mode=OneWay}" />
                         <TextBlock Style="{StaticResource list}"
-                                Text="{x:Bind UpdateTime,Mode=OneWay}" />
+                                Text="{x:Bind UpdateTime,Mode=OneWay,Converter={StaticResource DateTimeConverter}}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

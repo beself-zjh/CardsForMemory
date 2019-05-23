@@ -49,15 +49,8 @@ namespace CardsForMemoryLibrary.Services {
 
         public async Task<ServiceResult> EditPackageAsync(Package package) {
             var connection = _connectionService.GetAsyncConnection();
-            Package newPackage = new Package() {
-                Id = package.Id,
-                Author = package.Author,
-                Description = package.Description,
-                Name = package.Name,
-                CreateTime = package.CreateTime,
-                UpdateTime = DateTime.Now
-            };
-            await connection.Result.UpdateAsync(newPackage);
+            package.UpdateTime = DateTime.Now;
+            await connection.Result.UpdateAsync(package);
 
             return new ServiceResult() {
                 Status = ServiceResultStatus.OK,

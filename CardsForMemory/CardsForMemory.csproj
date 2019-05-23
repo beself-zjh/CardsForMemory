@@ -111,8 +111,9 @@
     <Compile Include="Controls\PackageInfo.xaml.cs">
       <DependentUpon>PackageInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditPackagePage\EditPackagePageConverter.cs" />
     <Compile Include="Pages\PackagePage\PackagePageConverter.cs" />
-    <Compile Include="Pages\EditPackagePage.xaml.cs">
+    <Compile Include="Pages\EditPackagePage\EditPackagePage.xaml.cs">
       <DependentUpon>EditPackagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RememberPage\RememberPageConverter.cs" />
@@ -180,7 +181,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EditPackagePage.xaml">
+    <Page Include="Pages\EditPackagePage\EditPackagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

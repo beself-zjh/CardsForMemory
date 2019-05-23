@@ -93,25 +93,6 @@ namespace CardsForMemoryLibrary.Services {
                 Message = "Success",
                 Status = ServiceResultStatus.OK
             };
-
-            ////排序
-            //cards.Sort((c1, c2) => {
-            //    if (c1.Proficiency == c2.Proficiency) {
-            //        return 0;
-            //    } else if (c1.Proficiency > c2.Proficiency) {
-            //        return 1;
-            //    } else {
-            //        return -1;
-            //    }
-            //});
-            ////选旧牌
-            //for (int i = 0; i < Old; i++) {
-            //    sorted.Add(cards[i]);
-            //}
-            ////选新牌
-            //for (int i = 1; i <= New; i++) {
-            //    sorted.Add(cards[cards.Count - i]);
-            //}
         }
 
         public async Task<ServiceResult<int>> GetNewCardNum(int packageId) {

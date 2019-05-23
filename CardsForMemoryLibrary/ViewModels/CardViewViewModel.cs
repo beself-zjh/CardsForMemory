@@ -50,7 +50,7 @@ namespace CardsForMemoryLibrary.ViewModels {
 
         private RelayCommand _nextCommand;
         public RelayCommand NextCommand => _nextCommand ?? (_nextCommand = new RelayCommand(() => {
-            if(ButtonText=="See Answer") {
+            if(ButtonText== "看答案") {
                 ShowText = answer;
                 ButtonText = "看问题";
             } else {

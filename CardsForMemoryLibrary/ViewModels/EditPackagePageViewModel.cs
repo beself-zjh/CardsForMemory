@@ -79,5 +79,16 @@ namespace CardsForMemoryLibrary.ViewModels {
             status["card"] = SelectionCard;
             navigationService.Navigate("card view");
         }));
+
+        private RelayCommand _refreshCommand;
+        public RelayCommand RefreshCommand => _refreshCommand ?? (_refreshCommand = new RelayCommand(async () => {
+            var status = Status.s;
+            if (status["package"] is Package package) {
+                int packageId = package.Id;
+                Cards = (await cardService.GetCardsAsync(packageId)).Result;
+            } else {
+                toastService.Toast("zh`怎么回事小老弟?到了这个页面竟然package是空的???");
+            }
+        }));
     }
 }
