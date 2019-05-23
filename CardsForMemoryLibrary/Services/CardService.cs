@@ -254,7 +254,7 @@ namespace CardsForMemoryLibrary.Services {
                 ServiceResult<List<Card>> serviceResult = new ServiceResult<List<Card>>() {
                     Result = await connection.Result
                             .Table<Card>()
-                            .Where(i => i.UpdateTime == DateTime.MinValue)
+                            .Where(i => i.UpdateTime != DateTime.MinValue)
                             .ToListAsync(),
                     Status = ServiceResultStatus.OK,
                     Message = "Success"

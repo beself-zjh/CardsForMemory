@@ -36,7 +36,7 @@ namespace CardsForMemory.Locator {
         ///     私有构造
         /// </summary>
         private ViewModelLocator() {
-            SimpleIoc.Default.Register<ICardService, CardService>();
+            SimpleIoc.Default.Register<ICardService, CardServiceEx>();
             SimpleIoc.Default.Register<IPackageService, PackageServiceEx>();
             SimpleIoc.Default.Register<ISqliteConnectionService, SqliteConnectionService>();
             SimpleIoc.Default.Register<IFeedbackService, FeedbackService>();

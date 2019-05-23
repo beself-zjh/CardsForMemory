@@ -41,6 +41,7 @@ namespace CardsForMemoryTest.ViewModelTest {
 
         [Test]
         public async Task NormalCommandTest() {
+            await EasyCommandTest();
             List<Card> cardlist = (await cardService.GetAllCardsAsync()).Result;
             Status.s["cardi"] = cardlist.Count;
             Status.s["cards"] = cardlist;
